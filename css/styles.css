@@ -1,29 +1,83 @@
+/* =========================================
+   1. CONFIGURACIÓN (Variables Globales)
+   Centralizamos colores y fuentes aquí.
+   ========================================= */
+:root {
+    /* Paleta de Colores */
+    --bg-dark: #0a0a0a;
+    --scrollbar-track: #0a0a0a;
+    --scrollbar-thumb: #333333;
+    --scrollbar-thumb-hover: #22c55e; /* Tailwind green-500 */
+    
+    /* Configuración */
+    --scroll-width: 10px;
+    --font-primary: 'Fira Code', monospace;
+}
+
+/* =========================================
+   2. IMPORTACIONES
+   ========================================= */
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap');
 
+/* =========================================
+   3. ESTILOS BASE (Reset & Body)
+   ========================================= */
 body { 
-    font-family: 'Fira Code', monospace; 
-    background-color: #0a0a0a;
+    font-family: var(--font-primary); 
+    background-color: var(--bg-dark);
     margin: 0;
-    overflow-x: hidden;
+    overflow-x: hidden; /* Evita scroll lateral accidental */
 }
 
-/* Cursor parpadeante */
-.cursor-blink { animation: blink 1s step-end infinite; }
-@keyframes blink { 50% { opacity: 0; } }
+/* =========================================
+   4. COMPONENTES (Scrollbar Personalizada)
+   ========================================= */
+::-webkit-scrollbar { 
+    width: var(--scroll-width); 
+}
 
-/* Animación de entrada suave */
+::-webkit-scrollbar-track { 
+    background: var(--scrollbar-track); 
+}
+
+::-webkit-scrollbar-thumb { 
+    background: var(--scrollbar-thumb); 
+    border-radius: 5px; 
+}
+
+::-webkit-scrollbar-thumb:hover { 
+    background: var(--scrollbar-thumb-hover); 
+}
+
+/* =========================================
+   5. UTILIDADES & ANIMACIONES
+   ========================================= */
+
+/* Cursor estilo terminal */
+.cursor-blink { 
+    animation: blink 1s step-end infinite; 
+}
+
+@keyframes blink { 
+    50% { opacity: 0; } 
+}
+
+/* Fade In Up (Entrada suave de elementos) */
+.animate-fade-in-up { 
+    animation: fadeInUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; 
+}
+
 @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from { 
+        opacity: 0; 
+        transform: translateY(20px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
 }
-.animate-fade-in-up { animation: fadeInUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
 
-/* Clases de utilidad para delay */
+/* Helpers de retraso (Delays) */
 .delay-100 { animation-delay: 0.1s; }
 .delay-200 { animation-delay: 0.2s; }
-
-/* Scrollbar personalizada (Estilo Hacker) */
-::-webkit-scrollbar { width: 10px; }
-::-webkit-scrollbar-track { background: #0a0a0a; }
-::-webkit-scrollbar-thumb { background: #333; border-radius: 5px; }
-::-webkit-scrollbar-thumb:hover { background: #22c55e; }
