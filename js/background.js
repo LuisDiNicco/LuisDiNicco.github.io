@@ -1,24 +1,58 @@
 /**
  * BACKGROUND MODULE
- * Maneja la grilla animada, los puntos y el efecto parallax.
+ * Grilla Perfecta + Puntos Orgánicos (Caos Determinista)
+ * Refactorizado: Sin números mágicos, todo en CONFIG.
  */
+
+const CONFIG = Object.freeze({
+    GRID: {
+        SIZE: 40,               // Tamaño de la celda (px) - NO CAMBIAR para mantener geometría
+        LINE_COLOR: 'rgba(255, 255, 255, 0.05)',
+        LINE_WIDTH: 1
+    },
+    ANIMATION: {
+        PARALLAX_SPEED: 0.4,    // Velocidad del desplazamiento vertical (0.3 = 30%)
+        GLOBAL_SPEED: 0.7,        // Multiplicador de velocidad del tiempo
+        REFRESH_DELAY: 100      // ms de espera al redimensionar
+    },
+    DOTS: {
+        CHANCE: 0.45,           // Probabilidad de existencia (0.0 a 1.0)
+        COLOR_RGB: '74, 222, 128', // Color base (Tailwind green-400)
+        
+        // Configuración de "Vida" (Aleatoriedad)
+        MIN_SPEED: 0.5,         // Velocidad mínima de parpadeo
+        MAX_SPEED: 2.0,         // Velocidad máxima (para desincronizar)
+        
+        MIN_GROWTH: 1.0,        // Crecimiento extra mínimo
+        MAX_GROWTH: 3,        // Crecimiento extra máximo (Puntos "Nova")
+        
+        BASE_SIZE: 1,         // Tamaño base del punto en px
+        
+        // Configuración de ciclo (Seno)
+        CYCLE_OFFSET: -0.2,     // Recorte de onda (negativo = pasa más tiempo apagado)
+        INTENSITY_MULT: 1.25,   // Multiplicador para recuperar brillo tras el recorte
+        NOVA_BOOST: 0.8         // Cuanto brillo extra ganan los puntos grandes
+    },
+    PRNG: { A: 12.9898, B: 78.233, C: 43758.5453123 }
+});
 
 const canvas = document.getElementById('grid-canvas');
 const ctx = canvas.getContext('2d');
 
 let width, height;
-const gridSize = 40; 
-const speedFactor = 0.3; 
 
 // Función pseudo-aleatoria determinista
 function pseudoRandom(x, y) {
-    let n = Math.sin(x * 12.9898 + y * 78.233) * 43758.5453123;
+    let n = Math.sin(x * CONFIG.PRNG.A + y * CONFIG.PRNG.B) * CONFIG.PRNG.C;
     return n - Math.floor(n);
 }
 
 function resize() {
     width = window.innerWidth;
-    height = window.innerHeight;
+    // CRÍTICO: Usar window.innerHeight mantiene la relación de aspecto 1:1 con la pantalla.
+    // Usar scrollHeight aquí es lo que causaba el achatamiento.
+    height = window.innerHeight; 
+    
     canvas.width = width;
     canvas.height = height;
 }
@@ -27,53 +61,86 @@ function draw() {
     ctx.clearRect(0, 0, width, height);
     
     const scrollY = window.scrollY;
-    const offsetY = (scrollY * speedFactor) % gridSize;
+    const offsetY = (scrollY * CONFIG.ANIMATION.PARALLAX_SPEED) % CONFIG.GRID.SIZE;
 
-    // Líneas tenues
-    ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
-    ctx.lineWidth = 1;
+    // ==========================================
+    // 1. DIBUJAR LÍNEAS (Estructura Fija)
+    // ==========================================
+    ctx.strokeStyle = CONFIG.GRID.LINE_COLOR;
+    ctx.lineWidth = CONFIG.GRID.LINE_WIDTH;
     ctx.beginPath();
     
     // Verticales
-    for (let x = 0; x <= width; x += gridSize) {
+    for (let x = 0; x <= width; x += CONFIG.GRID.SIZE) {
         ctx.moveTo(x, 0);
         ctx.lineTo(x, height);
     }
 
     // Horizontales (con parallax)
-    for (let y = -gridSize; y <= height; y += gridSize) {
+    for (let y = -CONFIG.GRID.SIZE; y <= height; y += CONFIG.GRID.SIZE) {
         const drawY = y - offsetY;
         ctx.moveTo(0, drawY);
         ctx.lineTo(width, drawY);
     }
     ctx.stroke();
 
-    // Puntos (con parallax y ciclo de vida)
-    const time = Date.now() / 500;
+    // ==========================================
+    // 2. DIBUJAR PUNTOS (Lógica Orgánica)
+    // ==========================================
     
-    for (let x = 0; x <= width; x += gridSize) {
-        for (let y = -gridSize; y <= height; y += gridSize) {
+    // Tiempo en segundos
+    const t = Date.now() / 1000 * CONFIG.ANIMATION.GLOBAL_SPEED;
+    
+    for (let x = 0; x <= width; x += CONFIG.GRID.SIZE) {
+        for (let y = -CONFIG.GRID.SIZE; y <= height; y += CONFIG.GRID.SIZE) {
             
-            // Calculamos fila absoluta para consistencia visual
-            const absoluteRowIndex = Math.floor((scrollY * speedFactor + y) / gridSize);
-            const colIndex = Math.floor(x / gridSize);
+            // Índices para mantener identidad visual al scrollear
+            const absoluteRowIndex = Math.floor((scrollY * CONFIG.ANIMATION.PARALLAX_SPEED + y) / CONFIG.GRID.SIZE);
+            const colIndex = Math.floor(x / CONFIG.GRID.SIZE);
 
-            const hasDot = pseudoRandom(colIndex, absoluteRowIndex) > 0.5;
-
-            if (hasDot) {
-                const phase = pseudoRandom(colIndex + 100, absoluteRowIndex + 100) * Math.PI * 2;
-                const maxAlpha = 0.1 + pseudoRandom(colIndex, absoluteRowIndex) * 0.5;
+            // Filtro de existencia
+            if (pseudoRandom(colIndex, absoluteRowIndex) > CONFIG.DOTS.CHANCE) {
                 
-                let alpha = (Math.sin(time + phase) + 1) / 2 * maxAlpha;
-                if (Math.sin(time + phase) < -0.5) alpha = 0;
+                // --- Generación de atributos aleatorios únicos ---
+                // Usamos diferentes "offsets" (+100, +200, +300) para obtener números distintos de la misma semilla
+                
+                // 1. Velocidad única (Rompe el efecto GIF)
+                const speedRand = pseudoRandom(colIndex + 100, absoluteRowIndex + 100);
+                const mySpeed = CONFIG.DOTS.MIN_SPEED + (speedRand * (CONFIG.DOTS.MAX_SPEED - CONFIG.DOTS.MIN_SPEED));
 
-                if (alpha > 0) {
-                    ctx.fillStyle = `rgba(74, 222, 128, ${alpha})`; 
-                    ctx.beginPath();
-                    const drawY = y - offsetY;
-                    const size = 1 + (alpha * 3);
-                    ctx.arc(x, drawY, size, 0, Math.PI * 2);
-                    ctx.fill();
+                // 2. Fase única (Desincronización)
+                const phase = pseudoRandom(colIndex + 200, absoluteRowIndex + 200) * (Math.PI * 2);
+                
+                // 3. Potencial de crecimiento (Algunos crecen mucho, otros poco)
+                const growthRand = pseudoRandom(colIndex + 300, absoluteRowIndex + 300);
+                const myGrowth = CONFIG.DOTS.MIN_GROWTH + (growthRand * (CONFIG.DOTS.MAX_GROWTH - CONFIG.DOTS.MIN_GROWTH));
+
+                // --- Cálculo del Ciclo ---
+                // Onda senoidal basada en el tiempo y la velocidad propia
+                let cycle = Math.sin((t * mySpeed) + phase);
+
+                // Recorte para generar pausas (estar apagado)
+                let activeLevel = cycle + CONFIG.DOTS.CYCLE_OFFSET; 
+
+                if (activeLevel > 0) {
+                    // Normalizamos y recuperamos intensidad
+                    let alpha = activeLevel * CONFIG.DOTS.INTENSITY_MULT; 
+                    
+                    // Ajuste de brillo máximo: Los que crecen más, brillan más
+                    const maxAlphaBase = 0.2 + (growthRand * CONFIG.DOTS.NOVA_BOOST); 
+                    alpha *= maxAlphaBase;
+
+                    if (alpha > 0.01) {
+                        ctx.fillStyle = `rgba(${CONFIG.DOTS.COLOR_RGB}, ${alpha})`; 
+                        ctx.beginPath();
+                        const drawY = y - offsetY;
+                        
+                        // Tamaño final = Base + (Intensidad actual * Potencial de crecimiento propio)
+                        const size = CONFIG.DOTS.BASE_SIZE + (alpha * myGrowth);
+                        
+                        ctx.arc(x, drawY, size, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
                 }
             }
         }
@@ -81,10 +148,10 @@ function draw() {
     requestAnimationFrame(draw);
 }
 
-// Inicialización del Background
+// Inicialización
 window.addEventListener('resize', resize);
-// Iniciamos cuando el DOM esté listo
-document.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('load', () => {
     resize();
-    draw();
+    setTimeout(resize, CONFIG.ANIMATION.REFRESH_DELAY);
 });
+draw();
