@@ -5,31 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Luis Di Nicco | Backend Engineer</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap');
-        
-        body { 
-            font-family: 'Fira Code', monospace; 
-            background-color: #0a0a0a;
-            margin: 0;
-            overflow-x: hidden;
-        }
-        
-        .cursor-blink { animation: blink 1s step-end infinite; }
-        @keyframes blink { 50% { opacity: 0; } }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fade-in-up { animation: fadeInUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
-        
-        /* Scrollbar personalizada */
-        ::-webkit-scrollbar { width: 10px; }
-        ::-webkit-scrollbar-track { background: #0a0a0a; }
-        ::-webkit-scrollbar-thumb { background: #333; border-radius: 5px; }
-        ::-webkit-scrollbar-thumb:hover { background: #22c55e; }
-    </style>
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body class="text-gray-200 selection:bg-green-500 selection:text-black">
 
@@ -317,75 +293,6 @@
         </div>
     </div>
 
-    <script>
-        const canvas = document.getElementById('grid-canvas');
-        const ctx = canvas.getContext('2d');
-        
-        let width, height;
-        const gridSize = 40; 
-        const dots = []; 
-
-        function resize() {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-            initDots();
-        }
-
-        function initDots() {
-            dots.length = 0; 
-            const cols = Math.ceil(width / gridSize);
-            const rows = Math.ceil(height / gridSize);
-
-            for (let i = 0; i <= cols; i++) {
-                for (let j = 0; j <= rows; j++) {
-                    dots.push({
-                        x: i * gridSize,
-                        y: j * gridSize,
-                        life: Math.random() * Math.PI * 2, 
-                        speed: 0.01 + Math.random() * 0.02, 
-                        maxAlpha: 0.1 + Math.random() * 0.5 
-                    });
-                }
-            }
-        }
-
-        function draw() {
-            ctx.clearRect(0, 0, width, height);
-            
-            ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
-            ctx.lineWidth = 1;
-            ctx.beginPath();
-            
-            for (let x = 0; x <= width; x += gridSize) {
-                ctx.moveTo(x, 0);
-                ctx.lineTo(x, height);
-            }
-            for (let y = 0; y <= height; y += gridSize) {
-                ctx.moveTo(0, y);
-                ctx.lineTo(width, y);
-            }
-            ctx.stroke();
-
-            dots.forEach(dot => {
-                dot.life += dot.speed;
-                let alpha = (Math.sin(dot.life) + 1) / 2 * dot.maxAlpha;
-                if (Math.sin(dot.life) < -0.5) alpha = 0;
-
-                if (alpha > 0) {
-                    ctx.fillStyle = `rgba(74, 222, 128, ${alpha})`; 
-                    ctx.beginPath();
-                    const size = 1 + (alpha * 1.5);
-                    ctx.arc(dot.x, dot.y, size, 0, Math.PI * 2);
-                    ctx.fill();
-                }
-            });
-
-            requestAnimationFrame(draw);
-        }
-
-        window.addEventListener('resize', resize);
-        resize();
-        draw();
-    </script>
+    <script src="js/grid-bg.js"></script>
 </body>
 </html>
