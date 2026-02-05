@@ -40,3 +40,11 @@ export const SKILLS: Skill[] = [
   { name: 'PowerShell', category: 'tools', icon: 'simple-icons:powershell' },
   { name: 'Postman', category: 'tools', icon: 'simple-icons:postman' },
 ];
+
+export const SKILL_CATEGORIES = [
+  { id: 'all', labelKey: 'skills.filter.all', color: 'text-gray-400' },
+  { id: 'languages', labelKey: 'skills.filter.langs', color: 'text-yellow-400' },
+  { id: 'backend', labelKey: 'skills.filter.backend', color: 'text-blue-400' },
+  { id: 'database', labelKey: 'skills.filter.db', color: 'text-green-400' },
+  { id: 'tools', labelKey: 'skills.filter.tools', color: 'text-purple-400' },
+] as const;

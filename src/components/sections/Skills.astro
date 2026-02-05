@@ -2,7 +2,8 @@
 // src/components/sections/Skills.astro
 import { useTranslations } from '../../i18n';
 import SectionTitle from '../ui/SectionTitle.astro';
-import { SKILLS } from '../../data/skills';
+// Importamos datos y categorías desde la fuente centralizada
+import { SKILLS, SKILL_CATEGORIES } from '../../data/skills';
 import { Icon } from 'astro-icon/components';
 
 interface Props {
@@ -11,15 +12,6 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = useTranslations(lang);
-
-// Definimos las categorías usando las claves de traducción
-const categories = [
-  { id: 'all', labelKey: 'skills.filter.all', color: 'text-gray-400' },
-  { id: 'languages', labelKey: 'skills.filter.langs', color: 'text-yellow-400' },
-  { id: 'backend', labelKey: 'skills.filter.backend', color: 'text-blue-400' },
-  { id: 'database', labelKey: 'skills.filter.db', color: 'text-green-400' },
-  { id: 'tools', labelKey: 'skills.filter.tools', color: 'text-purple-400' },
-];
 ---
 
 <section id="skills" class="scroll-mt-24 mb-32">
@@ -31,22 +23,22 @@ const categories = [
             <span class="text-green-500 font-bold hidden md:inline">$ filter --type</span>
             
             <div class="flex flex-wrap gap-2" id="skill-filters">
-                {categories.map((cat) => (
+                {SKILL_CATEGORIES.map((cat) => (
                     <button 
                         data-filter={cat.id}
                         class={`px-3 py-1.5 rounded border border-gray-800 bg-[#1A1A1A] hover:border-gray-600 transition-all ${cat.id === 'all' ? 'border-green-500/50 bg-green-500/10 text-white' : 'text-gray-400'}`}
                     >
-                        <span class={cat.color}>{t(cat.labelKey as any)}</span>
+                        <span class={cat.color}>{t(cat.labelKey)}</span>
                     </button>
                 ))}
             </div>
         </div>
     </div>
 
-    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4" id="skills-grid">
+    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 min-h-[200px]" id="skills-grid">
         {SKILLS.map((skill) => (
             <div 
-                class="skill-card bg-[#111] border border-gray-800 p-4 rounded-lg hover:border-green-500/30 hover:bg-[#151515] transition-all group flex flex-col items-center justify-center gap-3"
+                class="skill-card bg-[#111] border border-gray-800 p-4 rounded-lg hover:border-green-500/30 hover:bg-[#151515] transition-colors group flex flex-col items-center justify-center gap-3"
                 data-category={skill.category}
             >
                 <div class="w-10 h-10 text-gray-500 group-hover:text-green-400 transition-colors duration-300">
@@ -63,45 +55,47 @@ const categories = [
 </section>
 
 <script>
+    import autoAnimate from '@formkit/auto-animate';
+
     const filters = document.querySelectorAll('#skill-filters button');
+    const grid = document.getElementById('skills-grid');
     const cards = document.querySelectorAll('.skill-card');
+
+    // 1. Inicializamos AutoAnimate en el grid padre
+    // Esto hace la magia: detecta cuando elementos se ocultan/muestran y anima el resto
+    if (grid) {
+        autoAnimate(grid, {
+            duration: 300,
+            easing: 'ease-in-out'
+        });
+    }
 
     filters.forEach(btn => {
         btn.addEventListener('click', () => {
-            // Reset estilos
+            // Reset estilos visuales de los botones
             filters.forEach(b => {
                 b.classList.remove('border-green-500/50', 'bg-green-500/10', 'text-white');
                 b.classList.add('text-gray-400');
             });
-            // Activar botón clickeado
+            
+            // Activar botón actual
             btn.classList.remove('text-gray-400');
             btn.classList.add('border-green-500/50', 'bg-green-500/10', 'text-white');
 
             const category = btn.getAttribute('data-filter');
 
+            // Lógica de filtrado
             cards.forEach(card => {
                 const cardCat = card.getAttribute('data-category');
                 const htmlCard = card as HTMLElement;
                 
+                // Simplemente mostramos u ocultamos. AutoAnimate hará la transición suave.
                 if (category === 'all' || cardCat === category) {
-                    htmlCard.style.display = 'flex';
-                    // Pequeño delay para permitir que el display:flex aplique antes de la opacidad
-                    requestAnimationFrame(() => {
-                        htmlCard.style.opacity = '1';
-                        htmlCard.style.transform = 'scale(1)';
-                    });
+                    htmlCard.style.display = 'flex'; 
                 } else {
-                    htmlCard.style.opacity = '0';
-                    htmlCard.style.transform = 'scale(0.95)';
-                    setTimeout(() => htmlCard.style.display = 'none', 300); // Esperar a que termine la transición
+                    htmlCard.style.display = 'none';
                 }
             });
         });
     });
 </script>
-
-<style>
-    .skill-card {
-        transition: opacity 0.3s ease, transform 0.3s ease, border-color 0.3s, background-color 0.3s;
-    }
-</style>
