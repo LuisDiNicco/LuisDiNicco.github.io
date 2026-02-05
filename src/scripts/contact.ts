@@ -1,37 +1,49 @@
 // src/scripts/contact.ts
 
+// 1. Definimos tipos para la respuesta de la API (Sin usar 'any')
+interface FormError {
+    code?: string;
+    field?: string;
+    message: string;
+}
+
+interface FormspreeResponse {
+    next?: string;
+    ok: boolean;
+    errors?: FormError[];
+}
+
 interface ContactConfig {
-    EMAIL_USER: string;
-    EMAIL_DOMAIN: string;
-    SELECTORS: {
-        FORM: string;
-        EMAIL_LINK: string;
-        STATUS_DIV: string;
-        SUBMIT_BTN: string;
-        LOADER: string;
+    readonly EMAIL_USER: string;
+    readonly EMAIL_DOMAIN: string;
+    readonly SELECTORS: {
+        readonly FORM: string;
+        readonly EMAIL_LINK: string;
+        readonly STATUS_DIV: string;
+        readonly SUBMIT_BTN: string;
+        readonly LOADER: string;
     };
-    UI: {
-        HIDDEN_CLASS: string;
-        LOADING_CLASS: string;
-        BASE_STATUS_CLASS: string;
-        SUCCESS_CLASSES: string[];
-        ERROR_CLASSES: string[];
-        MESSAGES: {
-            SENDING: string;
-            SUCCESS: string;
-            ERR_SECURITY: string;
-            ERR_EMAIL: string;
-            ERR_CONNECTION: string;
-            ERR_CRITICAL: string;
+    readonly UI: {
+        readonly HIDDEN_CLASS: string;
+        readonly LOADING_CLASS: string;
+        readonly BASE_STATUS_CLASS: string;
+        readonly SUCCESS_CLASSES: readonly string[]; // Array de lectura
+        readonly ERROR_CLASSES: readonly string[];
+        readonly MESSAGES: {
+            readonly SENDING: string;
+            readonly SUCCESS: string;
+            readonly ERR_SECURITY: string;
+            readonly ERR_EMAIL: string;
+            readonly ERR_CONNECTION: string;
+            readonly ERR_CRITICAL: string;
         };
     };
-    REGEX: {
-        DANGEROUS: RegExp;
-        EMAIL: RegExp;
+    readonly REGEX: {
+        readonly DANGEROUS: RegExp;
+        readonly EMAIL: RegExp;
     }
 }
 
-// Configuración centralizada
 const CONFIG: ContactConfig = {
     EMAIL_USER: 'diniccoluis',
     EMAIL_DOMAIN: 'gmail.com',
@@ -48,7 +60,6 @@ const CONFIG: ContactConfig = {
         BASE_STATUS_CLASS: 'mt-4 font-mono text-sm border-l-2 pl-2 transition-all duration-300',
         SUCCESS_CLASSES: ['text-green-400', 'border-green-500'],
         ERROR_CLASSES: ['text-red-400', 'border-red-500'],
-        // Estos mensajes son los "fallback" por defecto
         MESSAGES: {
             SENDING: 'Enviando paquetes...',
             SUCCESS: '> Mensaje enviado correctamente. Code: 200 [OK]',
@@ -92,7 +103,12 @@ function setupFormSubmission() {
         e.preventDefault();
         
         const formData = new FormData(form);
-        const data = Object.fromEntries(formData.entries()) as { name: string; email: string; message: string };
+        // Tipado más seguro para los datos del formulario
+        const data = {
+            name: formData.get('name') as string,
+            email: formData.get('email') as string,
+            message: formData.get('message') as string
+        };
         
         // 1. Validaciones de Seguridad
         if (CONFIG.REGEX.DANGEROUS.test(data.message) || CONFIG.REGEX.DANGEROUS.test(data.name)) {
@@ -121,9 +137,11 @@ function setupFormSubmission() {
                 showStatus(CONFIG.UI.MESSAGES.SUCCESS, 'success');
                 form.reset();
             } else {
-                const resData = await response.json();
-                if (resData.errors) {
-                    const errorMsg = resData.errors.map((err: any) => err.message).join(", ");
+                // AQUÍ ESTABA EL ANY: Ahora usamos casting a nuestra interfaz
+                const resData = await response.json() as FormspreeResponse;
+                
+                if (resData.errors && Array.isArray(resData.errors)) {
+                    const errorMsg = resData.errors.map(err => err.message).join(", ");
                     showStatus(`> Error: ${errorMsg}`, 'error');
                 } else {
                     showStatus(CONFIG.UI.MESSAGES.ERR_CONNECTION, 'error');

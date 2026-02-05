@@ -1,38 +1,36 @@
 // src/scripts/matrix.ts
 
-// Definimos interfaces para evitar "magic numbers" y errores de tipo
 interface GridConfig {
-  SIZE: number;
-  LINE_COLOR: string;
-  LINE_WIDTH: number;
+  readonly SIZE: number;
+  readonly LINE_COLOR: string;
+  readonly LINE_WIDTH: number;
 }
 
 interface AnimationConfig {
-  PARALLAX_SPEED: number;
-  GLOBAL_SPEED: number;
-  REFRESH_DELAY: number;
+  readonly PARALLAX_SPEED: number;
+  readonly GLOBAL_SPEED: number;
+  readonly REFRESH_DELAY: number;
 }
 
 interface DotConfig {
-  CHANCE: number;
-  COLOR_RGB: string;
-  MIN_SPEED: number;
-  MAX_SPEED: number;
-  MIN_GROWTH: number;
-  MAX_GROWTH: number;
-  BASE_SIZE: number;
-  CYCLE_OFFSET: number;
-  INTENSITY_MULT: number;
-  NOVA_BOOST: number;
+  readonly CHANCE: number;
+  readonly COLOR_RGB: string;
+  readonly MIN_SPEED: number;
+  readonly MAX_SPEED: number;
+  readonly MIN_GROWTH: number;
+  readonly MAX_GROWTH: number;
+  readonly BASE_SIZE: number;
+  readonly CYCLE_OFFSET: number;
+  readonly INTENSITY_MULT: number;
+  readonly NOVA_BOOST: number;
 }
 
 interface PrngConfig {
-  A: number;
-  B: number;
-  C: number;
+  readonly A: number;
+  readonly B: number;
+  readonly C: number;
 }
 
-// Configuración Inmutable
 const BG_CONFIG = {
   GRID: {
     SIZE: 40,
@@ -57,9 +55,8 @@ const BG_CONFIG = {
     NOVA_BOOST: 0.8
   } as DotConfig,
   PRNG: { A: 12.9898, B: 78.233, C: 43758.5453123 } as PrngConfig
-} as const; // 'as const' hace que sea read-only profundo
+} as const;
 
-// Variables de estado encapsuladas en el módulo
 let canvas: HTMLCanvasElement | null = null;
 let ctx: CanvasRenderingContext2D | null = null;
 let width = 0;
@@ -162,5 +159,6 @@ export function initMatrixBg() {
   window.addEventListener('resize', () => {
     resize();
     clearTimeout(resizeTimeout);
-    resizeTimeout = window.setTimeout(resize, BG_CONFIG.ANIMATION.REFRESH_DELAY);  });
+    resizeTimeout = window.setTimeout(resize, BG_CONFIG.ANIMATION.REFRESH_DELAY);
+  });
 }
