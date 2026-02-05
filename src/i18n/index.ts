@@ -89,7 +89,7 @@ export const ui = {
     'hero.role': 'Backend Developer & Future Computer Engineer',
     'hero.skills': '$ skills --list',
     'hero.status.cmd': '$ systemctl status',
-    'hero.status.text': 'Online & Open to new opportunities',
+    'hero.status.text': 'Open to new opportunities',
     'hero.stack.cmd': '$ current --stack',
     
     // About

@@ -3,6 +3,7 @@
 import { useTranslations } from '../../i18n';
 import ProjectCard from '../ui/ProjectCard.astro';
 import SectionTitle from '../ui/SectionTitle.astro';
+import { PROJECTS } from '../../data/projects'; // <--- Importamos los datos
 
 interface Props {
   lang: 'es' | 'en';
@@ -10,9 +11,6 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = useTranslations(lang);
-
-const project1Tags = ['NestJS', 'PostgreSQL', 'Docker'];
-const project2Tags = ['Node.js', 'Redis', 'Socket.io'];
 ---
 
 <section id="projects" class="scroll-mt-24 mb-24">
@@ -21,31 +19,24 @@ const project2Tags = ['Node.js', 'Redis', 'Socket.io'];
         <SectionTitle number="03" title={t('proj.title')} />
     </div>
     
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6"> <ProjectCard 
-            title={t('proj.p1.title')}
-            description={t('proj.p1.desc')}
-            tags={project1Tags}
-            linkText={t('proj.link')}
-            linkUrl="https://github.com/LuisDiNicco"
-        >
-            <li class="flex items-start gap-2 text-xs text-gray-300"><span class="text-green-500 mt-0.5">›</span>{t('proj.p1.k1')}</li>
-            <li class="flex items-start gap-2 text-xs text-gray-300"><span class="text-green-500 mt-0.5">›</span>{t('proj.p1.k2')}</li>
-            <li class="flex items-start gap-2 text-xs text-gray-300"><span class="text-green-500 mt-0.5">›</span>{t('proj.p1.k3')}</li>
-            <li class="flex items-start gap-2 text-xs text-gray-300"><span class="text-green-500 mt-0.5">›</span>{t('proj.p1.k4')}</li>
-        </ProjectCard>
-
-        <ProjectCard 
-            title={t('proj.p2.title')}
-            description={t('proj.p2.desc')}
-            tags={project2Tags}
-            linkText={t('proj.link')}
-            linkUrl="https://github.com/LuisDiNicco"
-        >
-            <li class="flex items-start gap-2 text-xs text-gray-300"><span class="text-green-500 mt-0.5">›</span>{t('proj.p2.k1')}</li>
-            <li class="flex items-start gap-2 text-xs text-gray-300"><span class="text-green-500 mt-0.5">›</span>{t('proj.p2.k2')}</li>
-            <li class="flex items-start gap-2 text-xs text-gray-300"><span class="text-green-500 mt-0.5">›</span>{t('proj.p2.k3')}</li>
-            <li class="flex items-start gap-2 text-xs text-gray-300"><span class="text-green-500 mt-0.5">›</span>{t('proj.p2.k4')}</li>
-        </ProjectCard>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        
+        {PROJECTS.map((project) => (
+            <ProjectCard 
+                title={t(project.title)}
+                description={t(project.description)}
+                tags={project.tags}
+                linkText={t(project.linkText)}
+                linkUrl={project.linkUrl}
+            >
+                {project.achievements.map((achievementKey) => (
+                    <li class="flex items-start gap-2 text-xs text-gray-300">
+                        <span class="text-green-500 mt-0.5">›</span>
+                        {t(achievementKey)}
+                    </li>
+                ))}
+            </ProjectCard>
+        ))}
 
     </div>
 </section>
