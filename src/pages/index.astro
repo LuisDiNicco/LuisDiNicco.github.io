@@ -1,0 +1,11 @@
+---
+// src/pages/index.astro
+// Esta página no renderiza nada, solo redirige.
+---
+
+<script is:inline>
+  // Detectar idioma del navegador
+  const userLang = navigator.language || navigator.userLanguage;
+  const path = userLang.startsWith('en') ? '/en' : '/es';
+  window.location.href = path;
+</script>

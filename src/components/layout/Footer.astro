@@ -1,0 +1,15 @@
+---
+// src/components/layout/Footer.astro
+const year = new Date().getFullYear();
+---
+
+<footer class="text-center text-gray-500 text-base pb-8 mt-8">
+    <p class="font-mono">
+        <span class="text-green-500">user@portfolio:~$</span> 
+        <span class="cursor-blink bg-gray-500 w-1.5 h-4 inline-block align-middle"></span>
+        exit
+    </p>
+    <p class="mt-2 opacity-70 text-sm">
+        © {year} Luis Di Nicco. Built with Astro & Tailwind.
+    </p>
+</footer>

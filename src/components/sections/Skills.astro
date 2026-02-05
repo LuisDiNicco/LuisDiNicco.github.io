@@ -1,0 +1,107 @@
+---
+// src/components/sections/Skills.astro
+import { useTranslations } from '../../i18n';
+import SectionTitle from '../ui/SectionTitle.astro';
+import { SKILLS } from '../../data/skills';
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+  lang: 'es' | 'en';
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+// Definimos las categorías usando las claves de traducción
+const categories = [
+  { id: 'all', labelKey: 'skills.filter.all', color: 'text-gray-400' },
+  { id: 'languages', labelKey: 'skills.filter.langs', color: 'text-yellow-400' },
+  { id: 'backend', labelKey: 'skills.filter.backend', color: 'text-blue-400' },
+  { id: 'database', labelKey: 'skills.filter.db', color: 'text-green-400' },
+  { id: 'tools', labelKey: 'skills.filter.tools', color: 'text-purple-400' },
+];
+---
+
+<section id="skills" class="scroll-mt-24 mb-32">
+    
+    <SectionTitle number="02" title={t('skills.title')} />
+
+    <div class="bg-[#111111] border border-gray-800 rounded-xl p-6 shadow-xl mb-8">
+        <div class="flex flex-col md:flex-row md:items-center gap-4 text-sm font-mono">
+            <span class="text-green-500 font-bold hidden md:inline">$ filter --type</span>
+            
+            <div class="flex flex-wrap gap-2" id="skill-filters">
+                {categories.map((cat) => (
+                    <button 
+                        data-filter={cat.id}
+                        class={`px-3 py-1.5 rounded border border-gray-800 bg-[#1A1A1A] hover:border-gray-600 transition-all ${cat.id === 'all' ? 'border-green-500/50 bg-green-500/10 text-white' : 'text-gray-400'}`}
+                    >
+                        <span class={cat.color}>{t(cat.labelKey as any)}</span>
+                    </button>
+                ))}
+            </div>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4" id="skills-grid">
+        {SKILLS.map((skill) => (
+            <div 
+                class="skill-card bg-[#111] border border-gray-800 p-4 rounded-lg hover:border-green-500/30 hover:bg-[#151515] transition-all group flex flex-col items-center justify-center gap-3"
+                data-category={skill.category}
+            >
+                <div class="w-10 h-10 text-gray-500 group-hover:text-green-400 transition-colors duration-300">
+                    <Icon name={skill.icon} class="w-full h-full" />
+                </div>
+                
+                <span class="text-sm font-mono text-gray-300 group-hover:text-white text-center">
+                    {skill.name}
+                </span>
+            </div>
+        ))}
+    </div>
+
+</section>
+
+<script>
+    const filters = document.querySelectorAll('#skill-filters button');
+    const cards = document.querySelectorAll('.skill-card');
+
+    filters.forEach(btn => {
+        btn.addEventListener('click', () => {
+            // Reset estilos
+            filters.forEach(b => {
+                b.classList.remove('border-green-500/50', 'bg-green-500/10', 'text-white');
+                b.classList.add('text-gray-400');
+            });
+            // Activar botón clickeado
+            btn.classList.remove('text-gray-400');
+            btn.classList.add('border-green-500/50', 'bg-green-500/10', 'text-white');
+
+            const category = btn.getAttribute('data-filter');
+
+            cards.forEach(card => {
+                const cardCat = card.getAttribute('data-category');
+                const htmlCard = card as HTMLElement;
+                
+                if (category === 'all' || cardCat === category) {
+                    htmlCard.style.display = 'flex';
+                    // Pequeño delay para permitir que el display:flex aplique antes de la opacidad
+                    requestAnimationFrame(() => {
+                        htmlCard.style.opacity = '1';
+                        htmlCard.style.transform = 'scale(1)';
+                    });
+                } else {
+                    htmlCard.style.opacity = '0';
+                    htmlCard.style.transform = 'scale(0.95)';
+                    setTimeout(() => htmlCard.style.display = 'none', 300); // Esperar a que termine la transición
+                }
+            });
+        });
+    });
+</script>
+
+<style>
+    .skill-card {
+        transition: opacity 0.3s ease, transform 0.3s ease, border-color 0.3s, background-color 0.3s;
+    }
+</style>

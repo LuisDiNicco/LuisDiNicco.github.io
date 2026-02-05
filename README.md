@@ -1,52 +1,43 @@
-# Portfolio | Luis Di Nicco
+# Astro Starter Kit: Minimal
 
-> **Backend Developer & Futuro Ingeniero Informático**
+```sh
+npm create astro@latest -- --template minimal
+```
 
-![Portfolio Preview](https://img.shields.io/badge/Estado-Online-success?style=for-the-badge) 
-[![Ver Portafolio](https://img.shields.io/badge/Ver_Portafolio_Web-Click_Aquí-2ea44f?style=for-the-badge&logo=github)](https://luisdinicco.github.io)
+> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
 
----
+## 🚀 Project Structure
 
-## 🚀 Sobre este Proyecto
+Inside of your Astro project, you'll see the following folders and files:
 
-Este repositorio contiene el código fuente de mi portafolio personal. He diseñado este sitio web para mostrar mi experiencia en **Arquitectura de Software**, **Desarrollo Backend** y **Sistemas Distribuidos**.
+```text
+/
+├── public/
+├── src/
+│   └── pages/
+│       └── index.astro
+└── package.json
+```
 
-El diseño está inspirado en una estética de "Terminal/Consola", reflejando mi entorno de trabajo diario como ingeniero, pero manteniendo una interfaz moderna y accesible para todos los usuarios.
+Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
 
-### 🌐 ¿Cómo ver el portafolio?
-No necesitas descargar nada. Puedes visitar la versión desplegada y funcional haciendo clic en el siguiente enlace:
+There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
 
-👉 **[https://luisdinicco.github.io](https://luisdinicco.github.io)**
+Any static assets, like images, can be placed in the `public/` directory.
 
----
+## 🧞 Commands
 
-## 🛠 Tecnologías Utilizadas en el Portafolio
+All commands are run from the root of the project, from a terminal:
 
-Aunque mi especialidad es el Backend (NestJS, Docker, AWS), este sitio fue construido utilizando tecnologías web modernas para asegurar rendimiento y diseño:
+| Command                   | Action                                           |
+| :------------------------ | :----------------------------------------------- |
+| `npm install`             | Installs dependencies                            |
+| `npm run dev`             | Starts local dev server at `localhost:4321`      |
+| `npm run build`           | Build your production site to `./dist/`          |
+| `npm run preview`         | Preview your build locally, before deploying     |
+| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
+| `npm run astro -- --help` | Get help using the Astro CLI                     |
 
-* **HTML5 Semántico**: Estructura limpia y accesible.
-* **Tailwind CSS**: Framework de utilidades para un diseño responsivo y moderno.
-* **Vanilla JavaScript & HTML5 Canvas**: Para las animaciones de fondo (Grid interactiva) y lógica de la interfaz, sin depender de librerías pesadas.
+## 👀 Want to learn more?
 
----
-
-## 💼 Proyectos Destacados
-
-En el portafolio encontrarás detalles sobre mis desarrollos más complejos, incluyendo:
-
-1.  **Microservicios E-Commerce API**: Arquitectura escalable con NestJS y Kubernetes.
-2.  **Real-Time Data Pipeline**: Sistema de gestión de eventos en tiempo real con WebSockets y Redis.
-
----
-
-## 📫 Contacto
-
-Estoy abierto a nuevas oportunidades y desafíos técnicos.
-
-* **Email**: [diniccoluis@gmail.com](mailto:diniccoluis@gmail.com)
-* **LinkedIn**: [Conectar en LinkedIn](www.linkedin.com/in/luis-demetrio-di-nicco)
-* **GitHub**: [@LuisDiNicco](https://github.com/LuisDiNicco)
-
----
-
-© 2026 Luis Di Nicco. Built with code & logic.
+Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).

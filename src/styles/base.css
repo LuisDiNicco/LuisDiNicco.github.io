@@ -1,0 +1,45 @@
+/* src/styles/base.css */
+
+/* 1. IMPORTACIÓN DE TAILWIND V4 (Esta línea carga todo el framework) */
+@import "tailwindcss";
+
+/* 2. IMPORTACIÓN DE FUENTES */
+@import '@fontsource/fira-code/300.css';
+@import '@fontsource/fira-code/400.css';
+@import '@fontsource/fira-code/500.css';
+@import '@fontsource/fira-code/600.css';
+@import '@fontsource/fira-code/700.css';
+
+/* 3. VARIABLES GLOBALES (CSS Estándar) */
+:root {
+  --font-primary: 'Fira Code', monospace;
+  --bg-dark: #0a0a0a;
+}
+
+/* 4. ESTILOS BASE */
+body {
+  font-family: var(--font-primary);
+  background-color: var(--bg-dark);
+  /* Ahora @apply funcionará porque "tailwindcss" ya fue importado arriba */
+  @apply text-gray-200 overflow-x-hidden selection:bg-green-500 selection:text-black;
+}
+
+/* 5. SCROLLBAR HACKER */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: #0a0a0a; }
+::-webkit-scrollbar-thumb { 
+    @apply bg-[#333] rounded-[5px] hover:bg-green-500; 
+}
+
+/* 6. UTILIDADES EXTRA */
+.cursor-blink { animation: blink 1s step-end infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+
+/* 7. NAVEGACIÓN ACTIVA (Restaurado) */
+.nav-active {
+    background-color: rgba(34, 197, 94, 0.15) !important; /* Fondo verde suave */
+    color: #4ade80 !important; /* Texto verde brillante */
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    font-weight: 600;
+    box-shadow: 0 0 10px rgba(34, 197, 94, 0.1);
+}

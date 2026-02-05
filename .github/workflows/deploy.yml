@@ -1,0 +1,35 @@
+name: Deploy to GitHub Pages
+
+on:
+  # Se ejecuta cuando haces push a la rama 'main'
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout your repository
+        uses: actions/checkout@v4
+      
+      # Detecta si usas npm, pnpm o yarn y prepara el entorno
+      - name: Install, build, and upload your site
+        uses: withastro/action@v2
+        # withastro/action se encarga de todo: npm install && npm run build
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

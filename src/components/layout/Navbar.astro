@@ -1,0 +1,44 @@
+---
+// src/components/layout/Navbar.astro
+import { useTranslations } from '../../i18n';
+
+interface Props {
+  lang: 'es' | 'en';
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const activeLangClass = "text-green-400 font-bold border-b border-green-500";
+const inactiveLangClass = "text-gray-600 hover:text-gray-400";
+---
+
+<nav class="fixed top-0 left-0 w-full z-50 bg-[#0a0a0a]/90 backdrop-blur-sm border-b border-green-500/10 h-14 flex items-center justify-between px-4 md:px-8 font-mono text-sm md:text-base transition-all">
+    
+    <div class="flex-1 flex justify-center ml-12 md:ml-0">
+        <ul class="flex items-center gap-2 md:gap-6">
+            <li><a href="#home" class="nav-link px-2 py-1 rounded transition-colors hover:text-green-400 text-gray-400">{t('nav.home')}</a></li>
+            <li class="text-gray-700 select-none">|</li>
+            <li><a href="#about-me" class="nav-link px-2 py-1 rounded transition-colors hover:text-green-400 text-gray-400">{t('nav.about')}</a></li>
+            <li class="text-gray-700 select-none">|</li>
+            <li><a href="#skills" class="nav-link px-2 py-1 rounded transition-colors hover:text-green-400 text-gray-400">{t('nav.skills')}</a></li>
+            <li class="text-gray-700 select-none">|</li>
+            <li><a href="#projects" class="nav-link px-2 py-1 rounded transition-colors hover:text-green-400 text-gray-400">{t('nav.projects')}</a></li>
+            <li class="text-gray-700 select-none">|</li>
+            <li><a href="#contact" class="nav-link px-2 py-1 rounded transition-colors hover:text-green-400 text-gray-400">{t('nav.contact')}</a></li>
+        </ul>
+    </div>
+
+    <div class="flex items-center gap-1 font-mono text-xs md:text-sm">
+        <a href="/en" class={`cursor-pointer transition-all px-2 ${lang === 'en' ? activeLangClass : inactiveLangClass}`}>EN</a>
+        <span class="text-gray-700">/</span>
+        <a href="/es" class={`cursor-pointer transition-all px-2 ${lang === 'es' ? activeLangClass : inactiveLangClass}`}>ES</a>
+    </div>
+</nav>
+
+<script>
+    import { initScrollSpy } from '../../scripts/scroll-spy';
+    document.addEventListener('DOMContentLoaded', () => {
+        initScrollSpy();
+    });
+</script>

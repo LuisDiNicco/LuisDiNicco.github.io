@@ -1,0 +1,38 @@
+---
+// src/layouts/Layout.astro
+import '../styles/base.css';
+
+interface Props {
+  title: string;
+  description: string;
+  lang: 'es' | 'en';
+}
+
+const { title, description, lang } = Astro.props;
+---
+
+<!doctype html>
+<html lang={lang} class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body class="relative">
+    <canvas id="grid-canvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
+    <div class="fixed inset-0 z-0 bg-[radial-gradient(circle_at_center,transparent_0%,#0a0a0a_100%)] pointer-events-none opacity-80"></div>
+
+    <div class="relative z-10">
+      <slot />
+    </div>
+
+    <script>
+      import { initMatrixBg } from '../scripts/matrix.ts';
+      // Ejecutamos la función cuando el DOM esté listo
+      initMatrixBg();
+    </script>
+  </body>
+</html>
