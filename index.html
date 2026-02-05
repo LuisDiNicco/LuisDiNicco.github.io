@@ -12,24 +12,24 @@
 </head>
 <body class="text-gray-200 selection:bg-green-500 selection:text-black relative">
 
-    <nav class="fixed top-0 left-0 w-full z-50 bg-[#0a0a0a]/90 backdrop-blur-sm border-b border-green-500/10 h-14 flex items-center justify-center font-mono text-sm md:text-base transition-all">
-        <ul class="flex items-center gap-2 md:gap-6 px-4">
-            <li>
-                <a href="#home" class="nav-link px-3 py-1 rounded transition-colors hover:text-green-400 text-gray-400" data-section="home">~/</a>
-            </li>
-            <li class="text-gray-700 select-none">|</li>
-            <li>
-                <a href="#about-me" class="nav-link px-3 py-1 rounded transition-colors hover:text-green-400 text-gray-400" data-section="about-me">./about</a>
-            </li>
-            <li class="text-gray-700 select-none">|</li>
-            <li>
-                <a href="#projects" class="nav-link px-3 py-1 rounded transition-colors hover:text-green-400 text-gray-400" data-section="projects">./projects</a>
-            </li>
-            <li class="text-gray-700 select-none">|</li>
-            <li>
-                <a href="#contact" class="nav-link px-3 py-1 rounded transition-colors hover:text-green-400 text-gray-400" data-section="contact">./contact</a>
-            </li>
-        </ul>
+    <nav class="fixed top-0 left-0 w-full z-50 bg-[#0a0a0a]/90 backdrop-blur-sm border-b border-green-500/10 h-14 flex items-center justify-between px-4 md:px-8 font-mono text-sm md:text-base transition-all">
+        
+        <div class="flex-1 flex justify-center ml-12 md:ml-0"> <ul class="flex items-center gap-2 md:gap-6">
+                <li><a href="#home" class="nav-link px-2 py-1 rounded transition-colors hover:text-green-400 text-gray-400" data-section="home" data-i18n="nav.home">~/</a></li>
+                <li class="text-gray-700 select-none">|</li>
+                <li><a href="#about-me" class="nav-link px-2 py-1 rounded transition-colors hover:text-green-400 text-gray-400" data-section="about-me" data-i18n="nav.about">./about</a></li>
+                <li class="text-gray-700 select-none">|</li>
+                <li><a href="#projects" class="nav-link px-2 py-1 rounded transition-colors hover:text-green-400 text-gray-400" data-section="projects" data-i18n="nav.projects">./projects</a></li>
+                <li class="text-gray-700 select-none">|</li>
+                <li><a href="#contact" class="nav-link px-2 py-1 rounded transition-colors hover:text-green-400 text-gray-400" data-section="contact" data-i18n="nav.contact">./contact</a></li>
+            </ul>
+        </div>
+
+        <div class="flex items-center gap-1 font-mono text-xs md:text-sm">
+            <button id="lang-en" class="cursor-pointer transition-all px-2 hover:text-white">EN</button>
+            <span class="text-gray-700">/</span>
+            <button id="lang-es" class="cursor-pointer transition-all px-2 hover:text-white">ES</button>
+        </div>
     </nav>
 
     <canvas id="grid-canvas" class="fixed top-0 left-0 w-full h-full pointer-events-none z-0"></canvas>
@@ -48,15 +48,15 @@
                 
                 <div class="p-8 md:p-10 space-y-6">
                     <div>
-                        <p class="text-green-500 font-bold mb-2">$ whoami</p>
+                        <p class="text-green-500 font-bold mb-2" data-i18n="hero.cmd">$ whoami</p>
                         <h1 class="text-5xl md:text-6xl font-bold text-gray-100 mb-2 tracking-tight">Luis Di Nicco</h1>
-                        <p class="text-gray-400 text-xl font-medium">
+                        <p class="text-gray-400 text-xl font-medium" data-i18n="hero.role">
                             Backend Developer & Futuro Ingeniero Informático
                         </p>
                     </div>
 
                     <div>
-                        <p class="text-green-500 font-bold mb-3">$ skills --list</p>
+                        <p class="text-green-500 font-bold mb-3" data-i18n="hero.skills">$ skills --list</p>
                         <div class="flex flex-wrap gap-3">
                             <span class="px-3 py-1.5 bg-[#112211] border border-green-900/50 text-green-400 rounded text-sm hover:border-green-500 transition cursor-default">NestJS</span>
                             <span class="px-3 py-1.5 bg-[#112211] border border-green-900/50 text-green-400 rounded text-sm hover:border-green-500 transition cursor-default">Node.js</span>
@@ -86,7 +86,7 @@
                 
                 <div class="flex items-center gap-4 mb-8">
                     <div class="h-px bg-gray-800 flex-grow"></div>
-                    <h2 class="text-xl md:text-2xl font-mono text-gray-500 font-bold">
+                    <h2 class="text-xl md:text-2xl font-mono text-gray-500 font-bold" data-i18n="about.title">
                         <span class="text-green-500">//</span> 01. Profile
                     </h2>
                     <div class="h-px bg-gray-800 flex-grow"></div>
@@ -103,21 +103,21 @@
                     <div class="p-6 md:p-10 font-mono">
                         <div class="flex items-center gap-2 mb-8 text-green-500 text-base md:text-lg border-b border-gray-800 pb-4 min-h-[3rem]">
                             <span class="font-bold">$</span>
-                            <span id="typewriter-text"></span><span id="cursor" class="cursor-blink bg-green-500 w-2.5 h-5 inline-block align-middle"></span>
+                            <span id="typewriter-text" data-i18n="about.cmd">cat about_me.txt</span><span id="cursor" class="cursor-blink bg-green-500 w-2.5 h-5 inline-block align-middle"></span>
                         </div>
 
                         <div id="about-content" class="text-gray-300 leading-relaxed text-sm md:text-base space-y-6 opacity-0 transition-opacity duration-700">
-                            <p>
+                            <p data-i18n="about.p1">
                                 <span class="text-green-500 font-bold mr-2">›</span> 
                                 Soy desarrollador Backend y estudiante avanzado de Ingeniería Informática. 
                                 No solo escribo código; diseño arquitecturas escalables y eficientes.
                             </p>
-                            <p>
+                            <p data-i18n="about.p2">
                                 <span class="text-green-500 font-bold mr-2">›</span> 
                                 Mi enfoque está en construir sistemas robustos utilizando <span class="text-white font-bold">NestJS</span> y <span class="text-white font-bold">TypeScript</span>. 
                                 Me obsesiona la limpieza del código (Clean Architecture), la optimización de bases de datos y la automatización de procesos (CI/CD).
                             </p>
-                            <p>
+                            <p data-i18n="about.p3">
                                 <span class="text-green-500 font-bold mr-2">›</span> 
                                 Actualmente busco desafíos donde pueda aplicar lógica de ingeniería para resolver problemas de negocio reales.
                             </p>
@@ -127,25 +127,25 @@
             </section>
 
             <section id="projects" class="scroll-mt-24">
-                <h2 class="text-3xl font-bold text-center mb-16 text-white">System Architecture & Projects</h2>
+                <h2 class="text-3xl font-bold text-center mb-16 text-white" data-i18n="proj.title">System Architecture & Projects</h2>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     
                     <div class="bg-[#111111] border border-gray-800 rounded-xl p-7 transition-all duration-300 transform hover:-translate-y-1 hover:border-green-500/50 hover:shadow-[0_0_20px_-5px_rgba(34,197,94,0.1)] flex flex-col h-full group">
-                        <h3 class="text-xl font-bold text-white mb-4 group-hover:text-green-400 transition-colors">Microservicios E-Commerce API</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                        <h3 class="text-xl font-bold text-white mb-4 group-hover:text-green-400 transition-colors" data-i18n="proj.p1.title">Microservicios E-Commerce API</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6" data-i18n="proj.p1.desc">
                             Arquitectura de backend escalable diseñada para manejar alto tráfico. Implementación de patrones de diseño y clean architecture.
                         </p>
                         <div class="mb-6 bg-[#080808] p-5 rounded-lg border border-gray-800/60 flex-grow">
                             <h4 class="text-xs font-bold text-gray-500 mb-3 uppercase tracking-widest flex items-center gap-2">
                                 <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                                Key Achievements
+                                <span data-i18n="proj.keys">Key Achievements</span>
                             </h4>
                             <ul class="space-y-2.5">
-                                <li class="flex items-start gap-2 text-xs text-gray-300"><span class="text-green-500 mt-0.5">›</span><span>API RESTful con NestJS y TypeScript.</span></li>
-                                <li class="flex items-start gap-2 text-xs text-gray-300"><span class="text-green-500 mt-0.5">›</span><span>Autenticación segura (JWT & OAuth2).</span></li>
-                                <li class="flex items-start gap-2 text-xs text-gray-300"><span class="text-green-500 mt-0.5">›</span><span>Documentación con Swagger/OpenAPI.</span></li>
-                                <li class="flex items-start gap-2 text-xs text-gray-300"><span class="text-green-500 mt-0.5">›</span><span>Coverage de tests > 80%.</span></li>
+                                <li class="flex items-start gap-2 text-xs text-gray-300"><span class="text-green-500 mt-0.5">›</span><span data-i18n="proj.p1.k1">API RESTful con NestJS y TypeScript.</span></li>
+                                <li class="flex items-start gap-2 text-xs text-gray-300"><span class="text-green-500 mt-0.5">›</span><span data-i18n="proj.p1.k2">Autenticación segura (JWT & OAuth2).</span></li>
+                                <li class="flex items-start gap-2 text-xs text-gray-300"><span class="text-green-500 mt-0.5">›</span><span data-i18n="proj.p1.k3">Documentación con Swagger/OpenAPI.</span></li>
+                                <li class="flex items-start gap-2 text-xs text-gray-300"><span class="text-green-500 mt-0.5">›</span><span data-i18n="proj.p1.k4">Coverage de tests > 80%.</span></li>
                             </ul>
                         </div>
                         <div class="flex flex-wrap gap-2 mb-6">
@@ -155,26 +155,26 @@
                         </div>
                         <div class="pt-4 border-t border-gray-800/50">
                             <a href="https://github.com/LuisDiNicco" target="_blank" class="text-sm font-bold text-white hover:text-green-400 transition flex items-center gap-2 group-hover:translate-x-1 duration-300">
-                                Ver Código <span class="text-green-500">-&gt;</span>
+                                <span data-i18n="proj.link">Ver Código</span> <span class="text-green-500">-&gt;</span>
                             </a>
                         </div>
                     </div>
 
                     <div class="bg-[#111111] border border-gray-800 rounded-xl p-7 transition-all duration-300 transform hover:-translate-y-1 hover:border-green-500/50 hover:shadow-[0_0_20px_-5px_rgba(34,197,94,0.1)] flex flex-col h-full group">
-                        <h3 class="text-xl font-bold text-white mb-4 group-hover:text-green-400 transition-colors">Sistema Real-Time & WebSockets</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                        <h3 class="text-xl font-bold text-white mb-4 group-hover:text-green-400 transition-colors" data-i18n="proj.p2.title">Sistema Real-Time & WebSockets</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6" data-i18n="proj.p2.desc">
                             Sistema de gestión de recursos con actualizaciones en tiempo real para múltiples clientes conectados simultáneamente.
                         </p>
                         <div class="mb-6 bg-[#080808] p-5 rounded-lg border border-gray-800/60 flex-grow">
                             <h4 class="text-xs font-bold text-gray-500 mb-3 uppercase tracking-widest flex items-center gap-2">
                                 <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                                Key Achievements
+                                <span data-i18n="proj.keys">Key Achievements</span>
                             </h4>
                             <ul class="space-y-2.5">
-                                <li class="flex items-start gap-2 text-xs text-gray-300"><span class="text-green-500 mt-0.5">›</span><span>Implementación de WebSockets (Socket.io).</span></li>
-                                <li class="flex items-start gap-2 text-xs text-gray-300"><span class="text-green-500 mt-0.5">›</span><span>Manejo de concurrencia y eventos.</span></li>
-                                <li class="flex items-start gap-2 text-xs text-gray-300"><span class="text-green-500 mt-0.5">›</span><span>Integración con Redis para caché.</span></li>
-                                <li class="flex items-start gap-2 text-xs text-gray-300"><span class="text-green-500 mt-0.5">›</span><span>Despliegue automatizado en nube.</span></li>
+                                <li class="flex items-start gap-2 text-xs text-gray-300"><span class="text-green-500 mt-0.5">›</span><span data-i18n="proj.p2.k1">Implementación de WebSockets (Socket.io).</span></li>
+                                <li class="flex items-start gap-2 text-xs text-gray-300"><span class="text-green-500 mt-0.5">›</span><span data-i18n="proj.p2.k2">Manejo de concurrencia y eventos.</span></li>
+                                <li class="flex items-start gap-2 text-xs text-gray-300"><span class="text-green-500 mt-0.5">›</span><span data-i18n="proj.p2.k3">Integración con Redis para caché.</span></li>
+                                <li class="flex items-start gap-2 text-xs text-gray-300"><span class="text-green-500 mt-0.5">›</span><span data-i18n="proj.p2.k4">Despliegue automatizado en nube.</span></li>
                             </ul>
                         </div>
                         <div class="flex flex-wrap gap-2 mb-6">
@@ -184,7 +184,7 @@
                         </div>
                         <div class="pt-4 border-t border-gray-800/50">
                             <a href="https://github.com/LuisDiNicco" target="_blank" class="text-sm font-bold text-white hover:text-green-400 transition flex items-center gap-2 group-hover:translate-x-1 duration-300">
-                                Ver Código <span class="text-green-500">-&gt;</span>
+                                <span data-i18n="proj.link">Ver Código</span> <span class="text-green-500">-&gt;</span>
                             </a>
                         </div>
                     </div>
@@ -206,39 +206,39 @@
                         
                         <div class="space-y-8">
                             <div>
-                                <div class="text-green-500 font-bold mb-1 font-mono text-base">$ contact --info</div>
-                                <h2 class="text-4xl font-bold text-white mb-4">Let's Connect</h2>
-                                <p class="text-gray-400 text-base">
+                                <div class="text-green-500 font-bold mb-1 font-mono text-base" data-i18n="contact.cmd">$ contact --info</div>
+                                <h2 class="text-4xl font-bold text-white mb-4" data-i18n="contact.title">Let's Connect</h2>
+                                <p class="text-gray-400 text-base" data-i18n="contact.desc">
                                     ¿Tenés un proyecto interesante? Hablemos.
                                 </p>
                             </div>
             
                             <div class="space-y-6">
                                 <div>
-                                    <div class="text-green-500 font-bold mb-1 font-mono text-sm">$ location --current</div>
+                                    <div class="text-green-500 font-bold mb-1 font-mono text-sm" data-i18n="contact.loc.cmd">$ location --current</div>
                                     <div class="flex items-center gap-2 text-gray-300 text-base">
                                         <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                                        <span>Buenos Aires, Argentina</span>
+                                        <span data-i18n="contact.loc">Buenos Aires, Argentina</span>
                                     </div>
                                 </div>
                                 
                                 <div>
-                                    <div class="text-green-500 font-bold mb-1 font-mono text-sm">$ contact --email</div>
+                                    <div class="text-green-500 font-bold mb-1 font-mono text-sm" data-i18n="contact.email.cmd">$ contact --email</div>
                                     <a id="email-link" href="#" class="inline-block px-4 py-2 bg-green-900/10 border border-green-500/20 rounded text-green-400 hover:bg-green-500/10 transition font-mono text-base">
                                         <span class="animate-pulse">Loading contact info...</span>
                                     </a>
                                 </div>
 
                                 <div>
-                                    <div class="text-green-500 font-bold mb-1 font-mono text-sm">$ cat resume.pdf</div>
+                                    <div class="text-green-500 font-bold mb-1 font-mono text-sm" data-i18n="contact.cv.cmd">$ cat resume.pdf</div>
                                     <a href="./cv.pdf" target="_blank" class="inline-flex items-center gap-2 px-4 py-2 bg-green-900/10 border border-green-500/20 rounded text-green-400 hover:bg-green-500/10 transition font-mono text-base">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                                        Download CV
+                                        <span data-i18n="contact.cv">Download CV</span>
                                     </a>
                                 </div>
 
                                 <div>
-                                    <div class="text-green-500 font-bold mb-2 font-mono text-sm">$ ls ./social-links</div>
+                                    <div class="text-green-500 font-bold mb-2 font-mono text-sm" data-i18n="contact.social">$ ls ./social-links</div>
                                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                         <a href="https://github.com/LuisDiNicco" target="_blank" class="flex items-center gap-3 bg-[#151515] border border-gray-800 p-3 rounded hover:bg-[#202020] transition group">
                                             <div class="bg-gray-800 p-1.5 rounded group-hover:bg-black transition">
@@ -258,14 +258,14 @@
                         </div>
             
                         <div class="relative pt-4 lg:pt-0">
-                            <div class="text-green-500 font-bold mb-4 font-mono text-sm">$ send-message</div>
+                            <div class="text-green-500 font-bold mb-4 font-mono text-sm" data-i18n="form.cmd">$ send-message</div>
                             
                             <form id="contact-form" action="https://formspree.io/f/TU_ID_DE_FORMSPREE" method="POST" class="space-y-4 bg-[#151515] p-6 rounded-xl border border-gray-800">
                                 
                                 <input type="text" name="_gotcha" style="display:none !important">
 
                                 <div>
-                                    <label for="name" class="block text-green-500 font-mono text-sm mb-2">$ name:</label>
+                                    <label for="name" class="block text-green-500 font-mono text-sm mb-2" data-i18n="form.name">$ name:</label>
                                     <input type="text" id="name" name="name" autocomplete="name" required maxlength="100" class="w-full bg-[#0a0a0a] border border-gray-700 rounded p-3 text-gray-200 focus:outline-none focus:border-green-500 text-base font-mono">
                                 </div>
                                 <div>
@@ -273,10 +273,10 @@
                                     <input type="email" id="email" name="email" autocomplete="email" required maxlength="100" class="w-full bg-[#0a0a0a] border border-gray-700 rounded p-3 text-gray-200 focus:outline-none focus:border-green-500 text-base font-mono">
                                 </div>
                                 <div>
-                                    <label for="message" class="block text-green-500 font-mono text-sm mb-2">$ message:</label>
+                                    <label for="message" class="block text-green-500 font-mono text-sm mb-2" data-i18n="form.message">$ message:</label>
                                     <textarea id="message" name="message" rows="5" required maxlength="3000" class="w-full bg-[#0a0a0a] border border-gray-700 rounded p-3 text-gray-200 focus:outline-none focus:border-green-500 text-base font-mono"></textarea>
                                 </div>
-                                <button type="submit" id="submit-btn" class="w-full bg-green-600 hover:bg-green-500 text-black font-bold py-3 rounded transition duration-300 uppercase tracking-widest text-sm shadow-lg shadow-green-900/20">
+                                <button type="submit" id="submit-btn" class="w-full bg-green-600 hover:bg-green-500 text-black font-bold py-3 rounded transition duration-300 uppercase tracking-widest text-sm shadow-lg shadow-green-900/20" data-i18n="form.btn">
                                     SendMessage()
                                 </button>
                             </form>
@@ -303,5 +303,6 @@
     <script src="js/form.js"></script>
     <script src="js/nav.js"></script>
     <script src="js/typing.js"></script>
+    <script src="js/language.js"></script>
 </body>
 </html>
