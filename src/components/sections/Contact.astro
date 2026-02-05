@@ -1,7 +1,7 @@
 ---
 // src/components/sections/Contact.astro
 import { useTranslations } from '../../i18n';
-import SectionTitle from '../ui/SectionTitle.astro'; // <-- IMPORTAR
+import SectionTitle from '../ui/SectionTitle.astro';
 
 interface Props {
   lang: 'es' | 'en';
@@ -9,6 +9,9 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = useTranslations(lang);
+
+// NUEVO: Leemos la variable de entorno
+const formId = import.meta.env.PUBLIC_FORMSPREE_ID;
 ---
 
 <section id="contact" class="pb-0 scroll-mt-24 mb-20"> 
@@ -69,7 +72,8 @@ const t = useTranslations(lang);
 
             <div class="w-full md:w-1/2 relative">
                 <div class="text-green-500 font-bold mb-4 font-mono text-sm">{t('form.cmd')}</div>
-                <form id="contact-form" action="https://formspree.io/f/TU_ID_DE_FORMSPREE" method="POST" class="space-y-4 bg-[#151515] p-6 rounded-xl border border-gray-800">
+                
+                <form id="contact-form" action={`https://formspree.io/f/${formId || 'DEMO_MODE'}`} method="POST" class="space-y-4 bg-[#151515] p-6 rounded-xl border border-gray-800">
                     <input type="text" name="_gotcha" style="display:none !important">
                     <div>
                         <label for="name" class="block text-green-500 font-mono text-sm mb-2">{t('form.name')}</label>
