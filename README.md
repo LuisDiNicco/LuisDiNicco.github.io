@@ -7,7 +7,7 @@
 
 ---
 
-## 🚀 About this Project
+## 💻 About this Project
 
 This repository contains the source code for my personal portfolio. The goal of this site is to present my experience in **Software Architecture**, **Backend Development**, and **Distributed Systems** in a clear and interactive way.
 
@@ -86,11 +86,11 @@ If you wish to clone and run this project in your local environment:
 
 ## 📫 Contact
 
-I am open to new professional opportunities and technical challenges.
+I am open to new professional opportunities and technical challenges. Feel free to connect!
 
-* **Email**: [diniccoluis@gmail.com](mailto:diniccoluis@gmail.com)
-* **LinkedIn**: [Luis Demetrio Di Nicco](https://linkedin.com/in/luis-demetrio-di-nicco)
-* **GitHub**: [@LuisDiNicco](https://github.com/LuisDiNicco)
+[![Email](https://img.shields.io/badge/Email-diniccoluis%40gmail.com-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:diniccoluis@gmail.com)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Luis_Di_Nicco-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/luis-demetrio-di-nicco)
+[![GitHub](https://img.shields.io/badge/GitHub-@LuisDiNicco-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/LuisDiNicco)
 
 ---
 
