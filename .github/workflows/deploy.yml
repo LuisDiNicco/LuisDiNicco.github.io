@@ -11,33 +11,47 @@ permissions:
   id-token: write
 
 jobs:
-  build:
+  test-and-build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout your repository
+      - name: Checkout repository
         uses: actions/checkout@v4
-      
-      # --- NUEVO: Descargar CVs desde Drive ---
-      - name: Download CVs from Google Drive
-        run: |
-          # Descargar CV Español
-          curl -L "https://drive.google.com/uc?export=download&id=${{ secrets.CV_ID_ES }}" -o public/CV_Luis_DiNicco_ES.pdf
-          
-          # Descargar CV Inglés
-          curl -L "https://drive.google.com/uc?export=download&id=${{ secrets.CV_ID_EN }}" -o public/CV_Luis_DiNicco_EN.pdf
-          
-          echo "CVs descargados correctamente en la carpeta public/"
-          ls -l public/*.pdf
-      # ----------------------------------------
 
-      - name: Install, build, and upload your site
-        uses: withastro/action@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps chromium
+
+      # 1. Descargamos CVs (Necesarios para que el test del link funcione)
+      - name: Download CVs from Drive
+        run: |
+          curl -L "https://drive.google.com/uc?export=download&id=${{ secrets.CV_ID_ES }}" -o public/CV_Luis_DiNicco_ES.pdf
+          curl -L "https://drive.google.com/uc?export=download&id=${{ secrets.CV_ID_EN }}" -o public/CV_Luis_DiNicco_EN.pdf
+
+      # 2. Corremos los Tests
+      # Si esto falla, el proceso se detiene y no se hace deploy.
+      - name: Run Playwright Tests
+        run: npx playwright test
+
+      # 3. Construimos el sitio (Solo si los tests pasaron)
+      - name: Build Site
+        run: npm run build
         env:
-            # Tu secreto de Formspree que ya configuramos antes
             PUBLIC_FORMSPREE_ID: ${{ secrets.PUBLIC_FORMSPREE_ID }}
 
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+
   deploy:
-    needs: build
+    needs: test-and-build
     runs-on: ubuntu-latest
     environment:
       name: github-pages
