@@ -1,7 +1,6 @@
 name: Deploy to GitHub Pages
 
 on:
-  # Se ejecuta cuando haces push a la rama 'main'
   push:
     branches: [ main ]
   workflow_dispatch:
@@ -18,12 +17,23 @@ jobs:
       - name: Checkout your repository
         uses: actions/checkout@v4
       
-      # Detecta si usas npm, pnpm o yarn y prepara el entorno
+      # --- NUEVO: Descargar CVs desde Drive ---
+      - name: Download CVs from Google Drive
+        run: |
+          # Descargar CV Español
+          curl -L "https://drive.google.com/uc?export=download&id=${{ secrets.CV_ID_ES }}" -o public/CV_Luis_DiNicco_ES.pdf
+          
+          # Descargar CV Inglés
+          curl -L "https://drive.google.com/uc?export=download&id=${{ secrets.CV_ID_EN }}" -o public/CV_Luis_DiNicco_EN.pdf
+          
+          echo "CVs descargados correctamente en la carpeta public/"
+          ls -l public/*.pdf
+      # ----------------------------------------
+
       - name: Install, build, and upload your site
         uses: withastro/action@v2
-        # withastro/action se encarga de todo: npm install && npm run build
         env:
-            # INYECTAMOS EL SECRETO COMO VARIABLE DE ENTORNO
+            # Tu secreto de Formspree que ya configuramos antes
             PUBLIC_FORMSPREE_ID: ${{ secrets.PUBLIC_FORMSPREE_ID }}
 
   deploy:
