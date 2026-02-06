@@ -27,9 +27,9 @@ export const ui = {
     // About
     'about.title': '// 01. Perfil',
     'about.cmd': 'cat sobre_mi.txt',
-    'about.p1': "<span class='text-green-500 font-bold mr-2'>›</span> Soy desarrollador Backend y estudiante avanzado de Ingeniería Informática. No solo escribo código; diseño arquitecturas escalables y eficientes.",
-    'about.p2': "<span class='text-green-500 font-bold mr-2'>›</span> Mi enfoque está en construir sistemas robustos utilizando <span class='text-white font-bold'>NestJS</span> y <span class='text-white font-bold'>TypeScript</span>. Me obsesiona la limpieza del código (Clean Architecture), la optimización de bases de datos y la automatización de procesos.",
-    'about.p3': "<span class='text-green-500 font-bold mr-2'>›</span> Actualmente busco desafíos donde pueda aplicar lógica de ingeniería para resolver problemas de negocio reales.",
+    'about.p1': "<span class='text-green-500 font-bold mr-2'>›</span> Soy estudiante avanzado de Ingeniería en Informática en la UNLaM. Mi formación me permite abordar el desarrollo no solo desde el código, sino con una visión integral orientada a resolver problemas reales.",
+    'about.p2': "<span class='text-green-500 font-bold mr-2'>›</span> Me especializo en el desarrollo Backend, utilizando tecnologías como <span class='text-white font-bold'>NestJS</span> y <span class='text-white font-bold'>TypeScript</span>. Me enfoco en construir arquitecturas robustas, buscando siempre que el código sea eficiente, legible y fácil de mantener.",
+    'about.p3': "<span class='text-green-500 font-bold mr-2'>›</span> Busco nuevos desafíos profesionales. Ofrezco compromiso, capacidad de análisis y una firme voluntad de aportar soluciones concretas a las necesidades del proyecto.",
     
     // Skills
     'skills.title': 'Conocimientos Técnicos',
@@ -95,9 +95,10 @@ export const ui = {
     // About
     'about.title': '// 01. Profile',
     'about.cmd': 'cat about_me.txt',
-    'about.p1': "<span class='text-green-500 font-bold mr-2'>›</span> I am a Backend Developer and advanced Computer Engineering student. I don't just write code; I design scalable and efficient architectures.",
-    'about.p2': "<span class='text-green-500 font-bold mr-2'>›</span> My focus is on building robust systems using <span class='text-white font-bold'>NestJS</span> and <span class='text-white font-bold'>TypeScript</span>. I am obsessed with Clean Architecture, database optimization, and process automation.",
-    'about.p3': "<span class='text-green-500 font-bold mr-2'>›</span> Currently seeking challenges where I can apply engineering logic to solve real business problems.",
+    // En el objeto EN:
+    'about.p1': "<span class='text-green-500 font-bold mr-2'>›</span> I am an advanced Computer Engineering student at UNLaM. My background allows me to approach development not just from code, but with a comprehensive vision focused on solving real-world problems.",
+    'about.p2': "<span class='text-green-500 font-bold mr-2'>›</span> I specialize in Backend development, using technologies like <span class='text-white font-bold'>NestJS</span> and <span class='text-white font-bold'>TypeScript</span>. I focus on building robust architectures, always ensuring that code is efficient, readable, and maintainable.",
+    'about.p3': "<span class='text-green-500 font-bold mr-2'>›</span> I am seeking new professional challenges. I offer commitment, analytical skills, and a strong determination to provide concrete solutions to project needs.",
     
     // Skills
     'skills.title': 'Technical Knowledge',
