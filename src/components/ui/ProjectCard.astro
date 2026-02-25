@@ -39,7 +39,7 @@ const { title, description, tags, linkText, linkUrl, demoText, demoUrl } = Astro
         ))}
     </div>
 
-    <div class="pt-3 border-t border-gray-800/50 mt-auto flex gap-3">
+    <div class="pt-3 border-t border-gray-800/50 mt-auto flex flex-wrap gap-3">
         {demoUrl && demoText && (
             <a href={demoUrl} target="_blank" class="text-sm font-bold text-white hover:text-green-400 transition flex items-center gap-2 group-hover:translate-x-1 duration-300">
                 {demoText} <span class="text-green-500">-&gt;</span>

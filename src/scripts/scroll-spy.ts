@@ -2,7 +2,7 @@
 
 export function initScrollSpy() {
   const sections = document.querySelectorAll('section, header');
-  const navLinks = document.querySelectorAll('.nav-link');
+  const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
@@ -15,12 +15,12 @@ export function initScrollSpy() {
 
         // Buscamos el link correspondiente (usando el href="#id")
         const id = entry.target.getAttribute('id');
-        const activeLink = document.querySelector(`.nav-link[href="#${id}"]`);
+        const activeLinks = document.querySelectorAll(`.nav-link[href="#${id}"], .mobile-nav-link[href="#${id}"]`);
 
-        if (activeLink) {
+        activeLinks.forEach(activeLink => {
           activeLink.classList.add('nav-active');
           activeLink.classList.remove('text-gray-400');
-        }
+        });
       }
     });
   }, {

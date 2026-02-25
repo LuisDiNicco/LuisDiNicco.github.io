@@ -10,7 +10,7 @@ test.describe('Portafolio E2E Tests', () => {
     await expect(page).toHaveTitle(/Luis Di Nicco | Backend Engineer/i);
     
     // CORRECCIÓN: Buscamos el enlace "~/" ESPECÍFICAMENTE dentro del Navbar
-    // Usamos 'exact: true' para que no confunda "~/" con "~/contact"
+    // Usamos 'exact: true' para que no confunda
     const homeLink = page.locator('nav').getByRole('link', { name: '~/', exact: true });
     
     await expect(homeLink).toBeVisible();

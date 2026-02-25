@@ -15,30 +15,86 @@ const inactiveLangClass = "text-gray-600 hover:text-gray-400";
 
 <nav class="fixed top-0 left-0 w-full z-50 bg-[#0a0a0a]/90 backdrop-blur-sm border-b border-green-500/10 h-14 flex items-center justify-between px-4 md:px-8 font-mono text-sm md:text-base transition-all">
     
-    <div class="flex-1 flex justify-center ml-12 md:ml-0">
-        <ul class="flex items-center gap-2 md:gap-6">
-            <li><a href="#home" class="nav-link px-2 py-1 rounded transition-colors hover:text-green-400 text-gray-400">{t('nav.home')}</a></li>
+    <!-- Mobile Menu Button -->
+    <button id="mobile-menu-btn" class="lg:hidden text-gray-400 hover:text-green-400 focus:outline-none z-50 relative">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            <path id="close-icon" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+    </button>
+
+    <!-- Desktop Menu -->
+    <div class="hidden lg:flex flex-1 justify-center">
+        <ul class="flex items-center gap-4 xl:gap-6">
+            <li><a href="#home" class="nav-link px-2 py-1 rounded transition-colors hover:text-green-400 text-gray-400 whitespace-nowrap">{t('nav.home')}</a></li>
             <li class="text-gray-700 select-none">|</li>
-            <li><a href="#about-me" class="nav-link px-2 py-1 rounded transition-colors hover:text-green-400 text-gray-400">{t('nav.about')}</a></li>
+            <li><a href="#about-me" class="nav-link px-2 py-1 rounded transition-colors hover:text-green-400 text-gray-400 whitespace-nowrap">{t('nav.about')}</a></li>
             <li class="text-gray-700 select-none">|</li>
-            <li><a href="#skills" class="nav-link px-2 py-1 rounded transition-colors hover:text-green-400 text-gray-400">{t('nav.skills')}</a></li>
+            <li><a href="#skills" class="nav-link px-2 py-1 rounded transition-colors hover:text-green-400 text-gray-400 whitespace-nowrap">{t('nav.skills')}</a></li>
             <li class="text-gray-700 select-none">|</li>
-            <li><a href="#projects" class="nav-link px-2 py-1 rounded transition-colors hover:text-green-400 text-gray-400">{t('nav.projects')}</a></li>
+            <li><a href="#projects" class="nav-link px-2 py-1 rounded transition-colors hover:text-green-400 text-gray-400 whitespace-nowrap">{t('nav.projects')}</a></li>
             <li class="text-gray-700 select-none">|</li>
-            <li><a href="#contact" class="nav-link px-2 py-1 rounded transition-colors hover:text-green-400 text-gray-400">{t('nav.contact')}</a></li>
+            <li><a href="#contact" class="nav-link px-2 py-1 rounded transition-colors hover:text-green-400 text-gray-400 whitespace-nowrap">{t('nav.contact')}</a></li>
         </ul>
     </div>
 
-    <div class="flex items-center gap-1 font-mono text-xs md:text-sm">
+    <!-- Language Switcher -->
+    <div class="flex items-center gap-1 font-mono text-xs md:text-sm z-50 relative">
         <a href="/en" class={`cursor-pointer transition-all px-2 ${lang === 'en' ? activeLangClass : inactiveLangClass}`}>EN</a>
         <span class="text-gray-700">/</span>
         <a href="/es" class={`cursor-pointer transition-all px-2 ${lang === 'es' ? activeLangClass : inactiveLangClass}`}>ES</a>
     </div>
 </nav>
 
+<!-- Mobile Menu Overlay -->
+<div id="mobile-menu" class="fixed inset-0 bg-[#0a0a0a]/95 backdrop-blur-md z-40 hidden flex-col items-center justify-center pt-14 opacity-0 transition-opacity duration-300">
+    <ul class="flex flex-col items-center gap-8 text-xl">
+        <li><a href="#home" class="mobile-nav-link px-4 py-2 rounded hover:text-green-400 text-gray-400 transition-colors">{t('nav.home')}</a></li>
+        <li><a href="#about-me" class="mobile-nav-link px-4 py-2 rounded hover:text-green-400 text-gray-400 transition-colors">{t('nav.about')}</a></li>
+        <li><a href="#skills" class="mobile-nav-link px-4 py-2 rounded hover:text-green-400 text-gray-400 transition-colors">{t('nav.skills')}</a></li>
+        <li><a href="#projects" class="mobile-nav-link px-4 py-2 rounded hover:text-green-400 text-gray-400 transition-colors">{t('nav.projects')}</a></li>
+        <li><a href="#contact" class="mobile-nav-link px-4 py-2 rounded hover:text-green-400 text-gray-400 transition-colors">{t('nav.contact')}</a></li>
+    </ul>
+</div>
+
 <script>
     import { initScrollSpy } from '../../scripts/scroll-spy';
     document.addEventListener('DOMContentLoaded', () => {
         initScrollSpy();
+
+        // Mobile menu logic
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        const closeIcon = document.getElementById('close-icon');
+        const links = document.querySelectorAll('.mobile-nav-link');
+
+        if (btn && menu && menuIcon && closeIcon) {
+            const toggleMenu = () => {
+                const isHidden = menu.classList.contains('hidden');
+                if (isHidden) {
+                    menu.classList.remove('hidden');
+                    // Small delay to allow display:block to apply before changing opacity
+                    setTimeout(() => menu.classList.remove('opacity-0'), 10);
+                    menuIcon.classList.add('hidden');
+                    closeIcon.classList.remove('hidden');
+                    document.body.style.overflow = 'hidden'; // Prevent scrolling
+                } else {
+                    menu.classList.add('opacity-0');
+                    setTimeout(() => {
+                        menu.classList.add('hidden');
+                    }, 300); // Match transition duration
+                    menuIcon.classList.remove('hidden');
+                    closeIcon.classList.add('hidden');
+                    document.body.style.overflow = ''; // Restore scrolling
+                }
+            };
+
+            btn.addEventListener('click', toggleMenu);
+
+            links.forEach(link => {
+                link.addEventListener('click', toggleMenu);
+            });
+        }
     });
 </script>
