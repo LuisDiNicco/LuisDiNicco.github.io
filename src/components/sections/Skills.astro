@@ -2,7 +2,6 @@
 // src/components/sections/Skills.astro
 import { useTranslations } from '../../i18n';
 import SectionTitle from '../ui/SectionTitle.astro';
-// Importamos datos y categorías desde la fuente centralizada
 import { SKILLS, SKILL_CATEGORIES } from '../../data/skills';
 import { Icon } from 'astro-icon/components';
 
@@ -55,41 +54,42 @@ const t = useTranslations(lang);
 </section>
 
 <script>
+    // 1. Importamos la librería
     import autoAnimate from '@formkit/auto-animate';
 
     const filters = document.querySelectorAll('#skill-filters button');
     const grid = document.getElementById('skills-grid');
     const cards = document.querySelectorAll('.skill-card');
 
-    // 1. Inicializamos AutoAnimate en el grid padre
-    // Esto hace la magia: detecta cuando elementos se ocultan/muestran y anima el resto
+    // 2. Inicializamos AutoAnimate en el contenedor padre (el grid)
+    // Esto hace la magia: observa cambios en los hijos directos.
     if (grid) {
         autoAnimate(grid, {
-            duration: 300,
+            // Opcional: puedes ajustar la duración y el 'easing'
+            duration: 300, 
             easing: 'ease-in-out'
         });
     }
 
     filters.forEach(btn => {
         btn.addEventListener('click', () => {
-            // Reset estilos visuales de los botones
+            // --- Lógica visual de los botones (sin cambios) ---
             filters.forEach(b => {
                 b.classList.remove('border-green-500/50', 'bg-green-500/10', 'text-white');
                 b.classList.add('text-gray-400');
             });
-            
-            // Activar botón actual
             btn.classList.remove('text-gray-400');
             btn.classList.add('border-green-500/50', 'bg-green-500/10', 'text-white');
 
             const category = btn.getAttribute('data-filter');
 
-            // Lógica de filtrado
+            // --- Lógica de filtrado ---
             cards.forEach(card => {
                 const cardCat = card.getAttribute('data-category');
                 const htmlCard = card as HTMLElement;
                 
-                // Simplemente mostramos u ocultamos. AutoAnimate hará la transición suave.
+                // Mantenemos la lógica simple de display 'flex' o 'none'.
+                // AutoAnimate detectará este cambio y lo convertirá en una transición suave de opacidad y posición.
                 if (category === 'all' || cardCat === category) {
                     htmlCard.style.display = 'flex'; 
                 } else {

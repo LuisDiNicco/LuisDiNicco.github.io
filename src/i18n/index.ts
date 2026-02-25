@@ -74,7 +74,13 @@ export const ui = {
     'form.name': '$ nombre:',
     'form.email': '$ email:',
     'form.message': '$ mensaje:',
-    'form.btn': 'EnviarMensaje()'
+    'form.btn': 'EnviarMensaje()',
+    'form.sending': 'Enviando mensaje...',
+    'form.success': '> Mensaje enviado correctamente! En breve responderé tu mensaje.',
+    'form.err_security': '⚠️ Error de seguridad: Caracteres no permitidos.',
+    'form.err_email': '⚠️ Por favor ingresa un email válido.',
+    'form.err_connection': '> Error: El servidor rechazó la conexión.',
+    'form.err_critical': '> Error crítico: No se pudo conectar con el servidor.'
   },
   en: {
     // Nav
@@ -142,7 +148,13 @@ export const ui = {
     'form.name': '$ name:',
     'form.email': '$ email:',
     'form.message': '$ message:',
-    'form.btn': 'SendMessage()'
+    'form.btn': 'SendMessage()',
+    'form.sending': 'Sending message...',
+    'form.success': '> Message sent successfully! Thanks for reaching out.',
+    'form.err_security': '⚠️ Security error: Forbidden characters.',
+    'form.err_email': '⚠️ Please enter a valid email.',
+    'form.err_connection': '> Error: Server rejected the connection.',
+    'form.err_critical': '> Critical error: Could not connect to server.'
   },
 } as const;
 
