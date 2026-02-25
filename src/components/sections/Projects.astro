@@ -28,6 +28,8 @@ const t = useTranslations(lang);
                 tags={project.tags}
                 linkText={t(project.linkText)}
                 linkUrl={project.linkUrl}
+                demoText={project.demoText ? t(project.demoText) : undefined}
+                demoUrl={project.demoUrl}
             >
                 {project.achievements.map((achievementKey) => (
                     <li class="flex items-start gap-2 text-xs text-gray-300">

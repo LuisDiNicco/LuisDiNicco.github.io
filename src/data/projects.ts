@@ -9,6 +9,8 @@ export interface Project {
   tags: string[];
   linkText: TranslationKey;
   linkUrl: string;
+  demoText?: TranslationKey;
+  demoUrl?: string;
   achievements: TranslationKey[];
 }
 
@@ -29,9 +31,11 @@ export const PROJECTS: Project[] = [
   {
     title: 'proj.p2.title',
     description: 'proj.p2.desc',
-    tags: ['Node.js', 'Redis', 'Socket.io'],
+    tags: ['NestJS', 'React', 'Prisma', 'JWT & OAuth 2.0', 'Jest'],
     linkText: 'proj.link',
-    linkUrl: 'https://github.com/LuisDiNicco',
+    linkUrl: 'https://github.com/LuisDiNicco/Mi-Carrerita',
+    demoText: 'proj.demo',
+    demoUrl: 'https://mi-carrerita.vercel.app/',
     achievements: [
       'proj.p2.k1',
       'proj.p2.k2',

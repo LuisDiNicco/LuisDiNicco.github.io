@@ -42,6 +42,7 @@ export const ui = {
     // Projects General
     'proj.title': 'Arquitectura & Proyectos',
     'proj.link': 'Ver Código',
+    'proj.demo': 'Ver Demo',
     'proj.keys': 'Logros Clave',
 
     // Proyecto 1
@@ -53,12 +54,12 @@ export const ui = {
     'proj.p1.k4': 'Coverage de tests > 80%.',
 
     // Proyecto 2
-    'proj.p2.title': 'Sistema Real-Time & WebSockets',
-    'proj.p2.desc': 'Sistema de gestión de recursos con actualizaciones en tiempo real para múltiples clientes conectados simultáneamente.',
-    'proj.p2.k1': 'Implementación de WebSockets (Socket.io).',
-    'proj.p2.k2': 'Manejo de concurrencia y eventos.',
-    'proj.p2.k3': 'Integración con Redis para caché.',
-    'proj.p2.k4': 'Despliegue automatizado en nube.',
+    'proj.p2.title': 'Mi Carrerita: Suite de Gestión y Analítica Universitaria',
+    'proj.p2.desc': 'Ecosistema integral que automatiza el seguimiento académico, combinando análisis de historial, proyección de graduación y planificación inteligente.',
+    'proj.p2.k1': 'Grafo interactivo de correlatividades.',
+    'proj.p2.k2': 'Dashboard analítico de rendimiento.',
+    'proj.p2.k3': 'Generador de horarios sin solapamientos.',
+    'proj.p2.k4': 'Arquitectura escalable y coverage > 80%.',
 
     // Contact
     'contact.cmd': '$ contact --info',
@@ -116,6 +117,7 @@ export const ui = {
     // Projects General
     'proj.title': 'Architecture & Projects',
     'proj.link': 'View Code',
+    'proj.demo': 'View Demo',
     'proj.keys': 'Key Achievements',
 
     // Project 1
@@ -127,12 +129,12 @@ export const ui = {
     'proj.p1.k4': 'Test Coverage > 80%.',
 
     // Project 2
-    'proj.p2.title': 'Real-Time System & WebSockets',
-    'proj.p2.desc': 'Resource management system with real-time updates for multiple simultaneously connected clients.',
-    'proj.p2.k1': 'WebSockets implementation (Socket.io).',
-    'proj.p2.k2': 'Concurrency and event handling.',
-    'proj.p2.k3': 'Redis integration for caching.',
-    'proj.p2.k4': 'Automated cloud deployment.',
+    'proj.p2.title': 'Mi Carrerita: University Management & Analytics Suite',
+    'proj.p2.desc': 'Comprehensive ecosystem that automates academic tracking, combining history analysis, graduation projection, and intelligent scheduling.',
+    'proj.p2.k1': 'Interactive graph of course prerequisites.',
+    'proj.p2.k2': 'Analytical performance dashboard.',
+    'proj.p2.k3': 'Conflict-free schedule generator.',
+    'proj.p2.k4': 'Scalable architecture and coverage > 80%.',
 
     // Contact
     'contact.cmd': '$ contact --info',
