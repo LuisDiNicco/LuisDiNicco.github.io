@@ -36,18 +36,36 @@ const t = useTranslations(lang);
 
     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 min-h-[200px]" id="skills-grid">
         {SKILLS.map((skill) => (
-            <div 
-                class="skill-card bg-[#111] border border-gray-800 p-4 rounded-lg hover:border-green-500/30 hover:bg-[#151515] transition-colors group flex flex-col items-center justify-center gap-3 h-[110px] md:h-[120px]"
-                data-category={skill.category}
-            >
-                <div class="w-8 h-8 sm:w-10 sm:h-10 text-gray-500 group-hover:text-green-400 transition-colors duration-300">
-                    <Icon name={skill.icon} class="w-full h-full" />
+            skill.url ? (
+                <a 
+                    href={skill.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="skill-card bg-[#111] border border-gray-800 p-4 rounded-lg hover:border-green-500/30 hover:bg-[#151515] transition-colors group flex flex-col items-center justify-center gap-3 h-[110px] md:h-[120px] no-underline text-inherit hover:text-inherit"
+                    data-category={skill.category}
+                >
+                    <div class="w-8 h-8 sm:w-10 sm:h-10 text-gray-500 group-hover:text-green-400 transition-colors duration-300">
+                        <Icon name={skill.icon} class="w-full h-full" />
+                    </div>
+                    
+                    <span class="text-xs sm:text-sm font-mono text-gray-300 group-hover:text-white text-center break-words px-1">
+                        {skill.name}
+                    </span>
+                </a>
+            ) : (
+                <div 
+                    class="skill-card bg-[#111] border border-gray-800 p-4 rounded-lg hover:border-green-500/30 hover:bg-[#151515] transition-colors group flex flex-col items-center justify-center gap-3 h-[110px] md:h-[120px]"
+                    data-category={skill.category}
+                >
+                    <div class="w-8 h-8 sm:w-10 sm:h-10 text-gray-500 group-hover:text-green-400 transition-colors duration-300">
+                        <Icon name={skill.icon} class="w-full h-full" />
+                    </div>
+                    
+                    <span class="text-xs sm:text-sm font-mono text-gray-300 group-hover:text-white text-center break-words px-1">
+                        {skill.name}
+                    </span>
                 </div>
-                
-                <span class="text-xs sm:text-sm font-mono text-gray-300 group-hover:text-white text-center break-words px-1">
-                    {skill.name}
-                </span>
-            </div>
+            )
         ))}
     </div>
 
