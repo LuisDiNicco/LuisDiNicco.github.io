@@ -12,41 +12,69 @@ interface Props {
 const { title, description, tags, linkText, linkUrl, demoText, demoUrl } = Astro.props;
 ---
 
-<div class="bg-[#111111] border border-gray-800 rounded-xl p-6 transition-all duration-300 transform hover:-translate-y-1 hover:border-green-500/50 hover:shadow-[0_0_20px_-5px_rgba(34,197,94,0.1)] flex flex-col h-full group">
+<div class="relative group h-full">
+    <!-- Glitch/Neon border effect on hover -->
+    <div class="absolute -inset-0.5 bg-gradient-to-r from-green-500 to-blue-500 rounded-xl blur opacity-0 group-hover:opacity-30 transition duration-500"></div>
     
-    <h3 class="text-lg md:text-xl font-bold text-white mb-3 group-hover:text-green-400 transition-colors leading-tight">
-        {title}
-    </h3>
-    
-    <p class="text-gray-400 text-sm leading-relaxed mb-4 flex-grow">
-        {description}
-    </p>
-    
-    <div class="mb-4 bg-[#080808] p-4 rounded-lg border border-gray-800/60">
-        <h4 class="text-xs font-bold text-gray-500 mb-2 uppercase tracking-widest flex items-center gap-2">
-            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-            Key Achievements
-        </h4>
-        <ul class="space-y-1.5"> <slot /> 
-        </ul>
-    </div>
+    <div class="relative bg-[#0a0a0a] border border-gray-800 rounded-xl overflow-hidden flex flex-col h-full transition-all duration-300 group-hover:border-green-500/50">
+        
+        <!-- Terminal Header -->
+        <div class="bg-[#111] px-4 py-2 flex items-center justify-between border-b border-gray-800 group-hover:border-green-500/30 transition-colors">
+            <div class="flex items-center gap-2">
+                <div class="w-2.5 h-2.5 rounded-full bg-red-500/80"></div>
+                <div class="w-2.5 h-2.5 rounded-full bg-yellow-500/80"></div>
+                <div class="w-2.5 h-2.5 rounded-full bg-green-500/80"></div>
+            </div>
+            <div class="text-[10px] text-gray-500 font-mono tracking-wider">bash - {title.substring(0, 15).toLowerCase().replace(/\s+/g, '-')}.sh</div>
+        </div>
 
-    <div class="flex flex-wrap gap-2 mb-4">
-        {tags.map((tag) => (
-            <span class="px-2 py-0.5 bg-[#1A1A1A] border border-blue-900/30 text-blue-300 rounded text-[10px] md:text-xs uppercase tracking-wide">
-                {tag}
-            </span>
-        ))}
-    </div>
+        <div class="p-6 flex flex-col flex-grow relative z-10">
+            <!-- Title with terminal prompt -->
+            <div class="flex items-start gap-3 mb-4">
+                <span class="text-green-500 font-mono mt-1">➜</span>
+                <h3 class="text-lg md:text-xl font-bold text-gray-100 group-hover:text-green-400 transition-colors leading-tight font-mono">
+                    {title}
+                </h3>
+            </div>
+            
+            <p class="text-gray-400 text-sm leading-relaxed mb-6 flex-grow font-mono">
+                {description}
+            </p>
+            
+            <!-- Achievements block styled as JSON or code output -->
+            <div class="mb-6 bg-[#050505] p-4 rounded border border-gray-800/60 font-mono text-xs relative overflow-hidden group-hover:border-green-900/50 transition-colors">
+                <div class="absolute top-0 left-0 w-1 h-full bg-green-500/20 group-hover:bg-green-500/50 transition-colors"></div>
+                <div class="text-gray-500 mb-2 select-none">/* Key Features */</div>
+                <ul class="space-y-2 text-gray-300">
+                    <slot /> 
+                </ul>
+            </div>
 
-    <div class="pt-3 border-t border-gray-800/50 mt-auto flex flex-wrap gap-3">
-        {demoUrl && demoText && (
-            <a href={demoUrl} target="_blank" class="text-sm font-bold text-white hover:text-green-400 transition flex items-center gap-2 group-hover:translate-x-1 duration-300">
-                {demoText} <span class="text-green-500">-&gt;</span>
-            </a>
-        )}
-        <a href={linkUrl} target="_blank" class="text-sm font-bold text-white hover:text-green-400 transition flex items-center gap-2 group-hover:translate-x-1 duration-300">
-            {linkText} <span class="text-green-500">-&gt;</span>
-        </a>
+            <!-- Tags styled as command flags -->
+            <div class="flex flex-wrap gap-2 mb-6 font-mono">
+                {tags.map((tag) => (
+                    <span class="px-2 py-1 bg-green-500/5 border border-green-500/20 text-green-400/80 rounded text-[10px] md:text-xs transition-colors group-hover:bg-green-500/10 group-hover:text-green-400">
+                        --{tag.toLowerCase().replace(/\s+/g, '-')}
+                    </span>
+                ))}
+            </div>
+
+            <!-- Links styled as executable commands -->
+            <div class="pt-4 border-t border-gray-800/50 mt-auto flex flex-wrap gap-4 font-mono text-sm">
+                {demoUrl && demoText && (
+                    <a href={demoUrl} target="_blank" class="text-gray-400 hover:text-green-400 transition-colors flex items-center gap-2 group/link">
+                        <span class="text-green-500/50 group-hover/link:text-green-500">./</span>{demoText.toLowerCase().replace(/\s+/g, '-')}
+                        <span class="opacity-0 group-hover/link:opacity-100 transition-opacity text-green-500 animate-pulse">_</span>
+                    </a>
+                )}
+                <a href={linkUrl} target="_blank" class="text-gray-400 hover:text-green-400 transition-colors flex items-center gap-2 group/link">
+                    <span class="text-green-500/50 group-hover/link:text-green-500">./</span>{linkText.toLowerCase().replace(/\s+/g, '-')}
+                    <span class="opacity-0 group-hover/link:opacity-100 transition-opacity text-green-500 animate-pulse">_</span>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Scanline effect overlay -->
+        <div class="absolute inset-0 pointer-events-none bg-[linear-gradient(transparent_50%,rgba(0,0,0,0.1)_50%)] bg-[length:100%_4px] opacity-20 group-hover:opacity-30 transition-opacity z-0"></div>
     </div>
 </div>

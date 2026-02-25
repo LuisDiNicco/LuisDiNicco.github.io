@@ -42,5 +42,31 @@ export const PROJECTS: Project[] = [
       'proj.p2.k3',
       'proj.p2.k4',
     ]
+  },
+  {
+    title: 'proj.p3.title',
+    description: 'proj.p3.desc',
+    tags: ['Node.js', 'Socket.io', 'Redis', 'Express'],
+    linkText: 'proj.link',
+    linkUrl: 'https://github.com/LuisDiNicco',
+    achievements: [
+      'proj.p3.k1',
+      'proj.p3.k2',
+      'proj.p3.k3',
+      'proj.p3.k4',
+    ]
+  },
+  {
+    title: 'proj.p4.title',
+    description: 'proj.p4.desc',
+    tags: ['TypeScript', 'BullMQ', 'Redis', 'Docker'],
+    linkText: 'proj.link',
+    linkUrl: 'https://github.com/LuisDiNicco',
+    achievements: [
+      'proj.p4.k1',
+      'proj.p4.k2',
+      'proj.p4.k3',
+      'proj.p4.k4',
+    ]
   }
 ];

@@ -82,4 +82,59 @@ test.describe('Portafolio E2E Tests', () => {
     expect(isInvalid).toBe(true);
   });
 
+  // 5. TEST DE SECCIÓN EXPERIENCIA
+  test('debe mostrar la sección de experiencia correctamente', async ({ page }) => {
+    await page.goto('/es');
+    
+    const expSection = page.locator('#experience');
+    await expSection.scrollIntoViewIfNeeded();
+    
+    await expect(expSection).toBeVisible();
+    await expect(page.locator('text=Procontacto')).toBeVisible();
+    await expect(page.locator('text=Backend Developer')).toBeVisible();
+  });
+
+  // 6. TEST DE FILTROS DE SKILLS
+  test('los filtros de skills deben funcionar correctamente', async ({ page }) => {
+    await page.goto('/es');
+    
+    const skillsSection = page.locator('#skills');
+    await skillsSection.scrollIntoViewIfNeeded();
+    
+    // Verificar que todos los skills están visibles inicialmente
+    const allSkills = page.locator('.skill-card');
+    const initialCount = await allSkills.count();
+    expect(initialCount).toBeGreaterThan(0);
+    
+    // Hacer clic en el filtro de Backend
+    const backendFilter = page.locator('button[data-filter="backend"]');
+    await backendFilter.click();
+    
+    // Esperar a que la animación termine (AutoAnimate)
+    await page.waitForTimeout(500);
+    
+    // Verificar que solo se muestran los skills de backend
+    const visibleSkills = page.locator('.skill-card:visible');
+    const newCount = await visibleSkills.count();
+    expect(newCount).toBeLessThan(initialCount);
+    expect(newCount).toBeGreaterThan(0);
+  });
+
+  // 7. TEST DE PROYECTOS
+  test('debe mostrar los proyectos con sus enlaces', async ({ page }) => {
+    await page.goto('/es');
+    
+    const projectsSection = page.locator('#projects');
+    await projectsSection.scrollIntoViewIfNeeded();
+    
+    // Verificar que hay al menos un proyecto
+    const projectCards = page.locator('#projects .group');
+    expect(await projectCards.count()).toBeGreaterThan(0);
+    
+    // Verificar que el primer proyecto tiene título y enlaces
+    const firstProject = projectCards.first();
+    await expect(firstProject.locator('h3')).toBeVisible();
+    await expect(firstProject.locator('a').first()).toBeVisible();
+  });
+
 });

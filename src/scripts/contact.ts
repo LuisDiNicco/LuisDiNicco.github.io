@@ -81,6 +81,24 @@ interface ContactConfig {
     }
 }
 
+let currentMathAnswer = 0;
+
+function generateMathChallenge() {
+    const num1 = Math.floor(Math.random() * 10) + 1;
+    const num2 = Math.floor(Math.random() * 10) + 1;
+    currentMathAnswer = num1 + num2;
+    
+    const questionEl = document.getElementById('math-question');
+    const inputEl = document.getElementById('math-challenge') as HTMLInputElement;
+    
+    if (questionEl) {
+        questionEl.textContent = `Verify: ${num1} + ${num2} = ?`;
+    }
+    if (inputEl) {
+        inputEl.value = '';
+    }
+}
+
 const CONFIG: ContactConfig = {
     EMAIL_USER: 'diniccoluis',
     EMAIL_DOMAIN: 'gmail.com',
@@ -108,6 +126,7 @@ const CONFIG: ContactConfig = {
 export function initContactForm() {
     setupEmailProtection();
     setupFormSubmission();
+    generateMathChallenge();
 }
 
 function setupEmailProtection() {
@@ -141,6 +160,13 @@ function setupFormSubmission() {
         };
         
         // 1. Validaciones de Seguridad
+        const mathInput = document.getElementById('math-challenge') as HTMLInputElement;
+        if (mathInput && parseInt(mathInput.value) !== currentMathAnswer) {
+            showStatus(getCurrentLanguage() === 'es' ? '⚠️ Error: Verificación matemática incorrecta.' : '⚠️ Error: Incorrect math verification.', 'error');
+            generateMathChallenge();
+            return;
+        }
+
         if (CONFIG.REGEX.DANGEROUS.test(data.message) || CONFIG.REGEX.DANGEROUS.test(data.name)) {
             showStatus(CONFIG.UI.MESSAGES.ERR_SECURITY, 'error');
             return;
@@ -166,6 +192,7 @@ function setupFormSubmission() {
             if (response.ok) {
                 showStatus(CONFIG.UI.MESSAGES.SUCCESS, 'success');
                 form.reset();
+                generateMathChallenge();
             } else {
                 // AQUÍ ESTABA EL ANY: Ahora usamos casting a nuestra interfaz
                 const resData = await response.json() as FormspreeResponse;

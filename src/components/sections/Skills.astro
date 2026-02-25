@@ -15,17 +15,21 @@ const t = useTranslations(lang);
 
 <section id="skills" class="scroll-mt-24 mb-32">
     
-    <SectionTitle number="02" title={t('skills.title')} />
+    <SectionTitle number="03" title={t('skills.title')} />
 
-    <div class="bg-[#111111] border border-gray-800 rounded-xl p-6 shadow-xl mb-8">
-        <div class="flex flex-col md:flex-row md:items-center gap-4 text-sm font-mono">
-            <span class="text-green-500 font-bold hidden md:inline">$ filter --type</span>
+    <div class="bg-[#0a0a0a] border border-gray-800 rounded-xl p-6 shadow-xl mb-8 relative overflow-hidden group">
+        <div class="absolute top-0 left-0 w-1 h-full bg-green-500/20 group-hover:bg-green-500/50 transition-colors"></div>
+        <div class="flex flex-col md:flex-row md:items-center gap-4 text-sm font-mono relative z-10">
+            <div class="flex items-center gap-2 text-green-500 font-bold">
+                <span class="animate-pulse">➜</span>
+                <span>$ filter --type=</span>
+            </div>
             
             <div class="flex flex-wrap gap-2" id="skill-filters">
                 {SKILL_CATEGORIES.map((cat) => (
                     <button 
                         data-filter={cat.id}
-                        class={`px-3 py-1.5 rounded border border-gray-800 bg-[#1A1A1A] hover:border-gray-600 transition-all ${cat.id === 'all' ? 'border-green-500/50 bg-green-500/10 text-white' : 'text-gray-400'}`}
+                        class={`px-3 py-1 rounded border border-transparent hover:bg-gray-800/50 transition-all ${cat.id === 'all' ? 'text-green-400 bg-green-500/10 border-green-500/30' : 'text-gray-500 hover:text-gray-300'}`}
                     >
                         <span class={cat.color}>{t(cat.labelKey)}</span>
                     </button>
@@ -91,13 +95,13 @@ const t = useTranslations(lang);
 
     filters.forEach(btn => {
         btn.addEventListener('click', () => {
-            // --- Lógica visual de los botones (sin cambios) ---
+            // --- Lógica visual de los botones ---
             filters.forEach(b => {
-                b.classList.remove('border-green-500/50', 'bg-green-500/10', 'text-white');
-                b.classList.add('text-gray-400');
+                b.classList.remove('text-green-400', 'bg-green-500/10', 'border-green-500/30');
+                b.classList.add('text-gray-500', 'border-transparent');
             });
-            btn.classList.remove('text-gray-400');
-            btn.classList.add('border-green-500/50', 'bg-green-500/10', 'text-white');
+            btn.classList.remove('text-gray-500', 'border-transparent');
+            btn.classList.add('text-green-400', 'bg-green-500/10', 'border-green-500/30');
 
             const category = btn.getAttribute('data-filter');
 

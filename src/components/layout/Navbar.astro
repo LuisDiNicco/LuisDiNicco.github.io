@@ -25,10 +25,12 @@ const inactiveLangClass = "text-gray-600 hover:text-gray-400";
 
     <!-- Desktop Menu -->
     <div class="hidden lg:flex flex-1 justify-center">
-        <ul class="flex items-center gap-4 xl:gap-6">
+        <ul class="flex items-center gap-3 xl:gap-5">
             <li><a href="#home" class="nav-link px-2 py-1 rounded transition-colors hover:text-green-400 text-gray-400 whitespace-nowrap">{t('nav.home')}</a></li>
             <li class="text-gray-700 select-none">|</li>
             <li><a href="#about-me" class="nav-link px-2 py-1 rounded transition-colors hover:text-green-400 text-gray-400 whitespace-nowrap">{t('nav.about')}</a></li>
+            <li class="text-gray-700 select-none">|</li>
+            <li><a href="#experience" class="nav-link px-2 py-1 rounded transition-colors hover:text-green-400 text-gray-400 whitespace-nowrap">{t('nav.experience')}</a></li>
             <li class="text-gray-700 select-none">|</li>
             <li><a href="#skills" class="nav-link px-2 py-1 rounded transition-colors hover:text-green-400 text-gray-400 whitespace-nowrap">{t('nav.skills')}</a></li>
             <li class="text-gray-700 select-none">|</li>
@@ -48,9 +50,10 @@ const inactiveLangClass = "text-gray-600 hover:text-gray-400";
 
 <!-- Mobile Menu Overlay -->
 <div id="mobile-menu" class="fixed inset-0 bg-[#0a0a0a]/95 backdrop-blur-md z-40 hidden flex-col items-center justify-center pt-14 opacity-0 transition-opacity duration-300">
-    <ul class="flex flex-col items-center gap-8 text-xl">
+    <ul class="flex flex-col items-center gap-6 text-xl">
         <li><a href="#home" class="mobile-nav-link px-4 py-2 rounded hover:text-green-400 text-gray-400 transition-colors">{t('nav.home')}</a></li>
         <li><a href="#about-me" class="mobile-nav-link px-4 py-2 rounded hover:text-green-400 text-gray-400 transition-colors">{t('nav.about')}</a></li>
+        <li><a href="#experience" class="mobile-nav-link px-4 py-2 rounded hover:text-green-400 text-gray-400 transition-colors">{t('nav.experience')}</a></li>
         <li><a href="#skills" class="mobile-nav-link px-4 py-2 rounded hover:text-green-400 text-gray-400 transition-colors">{t('nav.skills')}</a></li>
         <li><a href="#projects" class="mobile-nav-link px-4 py-2 rounded hover:text-green-400 text-gray-400 transition-colors">{t('nav.projects')}</a></li>
         <li><a href="#contact" class="mobile-nav-link px-4 py-2 rounded hover:text-green-400 text-gray-400 transition-colors">{t('nav.contact')}</a></li>
