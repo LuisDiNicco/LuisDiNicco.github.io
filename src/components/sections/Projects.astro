@@ -69,72 +69,75 @@ const t = useTranslations(lang);
         <div class="w-full md:w-[70%] bg-[#111] flex flex-col relative overflow-hidden h-full">
             <div class="absolute inset-0 pointer-events-none bg-[linear-gradient(transparent_50%,rgba(0,0,0,0.1)_50%)] bg-[length:100%_4px] opacity-20 z-0"></div>
             
-            <div class="flex-grow z-10 relative overflow-hidden" id="project-details">
+            <div class="flex-grow relative overflow-hidden" id="project-details">
                 {PROJECTS.map((project, index) => (
-                    <div class={`project-content absolute inset-0 p-6 md:p-8 flex flex-col transition-all duration-500 ease-in-out ${index === 0 ? 'opacity-100 pointer-events-auto z-10' : 'opacity-0 pointer-events-none z-0'}`} data-index={index}>
+                    <div class={`project-content absolute inset-0 p-6 md:p-8 flex flex-col transition-all duration-500 ease-in-out ${index === 0 ? 'opacity-100 z-10 translate-y-0' : 'opacity-0 z-0 pointer-events-none translate-y-4'}`} data-index={index}>
                         
-                        <!-- Header -->
-                        <div class="text-gray-500 font-mono text-sm mb-3 shrink-0">
-                            $ cat {project.shortName}.sh
-                        </div>
-                        
-                        <!-- Title -->
-                        <div class="flex items-start gap-3 mb-3 shrink-0 h-[3.5rem]">
-                            <span class="text-green-500 font-mono mt-1">➜</span>
-                            <h3 class="text-xl md:text-2xl font-bold text-gray-100 leading-tight font-mono line-clamp-2">
-                                {t(project.title)}
-                            </h3>
-                        </div>
-                        
-                        <!-- Description -->
-                        <div class="h-[4.5rem] mb-4 shrink-0">
-                            <p class="text-gray-400 text-sm leading-relaxed font-mono line-clamp-3">
-                                {t(project.description)}
-                            </p>
-                        </div>
+                        <div class="flex flex-col h-full justify-between">
+                            <!-- Header -->
+                            <div>
+                                <div class="text-gray-500 font-mono text-xs mb-3 flex items-center gap-2">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                                    {project.shortName}.sh
+                                </div>
+                                <h3 class="text-xl md:text-2xl font-bold text-gray-100 leading-tight font-mono mb-3 flex items-start gap-2">
+                                    <span class="text-green-500 mt-1">➜</span> 
+                                    <span class="line-clamp-2">{t(project.title)}</span>
+                                </h3>
+                                <p class="text-gray-400 text-sm leading-relaxed font-mono line-clamp-3 md:line-clamp-2">
+                                    {t(project.description)}
+                                </p>
+                            </div>
 
-                        <!-- Key Features (Achievements) -->
-                        <div class="mb-4 flex-grow overflow-hidden">
-                            <div class="text-xs text-gray-500 font-mono mb-2 uppercase tracking-wider">Key Features:</div>
-                            <ul class="space-y-1.5">
-                                {project.achievements.slice(0, 2).map(ach => (
-                                    <li class="text-sm text-gray-300 font-mono flex items-start gap-2">
-                                        <span class="text-green-500/70 mt-0.5">▹</span>
-                                        <span class="line-clamp-1">{t(ach)}</span>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
+                            <!-- Middle Content: Tech & Highlights -->
+                            <div class="flex-grow flex flex-col justify-center py-4 gap-4">
+                                <!-- Tech Stack -->
+                                <div class="tech-stack-container w-full overflow-hidden h-[26px] md:h-[28px]" data-index={index}>
+                                    <div class="flex flex-wrap gap-2 font-mono tech-stack-list">
+                                        {Object.values(project.stack).flat().map((tag) => (
+                                            <span class="px-2 py-1 bg-[#1a1a1a] border border-gray-700/60 text-gray-300 rounded text-[10px] md:text-xs project-tag transition-all duration-300 shadow-sm flex items-center gap-1.5" data-tag={tag}>
+                                                <span class="w-1.5 h-1.5 rounded-full bg-gray-600 tag-dot transition-colors duration-300"></span>
+                                                {tag}
+                                            </span>
+                                        ))}
+                                        <span class="px-2 py-1 bg-[#1a1a1a] border border-gray-800 text-gray-500 rounded text-[10px] md:text-xs hidden more-tags-indicator items-center">
+                                            +0
+                                        </span>
+                                    </div>
+                                </div>
+                                
+                                <!-- Highlights -->
+                                <div class="hidden md:block bg-[#161616] border border-gray-800/50 rounded-lg p-3">
+                                    <div class="text-xs text-gray-500 font-mono mb-2 flex items-center gap-2">
+                                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                                        {lang === 'es' ? 'Destacados' : 'Highlights'}
+                                    </div>
+                                    <ul class="space-y-1.5">
+                                        {project.achievements.slice(0, 2).map(ach => (
+                                            <li class="text-xs text-gray-400 flex items-start gap-2 font-mono">
+                                                <span class="text-green-500/70 mt-0.5">▹</span>
+                                                <span class="line-clamp-1">{t(ach)}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            </div>
 
-                        <!-- Tech Stack -->
-                        <div class="flex flex-wrap gap-2 font-mono shrink-0 mb-4 h-[56px] overflow-hidden content-start">
-                            {Object.values(project.stack).flat().map((tag) => (
-                                <span class="px-2 py-1 bg-green-500/5 border border-green-500/20 text-green-400/80 rounded text-[10px] md:text-xs project-tag transition-all duration-300" data-tag={tag}>
-                                    {tag}
-                                </span>
-                            ))}
-                        </div>
-                        
-                        <!-- Fixed Bottom Buttons -->
-                        <div class="flex items-center gap-2 font-mono text-sm pt-4 border-t border-gray-800/50 shrink-0 mt-auto">
-                            <span class="text-green-500">$</span>
-                            <div class="flex items-center w-full">
-                                <div class="w-32 flex-shrink-0">
+                            <!-- Fixed Bottom Buttons -->
+                            <div class="flex items-center gap-2 font-mono text-sm pt-4 border-t border-gray-800/50 shrink-0 mt-auto">
+                                <span class="text-green-500">$</span>
+                                <div class="flex flex-wrap gap-2 w-full">
                                     {project.demoUrl && project.demoText && (
-                                        <a href={project.demoUrl} target="_blank" class="text-gray-400 hover:text-white hover:bg-gray-800/50 px-3 py-2 rounded transition-colors flex items-center gap-2 w-fit">
+                                        <a href={project.demoUrl} target="_blank" class="text-gray-400 hover:text-white hover:bg-gray-800/50 px-3 py-2 rounded transition-colors flex items-center gap-2">
                                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
                                             <span>./demo.sh</span>
                                         </a>
                                     )}
-                                </div>
-                                <div class="w-32 flex-shrink-0">
-                                    <a href={project.linkUrl} target="_blank" class="text-gray-400 hover:text-white hover:bg-gray-800/50 px-3 py-2 rounded transition-colors flex items-center gap-2 w-fit">
+                                    <a href={project.linkUrl} target="_blank" class="text-gray-400 hover:text-white hover:bg-gray-800/50 px-3 py-2 rounded transition-colors flex items-center gap-2">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
                                         <span>./code.sh</span>
                                     </a>
-                                </div>
-                                <div class="flex-grow flex justify-end">
-                                    <button class="expand-btn text-green-400 hover:text-green-300 hover:bg-green-500/10 px-4 py-2 rounded border border-green-500/30 transition-colors flex items-center gap-2 cursor-pointer shadow-[0_0_10px_rgba(34,197,94,0.1)] hover:shadow-[0_0_15px_rgba(34,197,94,0.2)]" data-index={index}>
+                                    <button class="expand-btn text-green-400 hover:text-green-300 hover:bg-green-500/10 px-4 py-2 rounded border border-green-500/30 transition-colors flex items-center gap-2 cursor-pointer shadow-[0_0_10px_rgba(34,197,94,0.1)] hover:shadow-[0_0_15px_rgba(34,197,94,0.2)] ml-2" data-index={index}>
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path></svg>
                                         <span>./details.sh</span>
                                     </button>
@@ -368,11 +371,11 @@ const t = useTranslations(lang);
             // Update content with fade effect
             contents.forEach(content => {
                 if (content.getAttribute('data-index') === index) {
-                    content.classList.remove('opacity-0', 'pointer-events-none', 'z-0');
-                    content.classList.add('opacity-100', 'pointer-events-auto', 'z-10');
+                    content.classList.remove('opacity-0', 'z-0', 'pointer-events-none', 'translate-y-4');
+                    content.classList.add('opacity-100', 'z-10', 'translate-y-0');
                 } else {
-                    content.classList.remove('opacity-100', 'pointer-events-auto', 'z-10');
-                    content.classList.add('opacity-0', 'pointer-events-none', 'z-0');
+                    content.classList.remove('opacity-100', 'z-10', 'translate-y-0');
+                    content.classList.add('opacity-0', 'z-0', 'pointer-events-none', 'translate-y-4');
                 }
             });
         });
@@ -503,13 +506,28 @@ const t = useTranslations(lang);
                 // Resaltar la etiqueta filtrada
                 const tagElements = content.querySelectorAll('.project-tag');
                 tagElements.forEach(tagEl => {
+                    const htmlTag = tagEl as HTMLElement;
                     const tagText = tagEl.textContent?.toLowerCase() || '';
+                    const dot = tagEl.querySelector('.tag-dot');
+                    
                     if (searchTerm !== '' && tagText.includes(searchTerm)) {
-                        tagEl.classList.add('border-green-400', 'text-green-300', 'shadow-[0_0_8px_rgba(34,197,94,0.3)]');
-                        tagEl.classList.remove('border-green-500/20', 'text-green-400/80');
+                        tagEl.classList.add('border-green-500/50', 'text-green-300', 'bg-green-500/10', 'shadow-[0_0_8px_rgba(34,197,94,0.2)]');
+                        tagEl.classList.remove('border-gray-700/60', 'text-gray-300', 'bg-[#1a1a1a]');
+                        if (dot) {
+                            dot.classList.add('bg-green-400', 'shadow-[0_0_5px_rgba(34,197,94,0.8)]');
+                            dot.classList.remove('bg-gray-600');
+                        }
+                        // Mover al principio para que sea visible
+                        htmlTag.style.order = '-1';
                     } else {
-                        tagEl.classList.remove('border-green-400', 'text-green-300', 'shadow-[0_0_8px_rgba(34,197,94,0.3)]');
-                        tagEl.classList.add('border-green-500/20', 'text-green-400/80');
+                        tagEl.classList.remove('border-green-500/50', 'text-green-300', 'bg-green-500/10', 'shadow-[0_0_8px_rgba(34,197,94,0.2)]');
+                        tagEl.classList.add('border-gray-700/60', 'text-gray-300', 'bg-[#1a1a1a]');
+                        if (dot) {
+                            dot.classList.remove('bg-green-400', 'shadow-[0_0_5px_rgba(34,197,94,0.8)]');
+                            dot.classList.add('bg-gray-600');
+                        }
+                        // Restaurar orden
+                        htmlTag.style.order = '0';
                     }
                 });
 
@@ -530,8 +548,91 @@ const t = useTranslations(lang);
                     firstVisibleBtn.click();
                 }
             }
+            
+            // Actualizar visibilidad de tags después de filtrar
+            updateTechTags();
         });
     }
+
+    // --- LÓGICA DE ETIQUETAS DE TECNOLOGÍA (1 FILA) ---
+    function updateTechTags() {
+        document.querySelectorAll('.tech-stack-container').forEach(container => {
+            const list = container.querySelector('.tech-stack-list');
+            if (!list) return;
+            
+            // Obtener tags ordenados visualmente (por si se cambió el order)
+            const tags = Array.from(list.querySelectorAll('.project-tag')).sort((a, b) => {
+                const orderA = parseInt((a as HTMLElement).style.order || '0');
+                const orderB = parseInt((b as HTMLElement).style.order || '0');
+                return orderA - orderB;
+            });
+            
+            const indicator = container.querySelector('.more-tags-indicator') as HTMLElement;
+            if (!indicator) return;
+            
+            // Resetear para medir
+            tags.forEach(tag => {
+                (tag as HTMLElement).style.display = 'inline-flex';
+                tag.classList.remove('hidden-tag');
+            });
+            indicator.style.display = 'none';
+            
+            // Forzar un reflow para obtener anchos correctos
+            void container.clientWidth;
+            
+            const availableWidth = container.clientWidth;
+            let currentWidth = 0;
+            let hiddenCount = 0;
+            const indicatorWidth = 45; // Ancho aproximado del indicador + gap
+            
+            for (let i = 0; i < tags.length; i++) {
+                const tag = tags[i] as HTMLElement;
+                const tagWidth = tag.offsetWidth + 8; // 8px de gap (gap-2)
+                
+                // Si es el último elemento y entra justo, no necesitamos indicador
+                const needsIndicator = i < tags.length - 1;
+                const maxAllowedWidth = availableWidth - (needsIndicator ? indicatorWidth : 0);
+                
+                if (currentWidth + tagWidth > maxAllowedWidth) {
+                    tag.style.display = 'none';
+                    tag.classList.add('hidden-tag');
+                    hiddenCount++;
+                } else {
+                    currentWidth += tagWidth;
+                }
+            }
+            
+            if (hiddenCount > 0) {
+                indicator.textContent = `+${hiddenCount}`;
+                indicator.style.display = 'inline-flex';
+            }
+        });
+    }
+
+    // Ejecutar al cargar y al redimensionar
+    window.addEventListener('load', updateTechTags);
+    window.addEventListener('resize', () => {
+        requestAnimationFrame(updateTechTags);
+    });
+    // También ejecutar inmediatamente por si acaso
+    updateTechTags();
+    
+    // Observar cambios de visibilidad en los contenedores de proyectos para recalcular
+    const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                const target = mutation.target as HTMLElement;
+                if (target.classList.contains('opacity-100')) {
+                    // El proyecto se hizo visible, recalcular tags
+                    setTimeout(updateTechTags, 50);
+                }
+            }
+        });
+    });
+
+    document.querySelectorAll('.project-content').forEach(content => {
+        observer.observe(content, { attributes: true });
+    });
 </script>
 
 <style>

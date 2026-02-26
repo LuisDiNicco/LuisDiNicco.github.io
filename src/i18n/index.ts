@@ -70,7 +70,7 @@ export const ui = {
     'proj.p1.k4': 'Coverage de tests > 80%.',
 
     // Proyecto 2
-    'proj.p2.title': 'Mi Carrerita: Suite de Gestión y Analítica Universitaria',
+    'proj.p2.title': 'Mi Carrerita: Suite de Gestión Universitaria',
     'proj.p2.desc': 'Ecosistema integral que automatiza el seguimiento académico, combinando análisis de historial, proyección de graduación y planificación inteligente.',
     'proj.p2.problem': 'Los estudiantes universitarios carecen de herramientas centralizadas para planificar su carrera, dependiendo de hojas de cálculo manuales propensas a errores para calcular correlatividades y promedios.',
     'proj.p2.solution': 'Se desarrolló una plataforma integral que procesa el plan de estudios mediante teoría de grafos, automatizando la validación de correlatividades y generando proyecciones académicas precisas.',
@@ -183,7 +183,7 @@ export const ui = {
     'proj.p1.k4': 'Test Coverage > 80%.',
 
     // Project 2
-    'proj.p2.title': 'Mi Carrerita: University Management & Analytics Suite',
+    'proj.p2.title': 'Mi Carrerita: University Management Suite',
     'proj.p2.desc': 'Comprehensive ecosystem that automates academic tracking, combining history analysis, graduation projection, and intelligent scheduling.',
     'proj.p2.problem': 'University students lack centralized tools to plan their careers, relying on error-prone manual spreadsheets to calculate prerequisites and averages.',
     'proj.p2.solution': 'A comprehensive platform was developed that processes the curriculum using graph theory, automating prerequisite validation and generating accurate academic projections.',
