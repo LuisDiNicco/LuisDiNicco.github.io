@@ -15,13 +15,13 @@ const t = useTranslations(lang);
 const getLevelClasses = (level: string) => {
     switch (level) {
         case 'Básico':
-            return 'text-green-200/70 bg-green-200/5 border-green-200/10 shadow-none';
+            return 'text-gray-400 bg-gray-500/10 border-gray-500/30 shadow-none font-normal';
         case 'Intermedio':
-            return 'text-green-400 bg-green-400/10 border-green-400/30 shadow-[0_0_8px_rgba(74,222,128,0.2)]';
+            return 'text-green-500 bg-green-500/10 border-green-500/30 shadow-none font-medium';
         case 'Avanzado':
-            return 'text-green-500 bg-green-500/20 border-green-500/50 shadow-[0_0_15px_rgba(34,197,94,0.6)] font-bold';
+            return 'text-green-300 bg-green-500/20 border-green-500/50 shadow-[0_0_15px_rgba(34,197,94,0.4)] font-bold';
         default:
-            return 'text-green-500 bg-green-500/10 border-green-500/20';
+            return 'text-gray-400 bg-gray-500/10 border-gray-500/30';
     }
 };
 ---
@@ -145,23 +145,6 @@ const getLevelClasses = (level: string) => {
                     htmlCard.style.display = 'none';
                 }
             });
-        });
-    });
-
-    // Lógica para buscar proyectos por tecnología
-    cards.forEach(card => {
-        card.addEventListener('click', (e) => {
-            // Si es un enlace, no prevenimos el comportamiento por defecto
-            if (card.tagName === 'A') return;
-            
-            const skillName = card.getAttribute('data-skill-name');
-            if (!skillName) return;
-
-            // Disparamos un evento personalizado que el componente Projects escuchará
-            const event = new CustomEvent('search-project-by-skill', { 
-                detail: { skill: skillName } 
-            });
-            document.dispatchEvent(event);
         });
     });
 </script>

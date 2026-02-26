@@ -14,8 +14,20 @@ const t = useTranslations(lang);
 
 <section id="projects" class="scroll-mt-24 mb-24">
     
-    <div class="mb-10">
+    <div class="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4">
         <SectionTitle number="04" title={t('proj.title')} />
+        
+        <!-- Terminal Filter -->
+        <div class="flex items-center gap-2 text-sm font-mono bg-[#111] border border-gray-800 rounded-lg px-4 py-2 shadow-lg w-full md:w-auto">
+            <span class="text-green-500">grep</span>
+            <span class="text-gray-500">-i</span>
+            <input 
+                type="text" 
+                id="project-tech-filter" 
+                placeholder='"technology"' 
+                class="bg-transparent border-none outline-none text-gray-300 w-full md:w-32 placeholder-gray-600 focus:w-full md:focus:w-48 transition-all duration-300"
+            />
+        </div>
     </div>
     
     <div class="bg-[#111] border border-gray-800 rounded-xl overflow-hidden shadow-2xl flex flex-col">
@@ -55,35 +67,37 @@ const t = useTranslations(lang);
             
             <div class="p-6 md:p-8 flex-grow z-10 relative overflow-hidden" id="project-details">
                 {PROJECTS.map((project, index) => (
-                    <div class={`project-content ${index === 0 ? 'flex' : 'hidden'} animate-fade-in h-full flex-col justify-between transition-opacity duration-300`} data-index={index}>
-                        <div>
-                            <div class="text-gray-500 font-mono text-sm mb-5">
-                                $ cat {project.shortName}.sh
-                            </div>
-                            <div class="flex items-start gap-3 mb-4">
-                                <span class="text-green-500 font-mono mt-1">➜</span>
-                                <h3 class="text-xl md:text-2xl font-bold text-gray-100 leading-tight font-mono">
-                                    {t(project.title)}
-                                </h3>
-                            </div>
-                            
-                            <p class="text-gray-400 text-sm md:text-base leading-relaxed mb-6 font-mono line-clamp-3">
-                                {t(project.description)}
-                            </p>
-
-                            <div class="flex flex-wrap gap-2 mb-6 font-mono">
-                                {Object.values(project.stack).flat().slice(0, 5).map((tag) => (
-                                    <span class="px-2 py-1 bg-green-500/5 border border-green-500/20 text-green-400/80 rounded text-[10px] md:text-xs project-tag" data-tag={tag}>
-                                        {tag}
-                                    </span>
-                                ))}
-                                {Object.values(project.stack).flat().length > 5 && (
-                                    <span class="px-2 py-1 text-gray-500 text-[10px] md:text-xs">+{Object.values(project.stack).flat().length - 5}</span>
-                                )}
-                            </div>
+                    <div class={`project-content ${index === 0 ? 'flex' : 'hidden'} animate-fade-in h-full flex-col transition-opacity duration-300`} data-index={index}>
+                        <div class="text-gray-500 font-mono text-sm mb-5 shrink-0">
+                            $ cat {project.shortName}.sh
+                        </div>
+                        <div class="flex items-start gap-3 mb-4 shrink-0">
+                            <span class="text-green-500 font-mono mt-1">➜</span>
+                            <h3 class="text-xl md:text-2xl font-bold text-gray-100 leading-tight font-mono">
+                                {t(project.title)}
+                            </h3>
                         </div>
                         
-                        <div class="flex items-center gap-2 font-mono text-sm mt-auto pt-4 border-t border-gray-800/50">
+                        <div class="min-h-[4.5rem] mb-6 shrink-0">
+                            <p class="text-gray-400 text-sm md:text-base leading-relaxed font-mono line-clamp-3">
+                                {t(project.description)}
+                            </p>
+                        </div>
+
+                        <div class="flex flex-wrap gap-2 mb-6 font-mono shrink-0 min-h-[2rem]">
+                            {Object.values(project.stack).flat().slice(0, 5).map((tag) => (
+                                <span class="px-2 py-1 bg-green-500/5 border border-green-500/20 text-green-400/80 rounded text-[10px] md:text-xs project-tag" data-tag={tag}>
+                                    {tag}
+                                </span>
+                            ))}
+                            {Object.values(project.stack).flat().length > 5 && (
+                                <span class="px-2 py-1 text-gray-500 text-[10px] md:text-xs">+{Object.values(project.stack).flat().length - 5}</span>
+                            )}
+                        </div>
+                        
+                        <div class="flex-grow"></div>
+                        
+                        <div class="flex items-center gap-2 font-mono text-sm pt-4 border-t border-gray-800/50 shrink-0">
                             <span class="text-green-500">$</span>
                             <div class="flex flex-wrap gap-2 w-full">
                                 {project.demoUrl && project.demoText && (
@@ -181,64 +195,12 @@ const t = useTranslations(lang);
                     </div>
 
                     <!-- Main Content Grid -->
-                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
                         
-                        <!-- Left Column: Details -->
-                        <div class="lg:col-span-7 space-y-8">
-                            
-                            <!-- Context & Solution -->
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div class="space-y-3 group/card">
-                                    <h4 class="text-green-400 font-mono text-sm flex items-center gap-2 uppercase tracking-wider">
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                        {t('proj.problem')}
-                                    </h4>
-                                    <div class="bg-[#111] p-5 rounded-lg border border-gray-800/50 shadow-inner h-full group-hover/card:border-gray-700 transition-colors relative overflow-hidden">
-                                        <div class="absolute top-0 left-0 w-1 h-full bg-red-500/20"></div>
-                                        <p class="text-gray-300 text-sm leading-relaxed font-mono pl-2">
-                                            {t(project.problem)}
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="space-y-3 group/card">
-                                    <h4 class="text-green-400 font-mono text-sm flex items-center gap-2 uppercase tracking-wider">
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                        {t('proj.solution')}
-                                    </h4>
-                                    <div class="bg-[#111] p-5 rounded-lg border border-gray-800/50 shadow-inner h-full group-hover/card:border-gray-700 transition-colors relative overflow-hidden">
-                                        <div class="absolute top-0 left-0 w-1 h-full bg-green-500/20"></div>
-                                        <p class="text-gray-300 text-sm leading-relaxed font-mono pl-2">
-                                            {t(project.solution)}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Key Achievements (Redesigned 1-column) -->
-                            <div class="space-y-4 pt-2">
-                                <h4 class="text-green-400 font-mono text-sm flex items-center gap-2 uppercase tracking-wider">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
-                                    {t('proj.keys')}
-                                </h4>
-                                <div class="bg-[#111] rounded-lg border border-gray-800/50 p-2 shadow-inner">
-                                    <ul class="flex flex-col font-mono text-sm">
-                                        {project.achievements.map((achievementKey, i) => (
-                                            <li class={`flex items-start gap-4 p-3 hover:bg-[#1a1a1a] rounded transition-colors group/item ${i !== project.achievements.length - 1 ? 'mb-1' : ''}`}>
-                                                <div class="flex flex-col items-center mt-1">
-                                                    <div class="w-1.5 h-1.5 rounded-full bg-green-500/50 group-hover/item:bg-green-400 group-hover/item:shadow-[0_0_8px_rgba(74,222,128,0.8)] transition-all"></div>
-                                                </div>
-                                                <span class="text-gray-300 group-hover/item:text-white transition-colors leading-relaxed">{t(achievementKey)}</span>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Right Column: Image & Stack -->
-                        <div class="lg:col-span-5 flex flex-col gap-6">
+                        <!-- Left Column: Image & Story -->
+                        <div class="lg:col-span-2 space-y-6">
                             <!-- Image -->
-                            <div class="bg-[#111] border border-gray-800 rounded-lg overflow-hidden relative group/img shadow-xl aspect-video">
+                            <div class="bg-[#111] border border-gray-800/50 rounded-xl overflow-hidden relative group/img shadow-xl aspect-video">
                                 {project.image ? (
                                     <>
                                         <img src={project.image} alt={t(project.title)} loading="lazy" class="w-full h-full object-cover opacity-80 group-hover/img:opacity-100 group-hover/img:scale-105 transition-all duration-700" />
@@ -250,49 +212,93 @@ const t = useTranslations(lang);
                                 )}
                             </div>
 
+                            <!-- Context & Solution -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="bg-[#111] p-5 rounded-xl border border-gray-800/50 shadow-inner relative overflow-hidden group/card hover:border-gray-700 transition-colors">
+                                    <div class="absolute top-0 left-0 w-1 h-full bg-red-500/30"></div>
+                                    <h4 class="text-red-400 font-mono text-sm mb-3 flex items-center gap-2 uppercase tracking-wider">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                                        {t('proj.problem')}
+                                    </h4>
+                                    <p class="text-gray-400 text-sm leading-relaxed font-mono">
+                                        {t(project.problem)}
+                                    </p>
+                                </div>
+                                <div class="bg-[#111] p-5 rounded-xl border border-gray-800/50 shadow-inner relative overflow-hidden group/card hover:border-gray-700 transition-colors">
+                                    <div class="absolute top-0 left-0 w-1 h-full bg-green-500/30"></div>
+                                    <h4 class="text-green-400 font-mono text-sm mb-3 flex items-center gap-2 uppercase tracking-wider">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                        {t('proj.solution')}
+                                    </h4>
+                                    <p class="text-gray-400 text-sm leading-relaxed font-mono">
+                                        {t(project.solution)}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Column: Tech & Features -->
+                        <div class="space-y-6">
+                            
+                            <!-- Key Achievements (Compact) -->
+                            <div class="bg-[#111] p-5 rounded-xl border border-gray-800/50 shadow-inner">
+                                <h4 class="text-white font-mono text-sm mb-4 flex items-center gap-2 uppercase tracking-wider border-b border-gray-800 pb-3">
+                                    <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
+                                    {t('proj.keys')}
+                                </h4>
+                                <ul class="space-y-3 font-mono text-xs">
+                                    {project.achievements.map((achievementKey) => (
+                                        <li class="flex items-start gap-3 text-gray-400 group/item">
+                                            <span class="text-green-500 mt-0.5 shrink-0 group-hover/item:translate-x-1 transition-transform">▹</span>
+                                            <span class="leading-relaxed group-hover/item:text-gray-300 transition-colors">{t(achievementKey)}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+
                             <!-- Tech Stack (Categorized) -->
-                            <div class="bg-[#111] p-5 rounded-lg border border-gray-800/50 shadow-inner flex-grow">
-                                <h4 class="text-gray-400 font-mono text-xs mb-5 uppercase tracking-wider flex items-center gap-2 border-b border-gray-800 pb-3">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                            <div class="bg-[#111] p-5 rounded-xl border border-gray-800/50 shadow-inner">
+                                <h4 class="text-white font-mono text-sm mb-4 flex items-center gap-2 uppercase tracking-wider border-b border-gray-800 pb-3">
+                                    <svg class="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
                                     {t('proj.stack')}
                                 </h4>
-                                <div class="space-y-5 font-mono">
+                                <div class="space-y-4 font-mono">
                                     {project.stack.frontend && (
                                         <div>
-                                            <span class="text-[10px] text-gray-500 block mb-2 uppercase tracking-wider">Frontend</span>
-                                            <div class="flex flex-wrap gap-2">
+                                            <span class="text-[10px] text-gray-500 block mb-1.5 uppercase tracking-wider">Frontend</span>
+                                            <div class="flex flex-wrap gap-1.5">
                                                 {project.stack.frontend.map(tag => (
-                                                    <span class="px-2.5 py-1 bg-blue-500/5 border border-blue-500/20 text-blue-400/90 rounded text-xs project-tag" data-tag={tag}>{tag}</span>
+                                                    <span class="px-2 py-1 bg-[#1a1a1a] border border-gray-800 text-gray-300 rounded text-[10px] project-tag" data-tag={tag}>{tag}</span>
                                                 ))}
                                             </div>
                                         </div>
                                     )}
                                     {project.stack.backend && (
                                         <div>
-                                            <span class="text-[10px] text-gray-500 block mb-2 uppercase tracking-wider">Backend</span>
-                                            <div class="flex flex-wrap gap-2">
+                                            <span class="text-[10px] text-gray-500 block mb-1.5 uppercase tracking-wider">Backend</span>
+                                            <div class="flex flex-wrap gap-1.5">
                                                 {project.stack.backend.map(tag => (
-                                                    <span class="px-2.5 py-1 bg-green-500/5 border border-green-500/20 text-green-400/90 rounded text-xs project-tag" data-tag={tag}>{tag}</span>
+                                                    <span class="px-2 py-1 bg-[#1a1a1a] border border-gray-800 text-gray-300 rounded text-[10px] project-tag" data-tag={tag}>{tag}</span>
                                                 ))}
                                             </div>
                                         </div>
                                     )}
                                     {project.stack.database && (
                                         <div>
-                                            <span class="text-[10px] text-gray-500 block mb-2 uppercase tracking-wider">Database</span>
-                                            <div class="flex flex-wrap gap-2">
+                                            <span class="text-[10px] text-gray-500 block mb-1.5 uppercase tracking-wider">Database</span>
+                                            <div class="flex flex-wrap gap-1.5">
                                                 {project.stack.database.map(tag => (
-                                                    <span class="px-2.5 py-1 bg-yellow-500/5 border border-yellow-500/20 text-yellow-400/90 rounded text-xs project-tag" data-tag={tag}>{tag}</span>
+                                                    <span class="px-2 py-1 bg-[#1a1a1a] border border-gray-800 text-gray-300 rounded text-[10px] project-tag" data-tag={tag}>{tag}</span>
                                                 ))}
                                             </div>
                                         </div>
                                     )}
                                     {project.stack.tools && (
                                         <div>
-                                            <span class="text-[10px] text-gray-500 block mb-2 uppercase tracking-wider">Tools & Others</span>
-                                            <div class="flex flex-wrap gap-2">
+                                            <span class="text-[10px] text-gray-500 block mb-1.5 uppercase tracking-wider">Tools & Others</span>
+                                            <div class="flex flex-wrap gap-1.5">
                                                 {project.stack.tools.map(tag => (
-                                                    <span class="px-2.5 py-1 bg-purple-500/5 border border-purple-500/20 text-purple-400/90 rounded text-xs project-tag" data-tag={tag}>{tag}</span>
+                                                    <span class="px-2 py-1 bg-[#1a1a1a] border border-gray-800 text-gray-300 rounded text-[10px] project-tag" data-tag={tag}>{tag}</span>
                                                 ))}
                                             </div>
                                         </div>
@@ -453,49 +459,51 @@ const t = useTranslations(lang);
         }
     });
 
-    // --- NUEVA LÓGICA: Escuchar clics en Skills para buscar proyectos ---
-    document.addEventListener('search-project-by-skill', ((e: CustomEvent) => {
-        const skillName = e.detail.skill.toLowerCase();
-        
-        // 1. Hacer scroll suave hacia la sección de proyectos
-        const projectsSection = document.getElementById('projects');
-        if (projectsSection) {
-            projectsSection.scrollIntoView({ behavior: 'smooth' });
-        }
+    // --- LÓGICA DE FILTRADO POR TECNOLOGÍA ---
+    const techFilterInput = document.getElementById('project-tech-filter') as HTMLInputElement;
+    const projectListItems = document.querySelectorAll('#project-list li');
 
-        // 2. Buscar el primer proyecto que contenga esta tecnología
-        const projectTags = document.querySelectorAll('.project-tag');
-        let foundIndex = -1;
+    if (techFilterInput) {
+        techFilterInput.addEventListener('input', (e) => {
+            const searchTerm = (e.target as HTMLInputElement).value.toLowerCase();
+            let firstVisibleIndex = -1;
 
-        for (const tag of projectTags) {
-            const tagText = tag.getAttribute('data-tag')?.toLowerCase() || '';
-            if (tagText.includes(skillName) || skillName.includes(tagText)) {
-                // Encontramos una coincidencia, buscar a qué proyecto pertenece
-                const projectContent = tag.closest('.modal-project-content') || tag.closest('.project-content');
-                if (projectContent) {
-                    foundIndex = parseInt(projectContent.getAttribute('data-modal-index') || projectContent.getAttribute('data-index') || '-1');
-                    break;
+            projectListItems.forEach((li) => {
+                const btn = li.querySelector('.project-btn');
+                if (!btn) return;
+                
+                const index = btn.getAttribute('data-index');
+                if (!index) return;
+
+                // Buscar en el contenido del proyecto correspondiente
+                const content = document.querySelector(`.project-content[data-index="${index}"]`);
+                if (!content) return;
+
+                // Obtener todas las etiquetas de tecnología de este proyecto
+                const tags = Array.from(content.querySelectorAll('.project-tag')).map(tag => tag.textContent?.toLowerCase() || '');
+                
+                // Verificar si alguna etiqueta coincide con la búsqueda
+                const matches = searchTerm === '' || tags.some(tag => tag.includes(searchTerm));
+
+                if (matches) {
+                    li.style.display = 'block';
+                    if (firstVisibleIndex === -1) {
+                        firstVisibleIndex = parseInt(index);
+                    }
+                } else {
+                    li.style.display = 'none';
+                }
+            });
+
+            // Si hay resultados y el proyecto actual no es visible, cambiar al primer proyecto visible
+            if (firstVisibleIndex !== -1) {
+                const firstVisibleBtn = document.querySelector(`.project-btn[data-index="${firstVisibleIndex}"]`) as HTMLButtonElement;
+                if (firstVisibleBtn && !firstVisibleBtn.classList.contains('text-green-400')) {
+                    firstVisibleBtn.click();
                 }
             }
-        }
-
-        // 3. Si encontramos un proyecto, simular clic en su botón para mostrarlo
-        if (foundIndex !== -1) {
-            const targetBtn = document.querySelector(`.project-btn[data-index="${foundIndex}"]`) as HTMLButtonElement;
-            if (targetBtn) {
-                // Pequeño delay para que termine el scroll antes de cambiar
-                setTimeout(() => {
-                    targetBtn.click();
-                    
-                    // Efecto visual para destacar que se encontró
-                    targetBtn.classList.add('ring-2', 'ring-green-500', 'ring-offset-2', 'ring-offset-[#111]');
-                    setTimeout(() => {
-                        targetBtn.classList.remove('ring-2', 'ring-green-500', 'ring-offset-2', 'ring-offset-[#111]');
-                    }, 1500);
-                }, 500);
-            }
-        }
-    }) as EventListener);
+        });
+    }
 </script>
 
 <style>
