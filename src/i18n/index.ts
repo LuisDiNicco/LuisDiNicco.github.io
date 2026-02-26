@@ -55,10 +55,15 @@ export const ui = {
     'proj.link': 'Ver Código',
     'proj.demo': 'Ver Demo',
     'proj.keys': 'Logros Clave',
+    'proj.problem': 'Contexto & Desafío',
+    'proj.solution': 'Solución Implementada',
+    'proj.stack': 'Stack Tecnológico',
 
     // Proyecto 1
     'proj.p1.title': 'Microservicios E-Commerce API',
     'proj.p1.desc': 'Arquitectura de backend escalable diseñada para manejar alto tráfico. Implementación de patrones de diseño y clean architecture.',
+    'proj.p1.problem': 'Los sistemas monolíticos de e-commerce suelen sufrir cuellos de botella durante picos de tráfico, afectando la disponibilidad y la experiencia del usuario.',
+    'proj.p1.solution': 'Se diseñó una arquitectura basada en microservicios que permite escalar componentes críticos de forma independiente. Se implementó un API Gateway para orquestar las peticiones y Redis para el caché de catálogo.',
     'proj.p1.k1': 'API RESTful con NestJS y TypeScript.',
     'proj.p1.k2': 'Autenticación segura (JWT & OAuth2).',
     'proj.p1.k3': 'Documentación con Swagger/OpenAPI.',
@@ -67,6 +72,8 @@ export const ui = {
     // Proyecto 2
     'proj.p2.title': 'Mi Carrerita: Suite de Gestión y Analítica Universitaria',
     'proj.p2.desc': 'Ecosistema integral que automatiza el seguimiento académico, combinando análisis de historial, proyección de graduación y planificación inteligente.',
+    'proj.p2.problem': 'Los estudiantes universitarios carecen de herramientas centralizadas para planificar su carrera, dependiendo de hojas de cálculo manuales propensas a errores para calcular correlatividades y promedios.',
+    'proj.p2.solution': 'Se desarrolló una plataforma integral que procesa el plan de estudios mediante teoría de grafos, automatizando la validación de correlatividades y generando proyecciones académicas precisas.',
     'proj.p2.k1': 'Grafo interactivo de correlatividades.',
     'proj.p2.k2': 'Dashboard analítico de rendimiento.',
     'proj.p2.k3': 'Generador de horarios sin solapamientos.',
@@ -75,6 +82,8 @@ export const ui = {
     // Proyecto 3
     'proj.p3.title': 'Real-Time Chat Server',
     'proj.p3.desc': 'Servidor de mensajería en tiempo real con soporte para salas, mensajes privados y notificaciones push.',
+    'proj.p3.problem': 'La comunicación en tiempo real requiere manejar miles de conexiones concurrentes sin degradar el rendimiento, además de sincronizar el estado entre múltiples instancias del servidor.',
+    'proj.p3.solution': 'Se implementó un servidor WebSocket optimizado con Socket.io, utilizando Redis Pub/Sub como backplane para distribuir los mensajes entre múltiples nodos, garantizando alta disponibilidad.',
     'proj.p3.k1': 'Implementación de WebSockets con Socket.io.',
     'proj.p3.k2': 'Gestión de estado distribuido con Redis.',
     'proj.p3.k3': 'Autenticación de conexiones en tiempo real.',
@@ -83,6 +92,8 @@ export const ui = {
     // Proyecto 4
     'proj.p4.title': 'Task Queue Processing System',
     'proj.p4.desc': 'Sistema distribuido para el procesamiento asíncrono de tareas pesadas, como envío de emails masivos y generación de reportes.',
+    'proj.p4.problem': 'Las operaciones intensivas bloquean el hilo principal de ejecución, causando timeouts y una mala experiencia de usuario en aplicaciones web.',
+    'proj.p4.solution': 'Se construyó un sistema de procesamiento asíncrono basado en colas de mensajes con BullMQ, delegando las tareas pesadas a workers en segundo plano con políticas de reintento automático.',
     'proj.p4.k1': 'Integración con RabbitMQ / BullMQ.',
     'proj.p4.k2': 'Manejo de reintentos y dead-letter queues.',
     'proj.p4.k3': 'Monitoreo de workers en tiempo real.',
@@ -157,10 +168,15 @@ export const ui = {
     'proj.link': 'View Code',
     'proj.demo': 'View Demo',
     'proj.keys': 'Key Achievements',
+    'proj.problem': 'Context & Challenge',
+    'proj.solution': 'Implemented Solution',
+    'proj.stack': 'Tech Stack',
 
     // Project 1
     'proj.p1.title': 'E-Commerce Microservices API',
     'proj.p1.desc': 'Scalable backend architecture designed to handle high traffic. Implementation of design patterns and clean architecture.',
+    'proj.p1.problem': 'Monolithic e-commerce systems often suffer from bottlenecks during traffic spikes, affecting availability and user experience.',
+    'proj.p1.solution': 'A microservices-based architecture was designed to allow independent scaling of critical components. An API Gateway was implemented to orchestrate requests and Redis for catalog caching.',
     'proj.p1.k1': 'RESTful API with NestJS and TypeScript.',
     'proj.p1.k2': 'Secure Authentication (JWT & OAuth2).',
     'proj.p1.k3': 'Documentation with Swagger/OpenAPI.',
@@ -169,6 +185,8 @@ export const ui = {
     // Project 2
     'proj.p2.title': 'Mi Carrerita: University Management & Analytics Suite',
     'proj.p2.desc': 'Comprehensive ecosystem that automates academic tracking, combining history analysis, graduation projection, and intelligent scheduling.',
+    'proj.p2.problem': 'University students lack centralized tools to plan their careers, relying on error-prone manual spreadsheets to calculate prerequisites and averages.',
+    'proj.p2.solution': 'A comprehensive platform was developed that processes the curriculum using graph theory, automating prerequisite validation and generating accurate academic projections.',
     'proj.p2.k1': 'Interactive graph of course prerequisites.',
     'proj.p2.k2': 'Analytical performance dashboard.',
     'proj.p2.k3': 'Conflict-free schedule generator.',
@@ -177,6 +195,8 @@ export const ui = {
     // Project 3
     'proj.p3.title': 'Real-Time Chat Server',
     'proj.p3.desc': 'Real-time messaging server with support for rooms, private messages, and push notifications.',
+    'proj.p3.problem': 'Real-time communication requires handling thousands of concurrent connections without degrading performance, as well as synchronizing state across multiple server instances.',
+    'proj.p3.solution': 'An optimized WebSocket server was implemented with Socket.io, using Redis Pub/Sub as a backplane to distribute messages across multiple nodes, ensuring high availability.',
     'proj.p3.k1': 'WebSockets implementation with Socket.io.',
     'proj.p3.k2': 'Distributed state management with Redis.',
     'proj.p3.k3': 'Real-time connection authentication.',
@@ -185,6 +205,8 @@ export const ui = {
     // Project 4
     'proj.p4.title': 'Task Queue Processing System',
     'proj.p4.desc': 'Distributed system for asynchronous processing of heavy tasks, such as mass email sending and report generation.',
+    'proj.p4.problem': 'Intensive operations block the main execution thread, causing timeouts and a poor user experience in web applications.',
+    'proj.p4.solution': 'An asynchronous processing system based on message queues was built with BullMQ, delegating heavy tasks to background workers with automatic retry policies.',
     'proj.p4.k1': 'Integration with RabbitMQ / BullMQ.',
     'proj.p4.k2': 'Retry handling and dead-letter queues.',
     'proj.p4.k3': 'Real-time worker monitoring.',

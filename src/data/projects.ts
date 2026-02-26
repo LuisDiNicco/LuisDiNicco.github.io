@@ -6,6 +6,8 @@ type TranslationKey = keyof typeof ui.es;
 export interface Project {
   title: TranslationKey;
   description: TranslationKey;
+  problem: TranslationKey;
+  solution: TranslationKey;
   tags: string[];
   linkText: TranslationKey;
   linkUrl: string;
@@ -19,6 +21,8 @@ export const PROJECTS: Project[] = [
   {
     title: 'proj.p1.title',
     description: 'proj.p1.desc',
+    problem: 'proj.p1.problem',
+    solution: 'proj.p1.solution',
     tags: ['NestJS', 'PostgreSQL', 'Docker'],
     linkText: 'proj.link',
     linkUrl: 'https://github.com/LuisDiNicco',
@@ -33,6 +37,8 @@ export const PROJECTS: Project[] = [
   {
     title: 'proj.p2.title',
     description: 'proj.p2.desc',
+    problem: 'proj.p2.problem',
+    solution: 'proj.p2.solution',
     tags: ['NestJS', 'React', 'Prisma', 'JWT & OAuth 2.0', 'Jest'],
     linkText: 'proj.link',
     linkUrl: 'https://github.com/LuisDiNicco/Mi-Carrerita',
@@ -49,6 +55,8 @@ export const PROJECTS: Project[] = [
   {
     title: 'proj.p3.title',
     description: 'proj.p3.desc',
+    problem: 'proj.p3.problem',
+    solution: 'proj.p3.solution',
     tags: ['Node.js', 'Socket.io', 'Redis', 'Express'],
     linkText: 'proj.link',
     linkUrl: 'https://github.com/LuisDiNicco',
@@ -63,6 +71,8 @@ export const PROJECTS: Project[] = [
   {
     title: 'proj.p4.title',
     description: 'proj.p4.desc',
+    problem: 'proj.p4.problem',
+    solution: 'proj.p4.solution',
     tags: ['TypeScript', 'BullMQ', 'Redis', 'Docker'],
     linkText: 'proj.link',
     linkUrl: 'https://github.com/LuisDiNicco',

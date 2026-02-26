@@ -11,6 +11,19 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = useTranslations(lang);
+
+const getLevelClasses = (level: string) => {
+    switch (level) {
+        case 'Básico':
+            return 'text-green-200 bg-green-200/10 border-green-200/20 shadow-[0_0_4px_rgba(187,247,208,0.3)]';
+        case 'Intermedio':
+            return 'text-green-400 bg-green-400/10 border-green-400/20 shadow-[0_0_8px_rgba(74,222,128,0.4)]';
+        case 'Avanzado':
+            return 'text-green-500 bg-green-500/10 border-green-500/20 shadow-[0_0_12px_rgba(34,197,94,0.5)]';
+        default:
+            return 'text-green-500 bg-green-500/10 border-green-500/20';
+    }
+};
 ---
 
 <section id="skills" class="scroll-mt-24 mb-32">
@@ -57,7 +70,7 @@ const t = useTranslations(lang);
                     </span>
 
                     <div class="absolute bottom-2 left-0 w-full text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <span class="text-[10px] font-mono text-green-500 bg-green-500/10 px-2 py-0.5 rounded border border-green-500/20">
+                        <span class={`text-[10px] font-mono px-2 py-0.5 rounded border ${getLevelClasses(skill.level)}`}>
                             {skill.level}
                         </span>
                     </div>
@@ -76,7 +89,7 @@ const t = useTranslations(lang);
                     </span>
 
                     <div class="absolute bottom-2 left-0 w-full text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <span class="text-[10px] font-mono text-green-500 bg-green-500/10 px-2 py-0.5 rounded border border-green-500/20">
+                        <span class={`text-[10px] font-mono px-2 py-0.5 rounded border ${getLevelClasses(skill.level)}`}>
                             {skill.level}
                         </span>
                     </div>
