@@ -12,6 +12,7 @@ export interface Project {
   demoText?: TranslationKey;
   demoUrl?: string;
   achievements: TranslationKey[];
+  image?: string;
 }
 
 export const PROJECTS: Project[] = [
@@ -26,7 +27,8 @@ export const PROJECTS: Project[] = [
       'proj.p1.k2',
       'proj.p1.k3',
       'proj.p1.k4',
-    ]
+    ],
+    image: 'https://placehold.co/600x400/111/22c55e?text=E-Commerce+API'
   },
   {
     title: 'proj.p2.title',
@@ -41,7 +43,8 @@ export const PROJECTS: Project[] = [
       'proj.p2.k2',
       'proj.p2.k3',
       'proj.p2.k4',
-    ]
+    ],
+    image: 'https://placehold.co/600x400/111/22c55e?text=Mi+Carrerita'
   },
   {
     title: 'proj.p3.title',
@@ -54,7 +57,8 @@ export const PROJECTS: Project[] = [
       'proj.p3.k2',
       'proj.p3.k3',
       'proj.p3.k4',
-    ]
+    ],
+    image: 'https://placehold.co/600x400/111/22c55e?text=Real-Time+Chat'
   },
   {
     title: 'proj.p4.title',
@@ -67,6 +71,7 @@ export const PROJECTS: Project[] = [
       'proj.p4.k2',
       'proj.p4.k3',
       'proj.p4.k4',
-    ]
+    ],
+    image: 'https://placehold.co/600x400/111/22c55e?text=Task+Queue'
   }
 ];

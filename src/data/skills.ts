@@ -5,41 +5,42 @@ export interface Skill {
   category: 'languages' | 'backend' | 'database' | 'devops' | 'tools';
   icon: string; // Referencia al ID del icono (ej: 'simple-icons:nestjs')
   url?: string; // URL a la página de la tecnología o Wikipedia
+  level: 'Básico' | 'Intermedio' | 'Avanzado';
 }
 
 export const SKILLS: Skill[] = [
   // --- LENGUAJES ---
-  { name: 'JavaScript', category: 'languages', icon: 'simple-icons:javascript', url: 'https://es.wikipedia.org/wiki/JavaScript' },
-  { name: 'TypeScript', category: 'languages', icon: 'simple-icons:typescript', url: 'https://www.typescriptlang.org/' },
-  { name: 'Python', category: 'languages', icon: 'simple-icons:python', url: 'https://es.wikipedia.org/wiki/Python' },
-  { name: 'Java', category: 'languages', icon: 'fa-brands:java', url: 'https://es.wikipedia.org/wiki/Java_(lenguaje_de_programaci%C3%B3n)' },
-  { name: 'C++', category: 'languages', icon: 'simple-icons:cplusplus', url: 'https://es.wikipedia.org/wiki/C%2B%2B' },
-  { name: 'C', category: 'languages', icon: 'simple-icons:c', url: 'https://es.wikipedia.org/wiki/C_(lenguaje_de_programaci%C3%B3n)' },
-  { name: 'HTML5', category: 'languages', icon: 'simple-icons:html5', url: 'https://es.wikipedia.org/wiki/HTML5' },
-  { name: 'CSS3', category: 'languages', icon: 'simple-icons:css3', url: 'https://es.wikipedia.org/wiki/CSS' },
+  { name: 'JavaScript', category: 'languages', icon: 'simple-icons:javascript', url: 'https://es.wikipedia.org/wiki/JavaScript', level: 'Avanzado' },
+  { name: 'TypeScript', category: 'languages', icon: 'simple-icons:typescript', url: 'https://www.typescriptlang.org/', level: 'Avanzado' },
+  { name: 'Python', category: 'languages', icon: 'simple-icons:python', url: 'https://es.wikipedia.org/wiki/Python', level: 'Intermedio' },
+  { name: 'Java', category: 'languages', icon: 'fa-brands:java', url: 'https://es.wikipedia.org/wiki/Java_(lenguaje_de_programaci%C3%B3n)', level: 'Intermedio' },
+  { name: 'C++', category: 'languages', icon: 'simple-icons:cplusplus', url: 'https://es.wikipedia.org/wiki/C%2B%2B', level: 'Básico' },
+  { name: 'C', category: 'languages', icon: 'simple-icons:c', url: 'https://es.wikipedia.org/wiki/C_(lenguaje_de_programaci%C3%B3n)', level: 'Básico' },
+  { name: 'HTML5', category: 'languages', icon: 'simple-icons:html5', url: 'https://es.wikipedia.org/wiki/HTML5', level: 'Avanzado' },
+  { name: 'CSS3', category: 'languages', icon: 'simple-icons:css3', url: 'https://es.wikipedia.org/wiki/CSS', level: 'Avanzado' },
 
   // --- BACKEND ---
-  { name: 'NestJS', category: 'backend', icon: 'simple-icons:nestjs', url: 'https://nestjs.com/' },
-  { name: 'Node.js', category: 'backend', icon: 'simple-icons:nodedotjs', url: 'https://nodejs.org/' },
-  { name: 'MQTT', category: 'backend', icon: 'simple-icons:mqtt', url: 'https://mqtt.org/' },
-  { name: 'Swagger', category: 'backend', icon: 'simple-icons:swagger', url: 'https://swagger.io/' },
-  { name: 'TypeORM', category: 'backend', icon: 'simple-icons:typeorm', url: 'https://typeorm.io/' },
+  { name: 'NestJS', category: 'backend', icon: 'simple-icons:nestjs', url: 'https://nestjs.com/', level: 'Avanzado' },
+  { name: 'Node.js', category: 'backend', icon: 'simple-icons:nodedotjs', url: 'https://nodejs.org/', level: 'Avanzado' },
+  { name: 'MQTT', category: 'backend', icon: 'simple-icons:mqtt', url: 'https://mqtt.org/', level: 'Intermedio' },
+  { name: 'Swagger', category: 'backend', icon: 'simple-icons:swagger', url: 'https://swagger.io/', level: 'Avanzado' },
+  { name: 'TypeORM', category: 'backend', icon: 'simple-icons:typeorm', url: 'https://typeorm.io/', level: 'Avanzado' },
   
   // --- DATABASE ---
-  { name: 'SQL Server', category: 'database', icon: 'simple-icons:microsoftsqlserver', url: 'https://es.wikipedia.org/wiki/SQL_Server' },
-  { name: 'PostgreSQL', category: 'database', icon: 'simple-icons:postgresql', url: 'https://www.postgresql.org/' },
-  { name: 'MariaDB', category: 'database', icon: 'simple-icons:mariadb', url: 'https://mariadb.org/' },
-  { name: 'MongoDB', category: 'database', icon: 'simple-icons:mongodb', url: 'https://www.mongodb.com/' },
-  { name: 'SQLite', category: 'database', icon: 'simple-icons:sqlite', url: 'https://www.sqlite.org/' },
-  { name: 'Redis', category: 'database', icon: 'simple-icons:redis', url: 'https://redis.io/' },
+  { name: 'SQL Server', category: 'database', icon: 'simple-icons:microsoftsqlserver', url: 'https://es.wikipedia.org/wiki/SQL_Server', level: 'Avanzado' },
+  { name: 'PostgreSQL', category: 'database', icon: 'simple-icons:postgresql', url: 'https://www.postgresql.org/', level: 'Intermedio' },
+  { name: 'MariaDB', category: 'database', icon: 'simple-icons:mariadb', url: 'https://mariadb.org/', level: 'Intermedio' },
+  { name: 'MongoDB', category: 'database', icon: 'simple-icons:mongodb', url: 'https://www.mongodb.com/', level: 'Básico' },
+  { name: 'SQLite', category: 'database', icon: 'simple-icons:sqlite', url: 'https://www.sqlite.org/', level: 'Avanzado' },
+  { name: 'Redis', category: 'database', icon: 'simple-icons:redis', url: 'https://redis.io/', level: 'Básico' },
 
   // --- DEVOPS / TOOLS ---
-  { name: 'Git', category: 'tools', icon: 'simple-icons:git', url: 'https://git-scm.com/' },
-  { name: 'Docker', category: 'tools', icon: 'simple-icons:docker', url: 'https://www.docker.com/' },
-  { name: 'Apache Kafka', category: 'tools', icon: 'simple-icons:apachekafka', url: 'https://kafka.apache.org/' },
-  { name: 'Bash', category: 'tools', icon: 'simple-icons:gnubash', url: 'https://www.gnu.org/software/bash/' },
-  { name: 'PowerShell', category: 'tools', icon: 'simple-icons:powershell', url: 'https://learn.microsoft.com/es-es/powershell/' },
-  { name: 'Postman', category: 'tools', icon: 'simple-icons:postman', url: 'https://www.postman.com/' },
+  { name: 'Git', category: 'tools', icon: 'simple-icons:git', url: 'https://git-scm.com/', level: 'Avanzado' },
+  { name: 'Docker', category: 'tools', icon: 'simple-icons:docker', url: 'https://www.docker.com/', level: 'Intermedio' },
+  { name: 'Apache Kafka', category: 'tools', icon: 'simple-icons:apachekafka', url: 'https://kafka.apache.org/', level: 'Básico' },
+  { name: 'Bash', category: 'tools', icon: 'simple-icons:gnubash', url: 'https://www.gnu.org/software/bash/', level: 'Intermedio' },
+  { name: 'PowerShell', category: 'tools', icon: 'simple-icons:powershell', url: 'https://learn.microsoft.com/es-es/powershell/', level: 'Intermedio' },
+  { name: 'Postman', category: 'tools', icon: 'simple-icons:postman', url: 'https://www.postman.com/', level: 'Avanzado' },
 ];
 
 export const SKILL_CATEGORIES = [

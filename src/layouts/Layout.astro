@@ -44,6 +44,12 @@ const socialImageURL = new URL(image, siteUrl);
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={socialImageURL} />
+
+    <!-- Analytics (Plausible - Privacy Friendly) -->
+    <script defer data-domain="luisdinicco.github.io" src="https://plausible.io/js/script.js"></script>
+
+    <!-- Error Tracking (Sentry Placeholder) -->
+    <!-- <script src="https://js.sentry-cdn.com/YOUR_SENTRY_KEY.min.js" crossorigin="anonymous"></script> -->
   </head>
   <body class="relative bg-[#0a0a0a]"> <canvas id="grid-canvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
     

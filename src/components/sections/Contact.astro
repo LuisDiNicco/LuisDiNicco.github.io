@@ -27,7 +27,7 @@ const cvFileName = lang === 'es' ? 'CV_Luis_DiNicco_ES.pdf' : 'CV_Luis_DiNicco_E
             <div class="w-3 h-3 rounded-full bg-[#FF5F56]"></div>
             <div class="w-3 h-3 rounded-full bg-[#FFBD2E]"></div>
             <div class="w-3 h-3 rounded-full bg-[#27C93F]"></div>
-            <span class="ml-3 text-xs text-gray-500 opacity-70">luis@dev:~/contact</span>
+            <span class="ml-3 text-xs text-gray-500 opacity-70 font-mono">luis@dev:~/contact</span>
         </div>
 
         <div class="p-6 md:p-10 flex flex-col md:flex-row gap-10">
@@ -92,7 +92,7 @@ const cvFileName = lang === 'es' ? 'CV_Luis_DiNicco_ES.pdf' : 'CV_Luis_DiNicco_E
                         <textarea id="message" name="message" rows="5" required maxlength="3000" class="w-full bg-[#0a0a0a] border border-gray-700 rounded p-3 text-gray-200 focus:outline-none focus:border-green-500 text-base font-mono"></textarea>
                     </div>
 
-                    <button type="submit" id="submit-btn" class="w-full bg-green-600 hover:bg-green-500 text-black font-bold py-3 rounded transition duration-300 uppercase tracking-widest text-sm shadow-lg shadow-green-900/20">
+                    <button type="submit" id="submit-btn" class="w-full bg-green-600 hover:bg-green-500 text-black font-bold py-3 rounded transition duration-300 uppercase tracking-widest text-sm shadow-lg shadow-green-900/20 cursor-pointer">
                         {t('form.btn')}
                     </button>
                 </form>
