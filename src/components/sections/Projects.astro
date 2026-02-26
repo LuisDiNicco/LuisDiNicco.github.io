@@ -532,12 +532,12 @@ const t = useTranslations(lang);
                 });
 
                 if (matches) {
-                    li.style.display = 'block';
+                    (li as HTMLElement).style.display = 'block';
                     if (firstVisibleIndex === -1) {
                         firstVisibleIndex = parseInt(index);
                     }
                 } else {
-                    li.style.display = 'none';
+                    (li as HTMLElement).style.display = 'none';
                 }
             });
 
