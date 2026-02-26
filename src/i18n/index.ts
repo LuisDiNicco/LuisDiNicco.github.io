@@ -19,7 +19,7 @@ export const ui = {
     
     // Hero
     'hero.cmd': '$ whoami',
-    'hero.role': 'Desarrollador Backend & Estudiante de último año de Ingeniería en Informática',
+    'hero.role': 'Desarrollador Backend & Estudiante de Ingeniería en Informática',
     'hero.skills': '$ skills --list',
     'hero.status.cmd': '$ systemctl status', // <--- NUEVO
     'hero.status.text': 'Disponible para nuevas oportunidades', // <--- NUEVO
@@ -28,7 +28,7 @@ export const ui = {
     // About
     'about.title': '// 01. Perfil',
     'about.cmd': 'cat sobre_mi.txt',
-    'about.p1': "<span class='text-green-500 font-bold mr-2'>›</span> Soy estudiante de último año de Ingeniería en Informática en la UNLaM. Mi formación me permite abordar el desarrollo no solo desde el código, sino con una visión integral orientada a resolver problemas reales.",
+    'about.p1': "<span class='text-green-500 font-bold mr-2'>›</span> Soy estudiante de Ingeniería en Informática en la UNLaM. Mi formación me permite abordar el desarrollo no solo desde el código, sino con una visión integral orientada a resolver problemas reales.",
     'about.p2': "<span class='text-green-500 font-bold mr-2'>›</span> Me especializo en el desarrollo Backend, utilizando tecnologías como <span class='text-white font-bold'>NestJS</span> y <span class='text-white font-bold'>TypeScript</span>. Me enfoco en construir arquitecturas robustas, buscando siempre que el código sea eficiente, legible y fácil de mantener.",
     'about.p3': "<span class='text-green-500 font-bold mr-2'>›</span> Busco nuevos desafíos profesionales. Ofrezco compromiso, capacidad de análisis y una firme voluntad de aportar soluciones concretas a las necesidades del proyecto.",
     
@@ -47,6 +47,8 @@ export const ui = {
     'skills.filter.backend': 'grep "backend"',
     'skills.filter.db': 'grep "bases de datos"',
     'skills.filter.tools': 'grep "herramientas"',
+    'skills.filter.soft': 'grep "blandas"',
+    'skills.filter.spoken': 'grep "idiomas"',
     
     // Projects General
     'proj.title': 'Arquitectura & Proyectos',
@@ -119,7 +121,7 @@ export const ui = {
     
     // Hero
     'hero.cmd': '$ whoami',
-    'hero.role': 'Backend Developer & Senior Computer Engineering Student',
+    'hero.role': 'Backend Developer & Computer Engineering Student',
     'hero.skills': '$ skills --list',
     'hero.status.cmd': '$ systemctl status',
     'hero.status.text': 'Open to new opportunities',
@@ -129,7 +131,7 @@ export const ui = {
     'about.title': '// 01. Profile',
     'about.cmd': 'cat about_me.txt',
     // En el objeto EN:
-    'about.p1': "<span class='text-green-500 font-bold mr-2'>›</span> I am a senior Computer Engineering student at UNLaM. My background allows me to approach development not just from code, but with a comprehensive vision focused on solving real-world problems.",
+    'about.p1': "<span class='text-green-500 font-bold mr-2'>›</span> I am a Computer Engineering student at UNLaM. My background allows me to approach development not just from code, but with a comprehensive vision focused on solving real-world problems.",
     'about.p2': "<span class='text-green-500 font-bold mr-2'>›</span> I specialize in Backend development, using technologies like <span class='text-white font-bold'>NestJS</span> and <span class='text-white font-bold'>TypeScript</span>. I focus on building robust architectures, always ensuring that code is efficient, readable, and maintainable.",
     'about.p3': "<span class='text-green-500 font-bold mr-2'>›</span> I am seeking new professional challenges. I offer commitment, analytical skills, and a strong determination to provide concrete solutions to project needs.",
     
@@ -148,6 +150,8 @@ export const ui = {
     'skills.filter.backend': 'grep "backend"',
     'skills.filter.db': 'grep "databases"',
     'skills.filter.tools': 'grep "tools"',
+    'skills.filter.soft': 'grep "soft_skills"',
+    'skills.filter.spoken': 'grep "languages_spoken"',
     // Projects General
     'proj.title': 'Architecture & Projects',
     'proj.link': 'View Code',

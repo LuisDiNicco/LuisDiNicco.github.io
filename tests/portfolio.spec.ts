@@ -127,12 +127,12 @@ test.describe('Portafolio E2E Tests', () => {
     const projectsSection = page.locator('#projects');
     await projectsSection.scrollIntoViewIfNeeded();
     
-    // Verificar que hay al menos un proyecto
-    const projectCards = page.locator('#projects .group');
-    expect(await projectCards.count()).toBeGreaterThan(0);
+    // Verificar que hay al menos un proyecto en la lista
+    const projectBtns = page.locator('#project-list .project-btn');
+    expect(await projectBtns.count()).toBeGreaterThan(0);
     
     // Verificar que el primer proyecto tiene título y enlaces
-    const firstProject = projectCards.first();
+    const firstProject = page.locator('.project-content').first();
     await expect(firstProject.locator('h3')).toBeVisible();
     await expect(firstProject.locator('a').first()).toBeVisible();
   });
