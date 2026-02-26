@@ -15,11 +15,11 @@ const t = useTranslations(lang);
 const getLevelClasses = (level: string) => {
     switch (level) {
         case 'Básico':
-            return 'text-green-200 bg-green-200/10 border-green-200/20 shadow-[0_0_4px_rgba(187,247,208,0.3)]';
+            return 'text-green-200/70 bg-green-200/5 border-green-200/10 shadow-none';
         case 'Intermedio':
-            return 'text-green-400 bg-green-400/10 border-green-400/20 shadow-[0_0_8px_rgba(74,222,128,0.4)]';
+            return 'text-green-400 bg-green-400/10 border-green-400/30 shadow-[0_0_8px_rgba(74,222,128,0.2)]';
         case 'Avanzado':
-            return 'text-green-500 bg-green-500/10 border-green-500/20 shadow-[0_0_12px_rgba(34,197,94,0.5)]';
+            return 'text-green-500 bg-green-500/20 border-green-500/50 shadow-[0_0_15px_rgba(34,197,94,0.6)] font-bold';
         default:
             return 'text-green-500 bg-green-500/10 border-green-500/20';
     }
@@ -51,45 +51,47 @@ const getLevelClasses = (level: string) => {
         </div>
     </div>
 
-    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 min-h-[200px]" id="skills-grid">
+    <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-3 min-h-[200px]" id="skills-grid">
         {SKILLS.map((skill) => (
             skill.url ? (
                 <a 
                     href={skill.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="skill-card bg-[#111] border border-gray-800 p-4 rounded-lg hover:border-green-500/30 hover:bg-[#151515] transition-colors group flex flex-col items-center justify-center gap-3 h-[110px] md:h-[120px] no-underline text-inherit hover:text-inherit relative overflow-hidden"
+                    class="skill-card bg-[#111] border border-gray-800 p-3 rounded-lg hover:border-green-500/30 hover:bg-[#151515] transition-colors group flex flex-col items-center justify-center gap-2 h-[90px] md:h-[100px] no-underline text-inherit hover:text-inherit relative overflow-hidden cursor-pointer"
                     data-category={skill.category}
+                    data-skill-name={skill.name}
                 >
-                    <div class="w-8 h-8 sm:w-10 sm:h-10 text-gray-500 group-hover:text-green-400 transition-colors duration-300 group-hover:-translate-y-2">
+                    <div class="w-6 h-6 sm:w-8 sm:h-8 text-gray-500 group-hover:text-green-400 transition-colors duration-300 group-hover:-translate-y-1.5">
                         <Icon name={skill.icon} class="w-full h-full" />
                     </div>
                     
-                    <span class="text-xs sm:text-sm font-mono text-gray-300 group-hover:text-white text-center break-words px-1 group-hover:-translate-y-2 transition-transform duration-300">
+                    <span class="text-[10px] sm:text-xs font-mono text-gray-300 group-hover:text-white text-center break-words px-1 group-hover:-translate-y-1.5 transition-transform duration-300">
                         {skill.name}
                     </span>
 
-                    <div class="absolute bottom-2 left-0 w-full text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <span class={`text-[10px] font-mono px-2 py-0.5 rounded border ${getLevelClasses(skill.level)}`}>
+                    <div class="absolute bottom-1.5 left-0 w-full text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <span class={`text-[9px] font-mono px-1.5 py-0.5 rounded border ${getLevelClasses(skill.level)}`}>
                             {skill.level}
                         </span>
                     </div>
                 </a>
             ) : (
                 <div 
-                    class="skill-card bg-[#111] border border-gray-800 p-4 rounded-lg hover:border-green-500/30 hover:bg-[#151515] transition-colors group flex flex-col items-center justify-center gap-3 h-[110px] md:h-[120px] relative overflow-hidden"
+                    class="skill-card bg-[#111] border border-gray-800 p-3 rounded-lg hover:border-green-500/30 hover:bg-[#151515] transition-colors group flex flex-col items-center justify-center gap-2 h-[90px] md:h-[100px] relative overflow-hidden cursor-pointer"
                     data-category={skill.category}
+                    data-skill-name={skill.name}
                 >
-                    <div class="w-8 h-8 sm:w-10 sm:h-10 text-gray-500 group-hover:text-green-400 transition-colors duration-300 group-hover:-translate-y-2">
+                    <div class="w-6 h-6 sm:w-8 sm:h-8 text-gray-500 group-hover:text-green-400 transition-colors duration-300 group-hover:-translate-y-1.5">
                         <Icon name={skill.icon} class="w-full h-full" />
                     </div>
                     
-                    <span class="text-xs sm:text-sm font-mono text-gray-300 group-hover:text-white text-center break-words px-1 group-hover:-translate-y-2 transition-transform duration-300">
+                    <span class="text-[10px] sm:text-xs font-mono text-gray-300 group-hover:text-white text-center break-words px-1 group-hover:-translate-y-1.5 transition-transform duration-300">
                         {skill.name}
                     </span>
 
-                    <div class="absolute bottom-2 left-0 w-full text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <span class={`text-[10px] font-mono px-2 py-0.5 rounded border ${getLevelClasses(skill.level)}`}>
+                    <div class="absolute bottom-1.5 left-0 w-full text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <span class={`text-[9px] font-mono px-1.5 py-0.5 rounded border ${getLevelClasses(skill.level)}`}>
                             {skill.level}
                         </span>
                     </div>
@@ -143,6 +145,23 @@ const getLevelClasses = (level: string) => {
                     htmlCard.style.display = 'none';
                 }
             });
+        });
+    });
+
+    // Lógica para buscar proyectos por tecnología
+    cards.forEach(card => {
+        card.addEventListener('click', (e) => {
+            // Si es un enlace, no prevenimos el comportamiento por defecto
+            if (card.tagName === 'A') return;
+            
+            const skillName = card.getAttribute('data-skill-name');
+            if (!skillName) return;
+
+            // Disparamos un evento personalizado que el componente Projects escuchará
+            const event = new CustomEvent('search-project-by-skill', { 
+                detail: { skill: skillName } 
+            });
+            document.dispatchEvent(event);
         });
     });
 </script>

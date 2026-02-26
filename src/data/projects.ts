@@ -5,6 +5,7 @@ type TranslationKey = keyof typeof ui.es;
 
 export interface Project {
   title: TranslationKey;
+  shortName: string;
   description: TranslationKey;
   problem: TranslationKey;
   solution: TranslationKey;
@@ -25,6 +26,7 @@ export interface Project {
 export const PROJECTS: Project[] = [
   {
     title: 'proj.p1.title',
+    shortName: 'ecommerce-api',
     description: 'proj.p1.desc',
     problem: 'proj.p1.problem',
     solution: 'proj.p1.solution',
@@ -45,6 +47,7 @@ export const PROJECTS: Project[] = [
   },
   {
     title: 'proj.p2.title',
+    shortName: 'mi-carrerita',
     description: 'proj.p2.desc',
     problem: 'proj.p2.problem',
     solution: 'proj.p2.solution',
@@ -68,6 +71,7 @@ export const PROJECTS: Project[] = [
   },
   {
     title: 'proj.p3.title',
+    shortName: 'realtime-chat',
     description: 'proj.p3.desc',
     problem: 'proj.p3.problem',
     solution: 'proj.p3.solution',
@@ -89,6 +93,7 @@ export const PROJECTS: Project[] = [
   },
   {
     title: 'proj.p4.title',
+    shortName: 'task-queue',
     description: 'proj.p4.desc',
     problem: 'proj.p4.problem',
     solution: 'proj.p4.solution',

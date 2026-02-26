@@ -41,49 +41,51 @@ const t = useTranslations(lang);
                                     data-index={index}
                                 >
                                     <svg class="w-4 h-4 opacity-70 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                                    <span class="truncate">{project.title.split('.').pop()?.toLowerCase().replace(/\s+/g, '-')}.sh</span>
-                                </button>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
+                                <span class="truncate">{project.shortName}.sh</span>
+                            </button>
+                        </li>
+                    ))}
+                </ul>
             </div>
+        </div>
 
-            <!-- Main Content: Project Summary -->
-            <div class="w-full md:w-3/4 bg-[#111] flex flex-col relative overflow-hidden h-full">
-                <div class="absolute inset-0 pointer-events-none bg-[linear-gradient(transparent_50%,rgba(0,0,0,0.1)_50%)] bg-[length:100%_4px] opacity-20 z-0"></div>
-                
-                <div class="p-6 md:p-8 flex-grow z-10 relative overflow-hidden" id="project-details">
-                    {PROJECTS.map((project, index) => (
-                        <div class={`project-content ${index === 0 ? 'flex' : 'hidden'} animate-fade-in h-full flex-col justify-between`} data-index={index}>
-                            <div>
-                                <div class="text-gray-500 font-mono text-sm mb-5">
-                                    $ cat {project.title.split('.').pop()?.toLowerCase().replace(/\s+/g, '-')}.sh
-                                </div>
-                                <div class="flex items-start gap-3 mb-4">
-                                    <span class="text-green-500 font-mono mt-1">➜</span>
-                                    <h3 class="text-xl md:text-2xl font-bold text-gray-100 leading-tight font-mono">
-                                        {t(project.title)}
-                                    </h3>
-                                </div>
-                                
-                                <p class="text-gray-400 text-sm md:text-base leading-relaxed mb-6 font-mono line-clamp-3">
-                                    {t(project.description)}
-                                </p>
-
-                                <div class="flex flex-wrap gap-2 mb-6 font-mono">
-                                    {Object.values(project.stack).flat().slice(0, 5).map((tag) => (
-                                        <span class="px-2 py-1 bg-green-500/5 border border-green-500/20 text-green-400/80 rounded text-[10px] md:text-xs">
-                                            --{tag.toLowerCase().replace(/\s+/g, '-')}
-                                        </span>
-                                    ))}
-                                    {Object.values(project.stack).flat().length > 5 && (
-                                        <span class="px-2 py-1 text-gray-500 text-[10px] md:text-xs">...</span>
-                                    )}
-                                </div>
+        <!-- Main Content: Project Summary -->
+        <div class="w-full md:w-3/4 bg-[#111] flex flex-col relative overflow-hidden h-full">
+            <div class="absolute inset-0 pointer-events-none bg-[linear-gradient(transparent_50%,rgba(0,0,0,0.1)_50%)] bg-[length:100%_4px] opacity-20 z-0"></div>
+            
+            <div class="p-6 md:p-8 flex-grow z-10 relative overflow-hidden" id="project-details">
+                {PROJECTS.map((project, index) => (
+                    <div class={`project-content ${index === 0 ? 'flex' : 'hidden'} animate-fade-in h-full flex-col justify-between transition-opacity duration-300`} data-index={index}>
+                        <div>
+                            <div class="text-gray-500 font-mono text-sm mb-5">
+                                $ cat {project.shortName}.sh
                             </div>
+                            <div class="flex items-start gap-3 mb-4">
+                                <span class="text-green-500 font-mono mt-1">➜</span>
+                                <h3 class="text-xl md:text-2xl font-bold text-gray-100 leading-tight font-mono">
+                                    {t(project.title)}
+                                </h3>
+                            </div>
+                            
+                            <p class="text-gray-400 text-sm md:text-base leading-relaxed mb-6 font-mono line-clamp-3">
+                                {t(project.description)}
+                            </p>
 
-                            <div class="pt-4 border-t border-gray-800/50 flex flex-wrap items-center justify-end gap-3 font-mono text-sm mt-auto">
+                            <div class="flex flex-wrap gap-2 mb-6 font-mono">
+                                {Object.values(project.stack).flat().slice(0, 5).map((tag) => (
+                                    <span class="px-2 py-1 bg-green-500/5 border border-green-500/20 text-green-400/80 rounded text-[10px] md:text-xs project-tag" data-tag={tag}>
+                                        {tag}
+                                    </span>
+                                ))}
+                                {Object.values(project.stack).flat().length > 5 && (
+                                    <span class="px-2 py-1 text-gray-500 text-[10px] md:text-xs">+{Object.values(project.stack).flat().length - 5}</span>
+                                )}
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-2 font-mono text-sm mt-auto pt-4 border-t border-gray-800/50">
+                            <span class="text-green-500">$</span>
+                            <div class="flex flex-wrap gap-2 w-full">
                                 {project.demoUrl && project.demoText && (
                                     <a href={project.demoUrl} target="_blank" class="text-gray-400 hover:text-white hover:bg-gray-800/50 px-3 py-2 rounded transition-colors flex items-center gap-2">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
@@ -100,8 +102,8 @@ const t = useTranslations(lang);
                                 </button>
                             </div>
                         </div>
-                    ))}
-                </div>
+                    </div>
+                ))}
             </div>
         </div>
     </div>
@@ -133,7 +135,7 @@ const t = useTranslations(lang);
                         class={`modal-tab px-4 py-2 text-xs sm:text-sm font-mono rounded-t-md border-t border-x transition-colors whitespace-nowrap cursor-pointer ${index === 0 ? 'bg-[#161616] border-gray-800 text-green-400' : 'bg-transparent border-transparent text-gray-500 hover:bg-[#111] hover:text-gray-300'}`} 
                         data-modal-tab={index}
                     >
-                        {project.title.split('.').pop()?.toLowerCase().replace(/\s+/g, '-')}.sh
+                        {project.shortName}.sh
                     </button>
                 ))}
             </div>
@@ -144,20 +146,24 @@ const t = useTranslations(lang);
             <div class="absolute inset-0 pointer-events-none bg-[linear-gradient(transparent_50%,rgba(0,0,0,0.1)_50%)] bg-[length:100%_4px] opacity-20 z-0"></div>
             
             {PROJECTS.map((project, index) => (
-                <div class={`modal-project-content ${index === 0 ? 'block' : 'hidden'} animate-fade-in relative z-10`} data-modal-index={index}>
+                <div class={`modal-project-content ${index === 0 ? 'block' : 'hidden'} animate-fade-in relative z-10 transition-opacity duration-300`} data-modal-index={index}>
                     
                     <!-- Header Section: Title & Buttons -->
-                    <div class="flex flex-col md:flex-row md:items-start justify-between gap-6 mb-8">
+                    <div class="flex flex-col md:flex-row md:items-start justify-between gap-6 mb-8 border-b border-gray-800/50 pb-6">
                         <div class="flex-1">
-                            <h3 class="text-2xl md:text-4xl font-bold text-gray-100 mb-3 font-mono flex items-center gap-3">
+                            <div class="text-gray-500 font-mono text-xs mb-3 flex items-center gap-2">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M4 15V9a2 2 0 012-2h12a2 2 0 012 2v6a2 2 0 01-2 2H6a2 2 0 01-2-2z"></path></svg>
+                                ./execute {project.shortName}.sh
+                            </div>
+                            <h3 class="text-2xl md:text-4xl font-bold text-gray-100 mb-4 font-mono flex items-center gap-3">
                                 <span class="text-green-500">➜</span>
                                 {t(project.title)}
                             </h3>
-                            <p class="text-gray-400 text-base md:text-lg font-mono leading-relaxed max-w-3xl">{t(project.description)}</p>
+                            <p class="text-gray-400 text-base md:text-lg font-mono leading-relaxed max-w-3xl border-l-2 border-green-500/30 pl-4">{t(project.description)}</p>
                         </div>
                         
                         <!-- Action Buttons -->
-                        <div class="flex flex-col gap-3 shrink-0 font-mono text-sm w-full sm:w-auto">
+                        <div class="flex flex-col gap-3 shrink-0 font-mono text-sm w-full sm:w-auto mt-2">
                             {project.demoUrl && project.demoText && (
                                 <a href={project.demoUrl} target="_blank" class="group relative inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-green-500/10 text-green-400 border border-green-500/30 rounded-lg overflow-hidden transition-all hover:bg-green-500/20 hover:scale-105 hover:shadow-[0_0_20px_rgba(34,197,94,0.2)] w-full">
                                     <div class="absolute inset-0 flex h-full w-full justify-center [transform:skew(-12deg)_translateX(-150%)] group-hover:duration-1000 group-hover:[transform:skew(-12deg)_translateX(150%)]">
@@ -182,38 +188,44 @@ const t = useTranslations(lang);
                             
                             <!-- Context & Solution -->
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div class="space-y-3">
+                                <div class="space-y-3 group/card">
                                     <h4 class="text-green-400 font-mono text-sm flex items-center gap-2 uppercase tracking-wider">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                         {t('proj.problem')}
                                     </h4>
-                                    <p class="text-gray-300 text-sm leading-relaxed font-mono bg-[#111] p-5 rounded-lg border border-gray-800/50 shadow-inner h-full">
-                                        {t(project.problem)}
-                                    </p>
+                                    <div class="bg-[#111] p-5 rounded-lg border border-gray-800/50 shadow-inner h-full group-hover/card:border-gray-700 transition-colors relative overflow-hidden">
+                                        <div class="absolute top-0 left-0 w-1 h-full bg-red-500/20"></div>
+                                        <p class="text-gray-300 text-sm leading-relaxed font-mono pl-2">
+                                            {t(project.problem)}
+                                        </p>
+                                    </div>
                                 </div>
-                                <div class="space-y-3">
+                                <div class="space-y-3 group/card">
                                     <h4 class="text-green-400 font-mono text-sm flex items-center gap-2 uppercase tracking-wider">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                         {t('proj.solution')}
                                     </h4>
-                                    <p class="text-gray-300 text-sm leading-relaxed font-mono bg-[#111] p-5 rounded-lg border border-gray-800/50 shadow-inner h-full">
-                                        {t(project.solution)}
-                                    </p>
+                                    <div class="bg-[#111] p-5 rounded-lg border border-gray-800/50 shadow-inner h-full group-hover/card:border-gray-700 transition-colors relative overflow-hidden">
+                                        <div class="absolute top-0 left-0 w-1 h-full bg-green-500/20"></div>
+                                        <p class="text-gray-300 text-sm leading-relaxed font-mono pl-2">
+                                            {t(project.solution)}
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
 
                             <!-- Key Achievements (Redesigned 1-column) -->
-                            <div class="space-y-4 pt-4">
+                            <div class="space-y-4 pt-2">
                                 <h4 class="text-green-400 font-mono text-sm flex items-center gap-2 uppercase tracking-wider">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
                                     {t('proj.keys')}
                                 </h4>
-                                <div class="bg-[#111] rounded-lg border border-gray-800/50 p-1 shadow-inner">
+                                <div class="bg-[#111] rounded-lg border border-gray-800/50 p-2 shadow-inner">
                                     <ul class="flex flex-col font-mono text-sm">
                                         {project.achievements.map((achievementKey, i) => (
-                                            <li class={`flex items-start gap-4 p-4 hover:bg-[#1a1a1a] transition-colors group/item ${i !== project.achievements.length - 1 ? 'border-b border-gray-800/50' : ''}`}>
-                                                <div class="flex flex-col items-center mt-0.5">
-                                                    <div class="w-2 h-2 rounded-full bg-green-500/50 group-hover/item:bg-green-400 group-hover/item:shadow-[0_0_8px_rgba(74,222,128,0.8)] transition-all"></div>
+                                            <li class={`flex items-start gap-4 p-3 hover:bg-[#1a1a1a] rounded transition-colors group/item ${i !== project.achievements.length - 1 ? 'mb-1' : ''}`}>
+                                                <div class="flex flex-col items-center mt-1">
+                                                    <div class="w-1.5 h-1.5 rounded-full bg-green-500/50 group-hover/item:bg-green-400 group-hover/item:shadow-[0_0_8px_rgba(74,222,128,0.8)] transition-all"></div>
                                                 </div>
                                                 <span class="text-gray-300 group-hover/item:text-white transition-colors leading-relaxed">{t(achievementKey)}</span>
                                             </li>
@@ -244,43 +256,43 @@ const t = useTranslations(lang);
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
                                     {t('proj.stack')}
                                 </h4>
-                                <div class="space-y-4 font-mono">
+                                <div class="space-y-5 font-mono">
                                     {project.stack.frontend && (
                                         <div>
-                                            <span class="text-xs text-gray-500 block mb-2">Frontend</span>
+                                            <span class="text-[10px] text-gray-500 block mb-2 uppercase tracking-wider">Frontend</span>
                                             <div class="flex flex-wrap gap-2">
                                                 {project.stack.frontend.map(tag => (
-                                                    <span class="px-2.5 py-1 bg-blue-500/10 border border-blue-500/20 text-blue-400 rounded text-xs">{tag}</span>
+                                                    <span class="px-2.5 py-1 bg-blue-500/5 border border-blue-500/20 text-blue-400/90 rounded text-xs project-tag" data-tag={tag}>{tag}</span>
                                                 ))}
                                             </div>
                                         </div>
                                     )}
                                     {project.stack.backend && (
                                         <div>
-                                            <span class="text-xs text-gray-500 block mb-2">Backend</span>
+                                            <span class="text-[10px] text-gray-500 block mb-2 uppercase tracking-wider">Backend</span>
                                             <div class="flex flex-wrap gap-2">
                                                 {project.stack.backend.map(tag => (
-                                                    <span class="px-2.5 py-1 bg-green-500/10 border border-green-500/20 text-green-400 rounded text-xs">{tag}</span>
+                                                    <span class="px-2.5 py-1 bg-green-500/5 border border-green-500/20 text-green-400/90 rounded text-xs project-tag" data-tag={tag}>{tag}</span>
                                                 ))}
                                             </div>
                                         </div>
                                     )}
                                     {project.stack.database && (
                                         <div>
-                                            <span class="text-xs text-gray-500 block mb-2">Database</span>
+                                            <span class="text-[10px] text-gray-500 block mb-2 uppercase tracking-wider">Database</span>
                                             <div class="flex flex-wrap gap-2">
                                                 {project.stack.database.map(tag => (
-                                                    <span class="px-2.5 py-1 bg-yellow-500/10 border border-yellow-500/20 text-yellow-400 rounded text-xs">{tag}</span>
+                                                    <span class="px-2.5 py-1 bg-yellow-500/5 border border-yellow-500/20 text-yellow-400/90 rounded text-xs project-tag" data-tag={tag}>{tag}</span>
                                                 ))}
                                             </div>
                                         </div>
                                     )}
                                     {project.stack.tools && (
                                         <div>
-                                            <span class="text-xs text-gray-500 block mb-2">Tools & Others</span>
+                                            <span class="text-[10px] text-gray-500 block mb-2 uppercase tracking-wider">Tools & Others</span>
                                             <div class="flex flex-wrap gap-2">
                                                 {project.stack.tools.map(tag => (
-                                                    <span class="px-2.5 py-1 bg-purple-500/10 border border-purple-500/20 text-purple-400 rounded text-xs">{tag}</span>
+                                                    <span class="px-2.5 py-1 bg-purple-500/5 border border-purple-500/20 text-purple-400/90 rounded text-xs project-tag" data-tag={tag}>{tag}</span>
                                                 ))}
                                             </div>
                                         </div>
@@ -322,14 +334,24 @@ const t = useTranslations(lang);
             btn.classList.remove('text-gray-400');
             btn.classList.add('bg-green-500/10', 'text-green-400');
 
-            // Update content
+            // Update content with fade effect
             contents.forEach(content => {
                 if (content.getAttribute('data-index') === index) {
                     content.classList.remove('hidden');
-                    content.classList.add('flex');
+                    // Pequeño delay para que el display:flex se aplique antes de la opacidad
+                    setTimeout(() => {
+                        content.classList.remove('opacity-0');
+                        content.classList.add('opacity-100');
+                    }, 10);
                 } else {
-                    content.classList.remove('flex');
-                    content.classList.add('hidden');
+                    content.classList.remove('opacity-100');
+                    content.classList.add('opacity-0');
+                    // Esperar a que termine la transición antes de ocultar
+                    setTimeout(() => {
+                        if (content.classList.contains('opacity-0')) {
+                            content.classList.add('hidden');
+                        }
+                    }, 300);
                 }
             });
         });
@@ -350,14 +372,22 @@ const t = useTranslations(lang);
             }
         });
 
-        // Update content
+        // Update content with fade effect
         modalContents.forEach(content => {
             if (content.getAttribute('data-modal-index') === index) {
                 content.classList.remove('hidden');
-                content.classList.add('block');
+                setTimeout(() => {
+                    content.classList.remove('opacity-0');
+                    content.classList.add('opacity-100');
+                }, 10);
             } else {
-                content.classList.remove('block');
-                content.classList.add('hidden');
+                content.classList.remove('opacity-100');
+                content.classList.add('opacity-0');
+                setTimeout(() => {
+                    if (content.classList.contains('opacity-0')) {
+                        content.classList.add('hidden');
+                    }
+                }, 300);
             }
         });
     };
@@ -422,6 +452,50 @@ const t = useTranslations(lang);
             closeModal();
         }
     });
+
+    // --- NUEVA LÓGICA: Escuchar clics en Skills para buscar proyectos ---
+    document.addEventListener('search-project-by-skill', ((e: CustomEvent) => {
+        const skillName = e.detail.skill.toLowerCase();
+        
+        // 1. Hacer scroll suave hacia la sección de proyectos
+        const projectsSection = document.getElementById('projects');
+        if (projectsSection) {
+            projectsSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // 2. Buscar el primer proyecto que contenga esta tecnología
+        const projectTags = document.querySelectorAll('.project-tag');
+        let foundIndex = -1;
+
+        for (const tag of projectTags) {
+            const tagText = tag.getAttribute('data-tag')?.toLowerCase() || '';
+            if (tagText.includes(skillName) || skillName.includes(tagText)) {
+                // Encontramos una coincidencia, buscar a qué proyecto pertenece
+                const projectContent = tag.closest('.modal-project-content') || tag.closest('.project-content');
+                if (projectContent) {
+                    foundIndex = parseInt(projectContent.getAttribute('data-modal-index') || projectContent.getAttribute('data-index') || '-1');
+                    break;
+                }
+            }
+        }
+
+        // 3. Si encontramos un proyecto, simular clic en su botón para mostrarlo
+        if (foundIndex !== -1) {
+            const targetBtn = document.querySelector(`.project-btn[data-index="${foundIndex}"]`) as HTMLButtonElement;
+            if (targetBtn) {
+                // Pequeño delay para que termine el scroll antes de cambiar
+                setTimeout(() => {
+                    targetBtn.click();
+                    
+                    // Efecto visual para destacar que se encontró
+                    targetBtn.classList.add('ring-2', 'ring-green-500', 'ring-offset-2', 'ring-offset-[#111]');
+                    setTimeout(() => {
+                        targetBtn.classList.remove('ring-2', 'ring-green-500', 'ring-offset-2', 'ring-offset-[#111]');
+                    }, 1500);
+                }, 500);
+            }
+        }
+    }) as EventListener);
 </script>
 
 <style>
