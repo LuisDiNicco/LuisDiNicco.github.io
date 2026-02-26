@@ -8,7 +8,12 @@ export interface Project {
   description: TranslationKey;
   problem: TranslationKey;
   solution: TranslationKey;
-  tags: string[];
+  stack: {
+    frontend?: string[];
+    backend?: string[];
+    database?: string[];
+    tools?: string[];
+  };
   linkText: TranslationKey;
   linkUrl: string;
   demoText?: TranslationKey;
@@ -23,7 +28,11 @@ export const PROJECTS: Project[] = [
     description: 'proj.p1.desc',
     problem: 'proj.p1.problem',
     solution: 'proj.p1.solution',
-    tags: ['NestJS', 'PostgreSQL', 'Docker'],
+    stack: {
+      backend: ['NestJS', 'TypeScript', 'Node.js'],
+      database: ['PostgreSQL', 'Redis'],
+      tools: ['Docker', 'Swagger', 'Jest']
+    },
     linkText: 'proj.link',
     linkUrl: 'https://github.com/LuisDiNicco',
     achievements: [
@@ -32,14 +41,19 @@ export const PROJECTS: Project[] = [
       'proj.p1.k3',
       'proj.p1.k4',
     ],
-    image: 'https://placehold.co/600x400/111/22c55e?text=E-Commerce+API'
+    image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1000&auto=format&fit=crop'
   },
   {
     title: 'proj.p2.title',
     description: 'proj.p2.desc',
     problem: 'proj.p2.problem',
     solution: 'proj.p2.solution',
-    tags: ['NestJS', 'React', 'Prisma', 'JWT & OAuth 2.0', 'Jest'],
+    stack: {
+      frontend: ['React', 'Tailwind CSS'],
+      backend: ['NestJS', 'TypeScript'],
+      database: ['PostgreSQL', 'Prisma ORM'],
+      tools: ['JWT', 'OAuth 2.0', 'Jest']
+    },
     linkText: 'proj.link',
     linkUrl: 'https://github.com/LuisDiNicco/Mi-Carrerita',
     demoText: 'proj.demo',
@@ -50,14 +64,19 @@ export const PROJECTS: Project[] = [
       'proj.p2.k3',
       'proj.p2.k4',
     ],
-    image: 'https://placehold.co/600x400/111/22c55e?text=Mi+Carrerita'
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1000&auto=format&fit=crop'
   },
   {
     title: 'proj.p3.title',
     description: 'proj.p3.desc',
     problem: 'proj.p3.problem',
     solution: 'proj.p3.solution',
-    tags: ['Node.js', 'Socket.io', 'Redis', 'Express'],
+    stack: {
+      frontend: ['HTML/CSS', 'Vanilla JS'],
+      backend: ['Node.js', 'Express', 'Socket.io'],
+      database: ['Redis'],
+      tools: ['Nginx', 'Docker']
+    },
     linkText: 'proj.link',
     linkUrl: 'https://github.com/LuisDiNicco',
     achievements: [
@@ -66,14 +85,18 @@ export const PROJECTS: Project[] = [
       'proj.p3.k3',
       'proj.p3.k4',
     ],
-    image: 'https://placehold.co/600x400/111/22c55e?text=Real-Time+Chat'
+    image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=1000&auto=format&fit=crop'
   },
   {
     title: 'proj.p4.title',
     description: 'proj.p4.desc',
     problem: 'proj.p4.problem',
     solution: 'proj.p4.solution',
-    tags: ['TypeScript', 'BullMQ', 'Redis', 'Docker'],
+    stack: {
+      backend: ['TypeScript', 'Node.js'],
+      database: ['Redis'],
+      tools: ['BullMQ', 'Docker', 'Prometheus']
+    },
     linkText: 'proj.link',
     linkUrl: 'https://github.com/LuisDiNicco',
     achievements: [
@@ -82,6 +105,6 @@ export const PROJECTS: Project[] = [
       'proj.p4.k3',
       'proj.p4.k4',
     ],
-    image: 'https://placehold.co/600x400/111/22c55e?text=Task+Queue'
+    image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1000&auto=format&fit=crop'
   }
 ];
