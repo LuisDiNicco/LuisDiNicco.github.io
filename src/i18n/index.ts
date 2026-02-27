@@ -115,9 +115,9 @@ export const ui = {
     'form.message': '$ mensaje:',
     'form.btn': 'EnviarMensaje()',
     'form.sending': 'Enviando mensaje...',
-    'form.success': '> Mensaje enviado correctamente! En breve responderé tu mensaje.',
+    'form.success': '> ¡Mensaje enviado correctamente! En breve responderé tu mensaje.',
     'form.err_security': '⚠️ Error de seguridad: Caracteres no permitidos.',
-    'form.err_email': '⚠️ Por favor ingresa un email válido.',
+    'form.err_email': '⚠️ Por favor ingresá un email válido.',
     'form.err_connection': '> Error: El servidor rechazó la conexión.',
     'form.err_critical': '> Error crítico: No se pudo conectar con el servidor.'
   },
