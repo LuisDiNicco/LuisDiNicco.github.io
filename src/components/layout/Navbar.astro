@@ -15,33 +15,53 @@ const inactiveLangClass = "text-gray-600 hover:text-gray-400";
 
 <nav class="fixed top-0 left-0 w-full z-50 bg-[#0a0a0a]/90 backdrop-blur-sm border-b border-green-500/10 h-14 flex items-center justify-between px-4 md:px-8 font-mono text-sm md:text-base transition-all">
     
-    <!-- Mobile Menu Button -->
-    <button id="mobile-menu-btn" class="lg:hidden text-gray-400 hover:text-green-400 focus:outline-none z-50 relative cursor-pointer">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-            <path id="close-icon" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-        </svg>
-    </button>
-
-    <!-- Desktop Menu -->
-    <div class="hidden lg:flex flex-1 justify-center">
-        <ul class="flex items-center gap-3 xl:gap-5">
-            <li><a href="#home" class="nav-link px-2 py-1 rounded transition-colors hover:text-green-400 text-gray-400 whitespace-nowrap">{t('nav.home')}</a></li>
-            <li class="text-gray-700 select-none">|</li>
-            <li><a href="#about-me" class="nav-link px-2 py-1 rounded transition-colors hover:text-green-400 text-gray-400 whitespace-nowrap">{t('nav.about')}</a></li>
-            <li class="text-gray-700 select-none">|</li>
-            <li><a href="#experience" class="nav-link px-2 py-1 rounded transition-colors hover:text-green-400 text-gray-400 whitespace-nowrap">{t('nav.experience')}</a></li>
-            <li class="text-gray-700 select-none">|</li>
-            <li><a href="#skills" class="nav-link px-2 py-1 rounded transition-colors hover:text-green-400 text-gray-400 whitespace-nowrap">{t('nav.skills')}</a></li>
-            <li class="text-gray-700 select-none">|</li>
-            <li><a href="#projects" class="nav-link px-2 py-1 rounded transition-colors hover:text-green-400 text-gray-400 whitespace-nowrap">{t('nav.projects')}</a></li>
-            <li class="text-gray-700 select-none">|</li>
-            <li><a href="#contact" class="nav-link px-2 py-1 rounded transition-colors hover:text-green-400 text-gray-400 whitespace-nowrap">{t('nav.contact')}</a></li>
-        </ul>
+    <!-- Left: Mobile Menu Button (Mobile) / Logo (Desktop) -->
+    <div class="flex items-center w-1/3 lg:w-auto">
+        <button id="mobile-menu-btn" class="lg:hidden text-gray-400 hover:text-green-400 focus:outline-none z-50 relative cursor-pointer">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                <path id="close-icon" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+        </button>
+        
+        <!-- Logo (Desktop) -->
+        <a href="#home" class="hidden lg:flex items-center gap-1.5 group relative">
+            <div class="absolute -inset-2 bg-green-500/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity blur"></div>
+            <span class="text-green-500 font-bold text-lg group-hover:text-green-400 transition-colors relative z-10">~/</span>
+            <span class="text-gray-100 font-bold tracking-tight text-lg group-hover:text-white transition-colors relative z-10">LuisDiNicco</span>
+            <span class="cursor-blink bg-green-500 w-2 h-4 inline-block align-middle ml-1 opacity-0 group-hover:opacity-100 transition-opacity relative z-10"></span>
+        </a>
     </div>
 
-    <!-- Language Switcher -->
-    <div class="flex items-center gap-1 font-mono text-xs md:text-sm z-50 relative">
+    <!-- Center: Logo (Mobile) / Menu (Desktop) -->
+    <div class="flex-1 flex justify-center items-center">
+        <!-- Logo (Mobile) -->
+        <a href="#home" class="lg:hidden flex items-center gap-1 group">
+            <span class="text-green-500 font-bold text-base">~/</span>
+            <span class="text-gray-100 font-bold tracking-tight text-base">LuisDiNicco</span>
+            <span class="cursor-blink bg-green-500 w-1.5 h-3.5 inline-block align-middle ml-0.5"></span>
+        </a>
+
+        <!-- Desktop Menu -->
+        <div class="hidden lg:flex">
+            <ul class="flex items-center gap-3 xl:gap-5">
+                <li><a href="#home" class="nav-link px-2 py-1 rounded transition-colors hover:text-green-400 text-gray-400 whitespace-nowrap">{t('nav.home')}</a></li>
+                <li class="text-gray-700 select-none">|</li>
+                <li><a href="#about-me" class="nav-link px-2 py-1 rounded transition-colors hover:text-green-400 text-gray-400 whitespace-nowrap">{t('nav.about')}</a></li>
+                <li class="text-gray-700 select-none">|</li>
+                <li><a href="#experience" class="nav-link px-2 py-1 rounded transition-colors hover:text-green-400 text-gray-400 whitespace-nowrap">{t('nav.experience')}</a></li>
+                <li class="text-gray-700 select-none">|</li>
+                <li><a href="#skills" class="nav-link px-2 py-1 rounded transition-colors hover:text-green-400 text-gray-400 whitespace-nowrap">{t('nav.skills')}</a></li>
+                <li class="text-gray-700 select-none">|</li>
+                <li><a href="#projects" class="nav-link px-2 py-1 rounded transition-colors hover:text-green-400 text-gray-400 whitespace-nowrap">{t('nav.projects')}</a></li>
+                <li class="text-gray-700 select-none">|</li>
+                <li><a href="#contact" class="nav-link px-2 py-1 rounded transition-colors hover:text-green-400 text-gray-400 whitespace-nowrap">{t('nav.contact')}</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Right: Language Switcher -->
+    <div class="flex items-center justify-end gap-1 font-mono text-xs md:text-sm z-50 relative w-1/3 lg:w-auto">
         <a href="/en" class={`cursor-pointer transition-all px-2 ${lang === 'en' ? activeLangClass : inactiveLangClass}`}>EN</a>
         <span class="text-gray-700">/</span>
         <a href="/es" class={`cursor-pointer transition-all px-2 ${lang === 'es' ? activeLangClass : inactiveLangClass}`}>ES</a>

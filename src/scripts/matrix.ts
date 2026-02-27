@@ -48,7 +48,7 @@ const BG_CONFIG = {
     MIN_SPEED: 0.5,
     MAX_SPEED: 2.0,
     MIN_GROWTH: 1.0,
-    MAX_GROWTH: 3,
+    MAX_GROWTH: 2.5,
     BASE_SIZE: 1,
     CYCLE_OFFSET: -0.2,
     INTENSITY_MULT: 1.25,
